@@ -3,6 +3,7 @@ package main.java.edu.catherine.tutorg.model.client;
 import java.util.Objects;
 
 public abstract class Client {
+    private Integer clientId;
     private String firstName;
     private String lastName;
     private Contact contact;
@@ -31,6 +32,10 @@ public abstract class Client {
         return location;
     }
 
+    public Integer getClientId() {
+        return clientId;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -45,6 +50,10 @@ public abstract class Client {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
     @Override

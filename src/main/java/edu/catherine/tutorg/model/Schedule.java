@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Schedule {
-    Map<DayOfWeek, LocalTime> schedule;
+    private Map<DayOfWeek, LocalTime> schedule;
 
     public Schedule(Map<DayOfWeek, LocalTime> schedule) {
         this.schedule = schedule;

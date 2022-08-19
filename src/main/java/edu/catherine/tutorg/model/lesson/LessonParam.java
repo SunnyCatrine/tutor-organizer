@@ -1,10 +1,10 @@
-package main.java.edu.catherine.tutorg.model;
+package main.java.edu.catherine.tutorg.model.lesson;
 
 import java.util.Objects;
 
 public class LessonParam {
-    Integer price;
-    Double duration;
+    private Integer price;
+    private Double duration;
 
     public LessonParam(Integer price, Double duration) {
         this.price = price;
