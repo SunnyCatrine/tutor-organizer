@@ -1,12 +1,18 @@
 package main.java.edu.catherine.tutorg.dao;
 
+import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.client.ext.Student;
+import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
 
-import java.util.Arrays;
+import java.sql.*;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public final class ClientDao {
     private static final ClientDao INSTANCE = new ClientDao();
+    private static final String STUDENT_CREATE_SQL = "INSERT INTO student (first_name, last_name, status) VALUES (?,?,?)" ;
 
     private ClientDao() {
     }
@@ -15,8 +21,83 @@ public final class ClientDao {
         return INSTANCE;
     }
 
-    public Student createStudent(Student studentRequest) {
-        return null;
+    public Student createStudent(Student student, Connection connection) throws SQLException {
+        PreparedStatement studentCreateStatement = null;
+        Statement studentParameterStatement = null;
+        String CONTACT_CREATE_SQL = "INSERT INTO student_contact_info (country, city, phone_no, skype, timezone, student_id) VALUES ("
+                + student.getLocation().getCountry() + ","
+                + student.getLocation().getCity() + ","
+                + student.getContact().getPhoneNo() + ","
+                + student.getContact().getSkype() + ","
+                + student.getLocation().getTimezone() + ","
+                + student.getClientId()
+                +")";
+        String subjectCreateSql = "INSERT INTO subject (subject_name, student_id) VALUES (";
+        String defaultParamCreateSql = "INSERT INTO lesson_default_param (price, duration, student_id) VALUES ("
+                + student.getDefaultLessonParam().getPrice() + ","
+                + student.getDefaultLessonParam().getDuration() + ","
+                + student.getClientId()
+                + ")";
+        String lessonsPeriodCreateSql = "INSERT INTO lessons_period (first_lesson_date, last_lesson_date, student_id) VALUES ("
+                + Date.valueOf(student.getLessonsPeriod().getFirstLessonDate()) + ","
+                + Date.valueOf(student.getLessonsPeriod().getLastLessonDate()) + ","
+                + student.getClientId()
+                + ")";
+        String scheduleUnitCreateSql = "INSERT INTO schedule_unit (day_of_week, time, duration, price, student_id) VALUES (";
+
+        try {studentCreateStatement = connection.prepareStatement(STUDENT_CREATE_SQL, Statement.RETURN_GENERATED_KEYS);
+            studentParameterStatement = connection.createStatement();
+
+
+                studentCreateStatement.setString(1, student.getFirstName());
+                studentCreateStatement.setString(2, student.getLastName());
+                studentCreateStatement.setString(3, StudentStatus.ACTIVE.getStatus());
+
+                studentCreateStatement.executeUpdate();
+
+                ResultSet generatedKeys = studentCreateStatement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    student.setClientId(generatedKeys.getInt("id"));
+                }
+
+                studentParameterStatement.addBatch(CONTACT_CREATE_SQL);
+
+                for (SubjectBlock subj: student.getSubjects()) {
+                    subjectCreateSql = subjectCreateSql
+                            + subj.getSubjectName() + ","
+                            + student.getClientId()
+                            + ")";
+                    studentParameterStatement.addBatch(subjectCreateSql);
+                }
+
+                studentParameterStatement.addBatch(defaultParamCreateSql);
+                studentParameterStatement.addBatch(lessonsPeriodCreateSql);
+
+            for (Map.Entry<DayOfWeek,LocalDateTime> entry: student.getSchedule().getSchedule().entrySet()) {
+                scheduleUnitCreateSql = scheduleUnitCreateSql
+                        + entry.getKey() + ","
+                        + entry.getValue() + ","
+                        + student.getDefaultLessonParam().getDuration() + ","
+                        + student.getDefaultLessonParam().getPrice() + ","
+                        + student.getClientId()
+                        + ",";
+                studentParameterStatement.addBatch(scheduleUnitCreateSql);
+            }
+
+                studentParameterStatement.executeBatch();
+                connection.commit();
+
+                return student;
+            } catch (Exception e) {
+                throw e;
+            } finally {
+                if (studentCreateStatement != null) {
+                    studentCreateStatement.close();
+                }
+                if (studentParameterStatement != null) {
+                    studentParameterStatement.close();
+                }
+            }
     }
 
     public List<Student> findAllStudents() {

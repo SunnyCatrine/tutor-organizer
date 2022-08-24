@@ -1,22 +1,23 @@
 package main.java.edu.catherine.tutorg.model;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Map;
 import java.util.Objects;
 
 public class Schedule {
-    private Map<DayOfWeek, LocalTime> schedule;
+    private Map<DayOfWeek, LocalDateTime> schedule;
 
-    public Schedule(Map<DayOfWeek, LocalTime> schedule) {
+    public Schedule(Map<DayOfWeek, LocalDateTime> schedule) {
         this.schedule = schedule;
     }
 
-    public Map<DayOfWeek, LocalTime> getSchedule() {
+    public Map<DayOfWeek, LocalDateTime> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Map<DayOfWeek, LocalTime> schedule) {
+    public void setSchedule(Map<DayOfWeek, LocalDateTime> schedule) {
         this.schedule = schedule;
     }
 
