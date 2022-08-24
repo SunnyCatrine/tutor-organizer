@@ -26,7 +26,7 @@ public class CreateStudentMapper {
 
         LessonParam defaultLessonParam = new LessonParam(
                 studentRequestDto.getDefaultPrice(),
-                studentRequestDto.getDefaultDuration()
+                studentRequestDto.getDefaultDurationInMinutes()
         );
 
         Schedule schedule = new Schedule(studentRequestDto.getSchedule());

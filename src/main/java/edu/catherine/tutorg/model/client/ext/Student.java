@@ -18,18 +18,22 @@ public class Student extends Client {
     private LessonsPeriod lessonsPeriod;
     private Agent agent;
 
-    public Student(String firstName, String lastName, Contact contact, Location location) {
-        super(firstName, lastName, contact, location);
+    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location) {
+        super(clientId, firstName, lastName, contact, location);
     }
 
-    public Student(String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Schedule schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
-        super(firstName, lastName, contact, location);
+    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Schedule schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
+        super(clientId, firstName, lastName, contact, location);
         this.subjects = subjects;
         this.defaultLessonParam = defaultLessonParam;
         this.schedule = schedule;
         this.lessonList = lessonList;
         this.studentStatus = studentStatus;
         this.lessonsPeriod = lessonsPeriod;
+    }
+
+    public Student(Integer id, String first_name, String last_name) {
+        super(id, first_name, last_name);
     }
 
     public Agent getAgent() {

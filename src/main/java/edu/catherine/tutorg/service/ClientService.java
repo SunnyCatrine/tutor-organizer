@@ -43,10 +43,24 @@ public class ClientService {
         }
     }
 
-    public List<FindStudentResponseDto> findAllStudents() {
+    public List<FindStudentResponseDto> findAllStudents() throws SQLException {
+        Connection connection = null;
+        try {connection = ConnectionManager.get();
+            connection.setAutoCommit(false);
+            return clientDao.findAllStudents(connection).stream()
+                    .map(FindStudentMapper::toDto)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            if (connection != null) {
+                connection.rollback();
+            }
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
 
-        return clientDao.findAllStudents().stream()
-                .map(FindStudentMapper::toDto)
-                .collect(Collectors.toList());
+
     }
 }

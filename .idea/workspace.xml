@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38f145da-c3a2-499f-ba9c-ffc8239e624e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/ClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/ClientDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/Schedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/StudentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/StudentStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/lesson/SubjectBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/lesson/SubjectBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/CreateStudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/CreateStudentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/dto/CreateStudentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/dto/CreateStudentRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutor-organizer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tutor-organizer.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,6 +96,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -160,7 +162,7 @@
       <workItem from="1660575059872" duration="6137000" />
       <workItem from="1661007768762" duration="17022000" />
       <workItem from="1661275530737" duration="433000" />
-      <workItem from="1661329767800" duration="237000" />
+      <workItem from="1661329767800" duration="4872000" />
     </task>
     <servers />
   </component>

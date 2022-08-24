@@ -1,5 +1,6 @@
 package main.java.edu.catherine.tutorg.dao;
 
+import main.java.edu.catherine.tutorg.exception.DaoException;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.client.ext.Student;
 import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
@@ -7,12 +8,14 @@ import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
 import java.sql.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public final class ClientDao {
     private static final ClientDao INSTANCE = new ClientDao();
-    private static final String STUDENT_CREATE_SQL = "INSERT INTO student (first_name, last_name, status) VALUES (?,?,?)" ;
+    private static final String STUDENT_CREATE_SQL = "INSERT INTO student (first_name, last_name, status) VALUES (?,?,?)";
+    private static final String FIND_ALL_SQL = "SELECT student.id, student.first_name, student.last_name FROM student";
 
     private ClientDao() {
     }
@@ -100,7 +103,24 @@ public final class ClientDao {
             }
     }
 
-    public List<Student> findAllStudents() {
-        return null;
+    public List<Student> findAllStudents(Connection connection) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SQL)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Student> resultList = new ArrayList<>();
+            while (resultSet.next()) {
+                resultList.add(buildStudent(resultSet));
+            }
+            return resultList;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    private Student buildStudent(ResultSet resultSet) throws SQLException {
+        return new Student(
+                resultSet.getInt("id"),
+                resultSet.getString("first_name"),
+                resultSet.getString("last_name"));
     }
 }
