@@ -15,6 +15,13 @@ public abstract class Client {
         this.lastName = lastName;
     }
 
+    public Client(String firstName, String lastName, Contact contact, Location location) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contact = contact;
+        this.location = location;
+    }
+
     public Client(Integer clientId, String firstName, String lastName, Contact contact, Location location) {
         this.clientId = clientId;
         this.firstName = firstName;

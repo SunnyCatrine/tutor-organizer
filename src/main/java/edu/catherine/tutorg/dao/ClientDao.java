@@ -8,6 +8,7 @@ import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
 import java.sql.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,7 @@ public final class ClientDao {
                 studentParameterStatement.addBatch(defaultParamCreateSql);
                 studentParameterStatement.addBatch(lessonsPeriodCreateSql);
 
-            for (Map.Entry<DayOfWeek,LocalDateTime> entry: student.getSchedule().getSchedule().entrySet()) {
+            for (Map.Entry<DayOfWeek, LocalTime> entry: student.getSchedule().entrySet()) {
                 scheduleUnitCreateSql = scheduleUnitCreateSql
                         + entry.getKey() + ","
                         + entry.getValue() + ","

@@ -41,7 +41,6 @@ public class TutorgLauncher {
                 "31.05.2023");
 
         CreateStudentResponseDto addedStudent = clientController.createStudent(studentDto);
-        
-
+        System.out.println(addedStudent);
     }
 }

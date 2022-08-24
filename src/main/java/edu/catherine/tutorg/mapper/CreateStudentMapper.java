@@ -1,6 +1,5 @@
 package main.java.edu.catherine.tutorg.mapper;
 
-import main.java.edu.catherine.tutorg.model.Schedule;
 import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.LessonsPeriod;
 import main.java.edu.catherine.tutorg.model.client.Location;
@@ -9,6 +8,15 @@ import main.java.edu.catherine.tutorg.model.client.dto.CreateStudentRequestDto;
 import main.java.edu.catherine.tutorg.model.client.dto.CreateStudentResponseDto;
 import main.java.edu.catherine.tutorg.model.client.ext.Student;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
+import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CreateStudentMapper {
 
@@ -25,23 +33,33 @@ public class CreateStudentMapper {
         );
 
         LessonParam defaultLessonParam = new LessonParam(
-                studentRequestDto.getDefaultPrice(),
-                studentRequestDto.getDefaultDurationInMinutes()
+                Integer.parseInt(studentRequestDto.getDefaultPrice()),
+                Integer.parseInt(studentRequestDto.getDefaultDurationInMinutes())
         );
 
-        Schedule schedule = new Schedule(studentRequestDto.getSchedule());
+        Map<DayOfWeek, LocalTime> schedule = new HashMap<>();
+        schedule.put(DayOfWeek.valueOf(studentRequestDto.getFirstDayOfWeek()), LocalTime.parse(studentRequestDto.getFirstDayOfWeekTime()));
+        schedule.put(DayOfWeek.valueOf(studentRequestDto.getSecondDayOfWeek()), LocalTime.parse(studentRequestDto.getSecondDayOfWeekTime()));
+        schedule.put(DayOfWeek.valueOf(studentRequestDto.getThirdDayOfWeek()), LocalTime.parse(studentRequestDto.getFirstDayOfWeekTime()));
+        schedule.put(DayOfWeek.valueOf(studentRequestDto.getFourthDayOfWeek()), LocalTime.parse(studentRequestDto.getFourthDayOfWeekTime()));
+
 
         LessonsPeriod lessonsPeriod = new LessonsPeriod(
-                studentRequestDto.getFirstLessonDate(),
-                studentRequestDto.getLastLessonDate()
+                LocalDate.parse(studentRequestDto.getFirstLessonDate()),
+                LocalDate.parse(studentRequestDto.getLastLessonDate())
         );
+
+        List<SubjectBlock> subjectBlocks = new ArrayList<>();
+        subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getFirstSubjectBlock()));
+        subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getSecondSubjectBlock()));
+        subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getThirdSubjectBlock()));
 
         return new Student(
                 studentRequestDto.getFirstName(),
                 studentRequestDto.getLastName(),
                 contact,
                 location,
-                studentRequestDto.getSubjects(),
+                subjectBlocks,
                 defaultLessonParam,
                 schedule,
                 null,
@@ -49,7 +67,6 @@ public class CreateStudentMapper {
                 lessonsPeriod
         );
     }
-
     public static CreateStudentResponseDto toDto(Student student) {
         return new CreateStudentResponseDto(
                 student.getClientId(),

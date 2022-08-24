@@ -3,16 +3,18 @@ package main.java.edu.catherine.tutorg.model.client.ext;
 import main.java.edu.catherine.tutorg.model.client.*;
 import main.java.edu.catherine.tutorg.model.lesson.Lesson;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
-import main.java.edu.catherine.tutorg.model.Schedule;
 import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Student extends Client {
     private List<SubjectBlock> subjects;
     private LessonParam defaultLessonParam;
-    private Schedule schedule;
+    private Map<DayOfWeek, LocalTime> schedule;
     private List<Lesson> lessonList;
     private StudentStatus studentStatus;
     private LessonsPeriod lessonsPeriod;
@@ -22,7 +24,7 @@ public class Student extends Client {
         super(clientId, firstName, lastName, contact, location);
     }
 
-    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Schedule schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
+    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Map<DayOfWeek, LocalTime> schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
         super(clientId, firstName, lastName, contact, location);
         this.subjects = subjects;
         this.defaultLessonParam = defaultLessonParam;
@@ -34,6 +36,17 @@ public class Student extends Client {
 
     public Student(Integer id, String first_name, String last_name) {
         super(id, first_name, last_name);
+    }
+
+    public Student(String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Map<DayOfWeek, LocalTime> schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
+        super(firstName, lastName, contact, location);
+        this.subjects = subjects;
+        this.defaultLessonParam = defaultLessonParam;
+        this.schedule = schedule;
+        this.lessonList = lessonList;
+        this.studentStatus = studentStatus;
+        this.lessonsPeriod = lessonsPeriod;
+        this.agent = agent;
     }
 
     public Agent getAgent() {
@@ -61,11 +74,11 @@ public class Student extends Client {
         this.defaultLessonParam = defaultLessonParam;
     }
 
-    public Schedule getSchedule() {
+    public Map<DayOfWeek, LocalTime> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(Map<DayOfWeek, LocalTime> schedule) {
         this.schedule = schedule;
     }
 
