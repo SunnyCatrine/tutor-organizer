@@ -1,18 +1,13 @@
-package main.java.edu.catherine.tutorg.model.client.dto;
+package main.java.edu.catherine.tutorg.model.dto;
 
-import main.java.edu.catherine.tutorg.model.client.StudentStatus;
-import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class FindStudentResponseDto {
+    private Integer id;
     private String firstName;
     private String lastName;
+    private String status;
     private String phoneNo;
     private String skype;
     private String country;
@@ -24,13 +19,19 @@ public class FindStudentResponseDto {
     private List<String> scheduleUnits;
     private String firstLessonDate;
     private String lastLessonDate;
-    private String status;
     private String agentFirstName;
     private String agentLastName;
     private String agentPhoneNo;
     private String agentCountry;
     private String agentCity;
     private String agentTimezone;
+
+    public FindStudentResponseDto(Integer id, String firstName, String lastName, String status) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+    }
 
     public FindStudentResponseDto(String firstName, String lastName, String phoneNo, String skype, String country, String city, String timezone, List<String> subjects, String defaultPrice, String defaultDuration, List<String> scheduleUnits, String firstLessonDate, String lastLessonDate, String status, String agentFirstName, String agentLastName, String agentPhoneNo, String agentCountry, String agentCity, String agentTimezone) {
         this.firstName = firstName;
@@ -250,8 +251,10 @@ public class FindStudentResponseDto {
     @Override
     public String toString() {
         return "FindStudentResponseDto{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", status='" + status + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
                 ", skype='" + skype + '\'' +
                 ", country='" + country + '\'' +
@@ -263,7 +266,6 @@ public class FindStudentResponseDto {
                 ", scheduleUnits=" + scheduleUnits +
                 ", firstLessonDate='" + firstLessonDate + '\'' +
                 ", lastLessonDate='" + lastLessonDate + '\'' +
-                ", status='" + status + '\'' +
                 ", agentFirstName='" + agentFirstName + '\'' +
                 ", agentLastName='" + agentLastName + '\'' +
                 ", agentPhoneNo='" + agentPhoneNo + '\'' +

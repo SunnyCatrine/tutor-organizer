@@ -1,7 +1,7 @@
 package main.java.edu.catherine.tutorg.model.client;
 
 public enum StudentStatus {
-    ACTIVE("Active"),
+    ACTIVE("ACTIVE"),
     ARCHIVED("Archived");
 
     private String status;
@@ -12,5 +12,12 @@ public enum StudentStatus {
 
     public String getStatus() {
         return status;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentStatus{" +
+                "status='" + status + '\'' +
+                '}';
     }
 }

@@ -4,8 +4,8 @@ import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.LessonsPeriod;
 import main.java.edu.catherine.tutorg.model.client.Location;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
-import main.java.edu.catherine.tutorg.model.client.dto.CreateStudentRequestDto;
-import main.java.edu.catherine.tutorg.model.client.dto.CreateStudentResponseDto;
+import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequestDto;
+import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponseDto;
 import main.java.edu.catherine.tutorg.model.client.ext.Student;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
 import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
@@ -38,10 +38,18 @@ public class CreateStudentMapper {
         );
 
         Map<DayOfWeek, LocalTime> schedule = new HashMap<>();
-        schedule.put(DayOfWeek.valueOf(studentRequestDto.getFirstDayOfWeek()), LocalTime.parse(studentRequestDto.getFirstDayOfWeekTime()));
-        schedule.put(DayOfWeek.valueOf(studentRequestDto.getSecondDayOfWeek()), LocalTime.parse(studentRequestDto.getSecondDayOfWeekTime()));
-        schedule.put(DayOfWeek.valueOf(studentRequestDto.getThirdDayOfWeek()), LocalTime.parse(studentRequestDto.getFirstDayOfWeekTime()));
-        schedule.put(DayOfWeek.valueOf(studentRequestDto.getFourthDayOfWeek()), LocalTime.parse(studentRequestDto.getFourthDayOfWeekTime()));
+        if (studentRequestDto.getFirstDayOfWeek() != null && studentRequestDto.getFirstDayOfWeek() != null) {
+            schedule.put(DayOfWeek.valueOf(studentRequestDto.getFirstDayOfWeek()), LocalTime.parse(studentRequestDto.getFirstDayOfWeekTime()));
+        }
+        if (studentRequestDto.getSecondDayOfWeek() != null && studentRequestDto.getSecondDayOfWeekTime() != null) {
+            schedule.put(DayOfWeek.valueOf(studentRequestDto.getSecondDayOfWeek()), LocalTime.parse(studentRequestDto.getSecondDayOfWeekTime()));
+        }
+        if (studentRequestDto.getThirdDayOfWeek() != null && studentRequestDto.getThirdDayOfWeekTime() != null) {
+            schedule.put(DayOfWeek.valueOf(studentRequestDto.getThirdDayOfWeek()), LocalTime.parse(studentRequestDto.getFirstDayOfWeekTime()));
+        }
+        if (studentRequestDto.getFourthDayOfWeek() != null && studentRequestDto.getFourthDayOfWeekTime() != null) {
+            schedule.put(DayOfWeek.valueOf(studentRequestDto.getFourthDayOfWeek()), LocalTime.parse(studentRequestDto.getFourthDayOfWeekTime()));
+        }
 
 
         LessonsPeriod lessonsPeriod = new LessonsPeriod(
@@ -50,9 +58,15 @@ public class CreateStudentMapper {
         );
 
         List<SubjectBlock> subjectBlocks = new ArrayList<>();
-        subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getFirstSubjectBlock()));
-        subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getSecondSubjectBlock()));
-        subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getThirdSubjectBlock()));
+        if (studentRequestDto.getFirstSubjectBlock() != null) {
+            subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getFirstSubjectBlock()));
+        }
+        if (studentRequestDto.getSecondSubjectBlock() != null) {
+            subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getSecondSubjectBlock()));
+        }
+        if (studentRequestDto.getThirdSubjectBlock() != null) {
+            subjectBlocks.add(SubjectBlock.valueOf(studentRequestDto.getThirdSubjectBlock()));
+        }
 
         return new Student(
                 studentRequestDto.getFirstName(),

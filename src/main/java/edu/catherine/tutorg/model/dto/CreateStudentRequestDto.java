@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.client.dto;
+package main.java.edu.catherine.tutorg.model.dto;
 
 import java.util.Objects;
 

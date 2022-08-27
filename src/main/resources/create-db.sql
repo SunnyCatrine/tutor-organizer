@@ -123,3 +123,5 @@ CREATE TABLE home_work
     lesson_id smallint    NOT NULL,
     FOREIGN KEY (lesson_id) references lesson (id)
 );
+
+ALTER TABLE student ALTER COLUMN status TYPE varchar(30);

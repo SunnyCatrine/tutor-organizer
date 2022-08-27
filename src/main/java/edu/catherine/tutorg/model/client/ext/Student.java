@@ -34,8 +34,9 @@ public class Student extends Client {
         this.lessonsPeriod = lessonsPeriod;
     }
 
-    public Student(Integer id, String first_name, String last_name) {
+    public Student(Integer id, String first_name, String last_name, StudentStatus studentStatus) {
         super(id, first_name, last_name);
+        this.studentStatus = studentStatus;
     }
 
     public Student(String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Map<DayOfWeek, LocalTime> schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
