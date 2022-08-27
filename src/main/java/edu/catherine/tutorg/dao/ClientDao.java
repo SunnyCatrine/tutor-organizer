@@ -14,7 +14,7 @@ import java.util.Map;
 
 public final class ClientDao {
     private static final ClientDao INSTANCE = new ClientDao();
-    private static final String STUDENT_CREATE_SQL = "INSERT INTO student (first_name, last_name, status) VALUES (?,?,?)";
+    private static final String CREATE_STUDENT_SQL = "INSERT INTO student (first_name, last_name, status) VALUES (?,?,?)";
     private static final String FIND_ALL_SQL = "SELECT student.id, student.first_name, student.last_name, student.status FROM student";
 
     private ClientDao() {
@@ -125,5 +125,24 @@ public final class ClientDao {
                 resultSet.getString("first_name"),
                 resultSet.getString("last_name"),
                 StudentStatus.valueOf(resultSet.getString("status")));
+    }
+
+    public Student createStudent(Student studentRequest, Connection connection) throws SQLException {
+        Student studentResponse = studentRequest;
+        try(PreparedStatement preparedStatement = connection.prepareStatement(CREATE_STUDENT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            preparedStatement.setString(1, studentRequest.getFirstName());
+            preparedStatement.setString(2,studentRequest.getLastName());
+            preparedStatement.setString(3,studentRequest.getStudentStatus().getStatus());
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                studentResponse.setClientId(resultSet.getInt("id"));
+            }
+            return  studentResponse;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

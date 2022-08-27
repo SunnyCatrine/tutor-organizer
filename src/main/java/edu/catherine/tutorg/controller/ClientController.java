@@ -1,5 +1,7 @@
 package main.java.edu.catherine.tutorg.controller;
 
+import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequestDto;
+import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponseDto;
 import main.java.edu.catherine.tutorg.model.dto.FindStudentResponseDto;
 import main.java.edu.catherine.tutorg.service.ClientService;
 
@@ -17,9 +19,9 @@ public final class ClientController {
         return INSTANCE;
     }
 
-//    public CreateStudentResponseDto createStudent(CreateStudentRequestDto studentDto) throws SQLException {
-//        return clientService.createStudent(studentDto);
-//    }
+    public CreateStudentResponseDto createStudent(CreateStudentRequestDto studentDto) throws SQLException {
+        return clientService.createStudent(studentDto);
+    }
 
     public List<FindStudentResponseDto> findAllStudents() throws SQLException {
         return clientService.findAllStudents();

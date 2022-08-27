@@ -3,21 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="38f145da-c3a2-499f-ba9c-ffc8239e624e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tutor-organizer/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tutor-organizer/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tutor-organizer/main/resources/create-db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tutor-organizer/main/resources/create-db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/ClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/ClientDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/CreateStudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/CreateStudentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/FindStudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/FindStudentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/StudentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/StudentStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/dto/CreateStudentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/dto/CreateStudentRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/dto/CreateStudentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/dto/CreateStudentResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/dto/FindStudentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/dto/FindStudentResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/create-db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/create-db.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -218,7 +207,7 @@
       <workItem from="1661007768762" duration="17022000" />
       <workItem from="1661275530737" duration="433000" />
       <workItem from="1661329767800" duration="14754000" />
-      <workItem from="1661589725240" duration="2899000" />
+      <workItem from="1661589725240" duration="4586000" />
     </task>
     <servers />
   </component>
