@@ -26,10 +26,10 @@ public final class StudentController {
     public List<Student> findAll() throws SQLException {
         return studentService.findAll();
     }
-//
-//    public Student findBy(Integer studentId) {
-//        return studentService.findBy(studentId);
-//    }
+
+    public Student findBy(Integer studentId) throws SQLException {
+        return studentService.findBy(studentId);
+    }
 //
 //    public Student update(Student studentRequest) {
 //        return studentService.update(studentRequest);

@@ -16,6 +16,7 @@ public final class StudentDao {
     private static final String CREATE_CONTACT_SQL = "INSERT INTO student_contact_info (country, city, phone_no, skype, timezone, student_id) VALUES (?,?,?,?,?,?)";
 
     private static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
+    private static final String FIND_BY_ID = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id WHERE student.id = ?";
 
     private StudentDao() {
     }
@@ -59,9 +60,9 @@ public final class StudentDao {
 
     public List<Student> findAll(Connection connection) throws SQLException {
         List<Student> resultList = new ArrayList<>();
-        try (PreparedStatement findAll = connection.prepareStatement(FIND_ALL_SQL)) {
-            findAll.executeQuery();
-            ResultSet resultSet = findAll.getResultSet();
+        try (PreparedStatement findAllStudents = connection.prepareStatement(FIND_ALL_SQL)) {
+            findAllStudents.executeQuery();
+            ResultSet resultSet = findAllStudents.getResultSet();
             while (resultSet.next()) {
                 resultList.add(buildStudent(resultSet));
             }
@@ -79,6 +80,21 @@ public final class StudentDao {
                 contact,
                 StudentStatus.valueOf(resultSet.getString("status")));
         return resultStudent;
+    }
+
+    public Student findBy(Connection connection, Integer studentId) throws SQLException {
+        Student resultStudent = null;
+        try (PreparedStatement findStudentById = connection.prepareStatement(FIND_BY_ID)) {
+
+            findStudentById.setInt(1,studentId);
+
+            findStudentById.executeQuery();
+            ResultSet resultSet = findStudentById.getResultSet();
+            if (resultSet.next()) {
+                resultStudent = buildStudent(resultSet);
+            }
+            return resultStudent;
+        }
     }
 
 

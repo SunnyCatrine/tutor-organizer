@@ -22,11 +22,14 @@ public class TutorgLauncher {
         LessonParam defaultLessonParams = new LessonParam(1000, 90);
         Student student = new Student("Noah", "Benet", contact, location, defaultLessonParams);
 
-        Student addedStudent = studentController.create(student);
-        System.out.println(addedStudent);
+//        Student addedStudent = studentController.create(student);
+//        System.out.println(addedStudent);
 
         List<Student> students = studentController.findAll();
         students.forEach(System.out::println);
+
+        Student findStudent = studentController.findBy(10);
+        System.out.println(findStudent);
 
 
 //        CreateStudentRequestDto studentDto = new CreateStudentRequestDto(

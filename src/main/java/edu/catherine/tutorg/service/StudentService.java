@@ -31,6 +31,12 @@ public class StudentService {
         }
     }
 
+    public Student findBy(Integer studentId) throws SQLException {
+        try (Connection connection = ConnectionManager.get()) {
+            return studentDao.findBy(connection, studentId);
+        }
+    }
+
 //    public CreateStudentResponseDto createStudent(CreateStudentRequestDto studentDto) throws SQLException {
 //        try (Connection connection = ConnectionManager.get()) {
 //
@@ -51,6 +57,6 @@ public class StudentService {
 //            throw e;
 //        }
 //    }
-    
-    
+
+
 }
