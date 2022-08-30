@@ -17,6 +17,7 @@ public final class StudentDao {
 
     private static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
     private static final String FIND_BY_ID = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id WHERE student.id = ?";
+    private static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE id = ?" ;
 
     private StudentDao() {
     }
@@ -94,6 +95,17 @@ public final class StudentDao {
                 resultStudent = buildStudent(resultSet);
             }
             return resultStudent;
+        }
+    }
+
+    public Student deleteBy(Connection connection, Integer studentId) throws SQLException {
+        Student resultStudent = findBy(connection,studentId);
+        try (PreparedStatement deleteStudentById = connection.prepareStatement(DELETE_STUDENT_BY_ID)) {
+            deleteStudentById.setInt(1,studentId);
+            if (deleteStudentById.executeUpdate()>0) {
+                return resultStudent;
+            }
+            return null;
         }
     }
 

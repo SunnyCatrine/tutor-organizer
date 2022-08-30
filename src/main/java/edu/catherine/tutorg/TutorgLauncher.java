@@ -25,11 +25,31 @@ public class TutorgLauncher {
 //        Student addedStudent = studentController.create(student);
 //        System.out.println(addedStudent);
 
+        System.out.println("ALL STUDENTS");
+
         List<Student> students = studentController.findAll();
         students.forEach(System.out::println);
 
+        System.out.println();
+
+        System.out.println("findStudent id 10");
         Student findStudent = studentController.findBy(10);
         System.out.println(findStudent);
+
+        System.out.println();
+
+        System.out.println("Delete student id 8");
+        Student deletedStudent = studentController.deleteBy(8);
+        System.out.println(deletedStudent);
+
+        System.out.println();
+
+        System.out.println("ALL STUDENTS Again");
+
+        students = studentController.findAll();
+        students.forEach(System.out::println);
+
+
 
 
 //        CreateStudentRequestDto studentDto = new CreateStudentRequestDto(

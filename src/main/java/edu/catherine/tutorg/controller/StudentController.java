@@ -35,7 +35,7 @@ public final class StudentController {
 //        return studentService.update(studentRequest);
 //    }
 //
-//    public Student deleteBy(Integer studentId) {
-//        return studentService.deleteBy(studentId);
-//    }
+    public Student deleteBy(Integer studentId) throws SQLException {
+        return studentService.deleteBy(studentId);
+    }
 }

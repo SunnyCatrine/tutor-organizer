@@ -17,8 +17,7 @@ CREATE TABLE student_contact_info
     phone_no   varchar(30),
     skype      varchar(30) NOT NULL,
     timezone   varchar(30) NOT NULL,
-    student_id smallint,
-    FOREIGN KEY (student_id) references student (id)
+    student_id smallint REFERENCES student (id) ON DELETE CASCADE
 );
 
 CREATE TABLE subject
@@ -53,8 +52,7 @@ CREATE TABLE lesson
     payment_status boolean  NOT NULL,
     price          smallint NOT NULL,
     duration       decimal  NOT NULL,
-    student_id     smallint,
-    FOREIGN KEY (student_id) references student (id)
+    student_id     smallint REFERENCES student (id) ON DELETE CASCADE
 );
 
 ALTER TABLE agent
@@ -74,8 +72,7 @@ CREATE TABLE lesson_default_param
     id         smallserial PRIMARY KEY,
     price      smallint NOT NULL,
     duration   decimal  NOT NULL,
-    student_id smallint NOT NULL,
-    FOREIGN KEY (student_id) references student (id)
+    student_id smallint NOT NULL REFERENCES student (id) ON DELETE CASCADE
 );
 
 CREATE TABLE schedule_unit
@@ -85,8 +82,7 @@ CREATE TABLE schedule_unit
     time        time[0]     NOT NULL,
     duration    decimal     NOT NULL,
     price       smallint    NOT NULL,
-    student_id  smallint    NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES student (id)
+    student_id  smallint    REFERENCES student (id) ON DELETE CASCADE
 );
 
 CREATE TABLE lessons_period
@@ -102,8 +98,7 @@ CREATE TABLE lesson_status
 (
     id        smallserial PRIMARY KEY,
     status    varchar(30) NOT NULL,
-    lesson_id smallint    NOT NULL,
-    FOREIGN KEY (lesson_id) references lesson (id)
+    lesson_id smallint    REFERENCES lesson (id) ON DELETE CASCADE
 );
 
 CREATE TABLE class_work
@@ -111,8 +106,7 @@ CREATE TABLE class_work
     id        smallserial PRIMARY KEY,
     status    varchar(30) NOT NULL,
     topic     text        NOT NULL,
-    lesson_id smallint    NOT NULL,
-    FOREIGN KEY (lesson_id) references lesson (id)
+    lesson_id smallint    REFERENCES lesson (id) ON DELETE CASCADE
 );
 
 CREATE TABLE home_work
@@ -120,8 +114,7 @@ CREATE TABLE home_work
     id        smallserial PRIMARY KEY,
     status    varchar(30) NOT NULL,
     topic     text        NOT NULL,
-    lesson_id smallint    NOT NULL,
-    FOREIGN KEY (lesson_id) references lesson (id)
+    lesson_id smallint    REFERENCES lesson (id) ON DELETE CASCADE
 );
 
 ALTER TABLE student ALTER COLUMN status TYPE varchar(30);
@@ -133,8 +126,8 @@ CREATE TABLE students_subjects (
                                    subject_id smallint,
                                    first_lesson_date date,
                                    last_lesson_date date,
-                                   FOREIGN KEY (student_id) REFERENCES student (id),
-                                   FOREIGN KEY (subject_id) REFERENCES subject (id)
+                                   FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE,
+                                   FOREIGN KEY (subject_id) REFERENCES subject (id) ON DELETE CASCADE
 );
 
 DROP TABLE lessons_period;
@@ -144,8 +137,8 @@ ALTER TABLE agent DROP COLUMN student_id;
 CREATE TABLE students_agents (
                                  student_id smallint,
                                  agent_id smallint,
-                                 FOREIGN KEY (student_id) REFERENCES student (id),
-                                 FOREIGN KEY (agent_id) REFERENCES agent (id)
+                                 FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ,
+                                 FOREIGN KEY (agent_id) REFERENCES agent (id) ON DELETE CASCADE
 );
 
 ALTER TABLE student ADD COLUMN default_lesson_price smallint;

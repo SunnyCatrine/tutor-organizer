@@ -5,6 +5,7 @@ import main.java.edu.catherine.tutorg.model.client.ext.Student;
 import main.java.edu.catherine.tutorg.util.ConnectionManager;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,6 +35,12 @@ public class StudentService {
     public Student findBy(Integer studentId) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
             return studentDao.findBy(connection, studentId);
+        }
+    }
+
+    public Student deleteBy(Integer studentId) throws SQLException {
+        try (Connection connection = ConnectionManager.get()) {
+            return studentDao.deleteBy(connection, studentId);
         }
     }
 
