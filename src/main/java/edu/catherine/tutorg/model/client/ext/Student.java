@@ -50,6 +50,11 @@ public class Student extends Client {
         this.agent = agent;
     }
 
+    public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam) {
+        super(firstName, lastName, contact, location);
+        this.defaultLessonParam = defaultLessonParam;
+    }
+
     public Agent getAgent() {
         return agent;
     }
@@ -128,13 +133,9 @@ public class Student extends Client {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "subjects=" + subjects +
-                ", defaultLessonParam=" + defaultLessonParam +
-                ", schedule=" + schedule +
-                ", lessonList=" + lessonList +
-                ", studentStatus=" + studentStatus +
-                ", lessonsPeriod=" + lessonsPeriod +
+
+        return super.toString() + "Student{" +
+                "defaultLessonParam=" + defaultLessonParam +
                 '}';
     }
 }

@@ -108,7 +108,7 @@ CREATE TABLE lesson_status
 
 CREATE TABLE class_work
 (
-    id        smallserial NOT NULL,
+    id        smallserial PRIMARY KEY,
     status    varchar(30) NOT NULL,
     topic     text        NOT NULL,
     lesson_id smallint    NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE class_work
 
 CREATE TABLE home_work
 (
-    id        smallserial NOT NULL,
+    id        smallserial PRIMARY KEY,
     status    varchar(30) NOT NULL,
     topic     text        NOT NULL,
     lesson_id smallint    NOT NULL,
@@ -125,3 +125,31 @@ CREATE TABLE home_work
 );
 
 ALTER TABLE student ALTER COLUMN status TYPE varchar(30);
+
+ALTER TABLE subject DROP COLUMN student_id;
+
+CREATE TABLE students_subjects (
+                                   student_id smallint,
+                                   subject_id smallint,
+                                   first_lesson_date date,
+                                   last_lesson_date date,
+                                   FOREIGN KEY (student_id) REFERENCES student (id),
+                                   FOREIGN KEY (subject_id) REFERENCES subject (id)
+);
+
+DROP TABLE lessons_period;
+
+ALTER TABLE agent DROP COLUMN student_id;
+
+CREATE TABLE students_agents (
+                                 student_id smallint,
+                                 agent_id smallint,
+                                 FOREIGN KEY (student_id) REFERENCES student (id),
+                                 FOREIGN KEY (agent_id) REFERENCES agent (id)
+);
+
+ALTER TABLE student ADD COLUMN default_lesson_price smallint;
+
+ALTER TABLE student ADD COLUMN default_lesson_duration_minutes smallint;
+
+DROP TABLE lesson_default_param;
