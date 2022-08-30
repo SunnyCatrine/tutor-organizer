@@ -1,6 +1,7 @@
 package main.java.edu.catherine.tutorg.dao;
 
 import main.java.edu.catherine.tutorg.exception.DaoException;
+import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.client.ext.Student;
 
@@ -14,7 +15,7 @@ public final class StudentDao {
     private static final String CREATE_STUDENT_SQL = "INSERT INTO student (first_name, last_name, status, default_lesson_price, default_lesson_duration_minutes) VALUES (?,?,?,?,?)";
     private static final String CREATE_CONTACT_SQL = "INSERT INTO student_contact_info (country, city, phone_no, skype, timezone, student_id) VALUES (?,?,?,?,?,?)";
 
-    private static final String FIND_ALL_SQL = "SELECT student.id, student.first_name, student.last_name, student.status FROM student";
+    private static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
 
     private StudentDao() {
     }
@@ -54,6 +55,30 @@ public final class StudentDao {
 
             return studentResponse;
         }
+    }
+
+    public List<Student> findAll(Connection connection) throws SQLException {
+        List<Student> resultList = new ArrayList<>();
+        try (PreparedStatement findAll = connection.prepareStatement(FIND_ALL_SQL)) {
+            findAll.executeQuery();
+            ResultSet resultSet = findAll.getResultSet();
+            while (resultSet.next()) {
+                resultList.add(buildStudent(resultSet));
+            }
+            return resultList;
+        }
+    }
+
+    private Student buildStudent(ResultSet resultSet) throws SQLException {
+        Contact contact = new Contact(resultSet.getString("phone"),
+                resultSet.getString("skype"));
+        Student resultStudent = new Student(
+                resultSet.getInt("id"),
+                resultSet.getString("first_name"),
+                resultSet.getString("last_name"),
+                contact,
+                StudentStatus.valueOf(resultSet.getString("status")));
+        return resultStudent;
     }
 
 

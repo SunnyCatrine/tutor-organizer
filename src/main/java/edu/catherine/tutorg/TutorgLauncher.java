@@ -25,6 +25,9 @@ public class TutorgLauncher {
         Student addedStudent = studentController.create(student);
         System.out.println(addedStudent);
 
+        List<Student> students = studentController.findAll();
+        students.forEach(System.out::println);
+
 
 //        CreateStudentRequestDto studentDto = new CreateStudentRequestDto(
 //                "Vasiliy",

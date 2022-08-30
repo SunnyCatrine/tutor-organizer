@@ -6,6 +6,7 @@ import main.java.edu.catherine.tutorg.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class StudentService {
     private final StudentDao studentDao = StudentDao.getInstance();
@@ -21,6 +22,12 @@ public class StudentService {
     public Student create(Student studentRequest) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
             return studentDao.create(connection, studentRequest);
+        }
+    }
+
+    public List<Student> findAll() throws SQLException {
+        try (Connection connection = ConnectionManager.get()) {
+            return studentDao.findAll(connection);
         }
     }
 

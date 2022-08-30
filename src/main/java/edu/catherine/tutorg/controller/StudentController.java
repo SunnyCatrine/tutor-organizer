@@ -23,9 +23,9 @@ public final class StudentController {
         return studentService.create(studentRequest);
     }
 
-//    public List<Student> findAll() {
-//        return studentService.findAll();
-//    }
+    public List<Student> findAll() throws SQLException {
+        return studentService.findAll();
+    }
 //
 //    public Student findBy(Integer studentId) {
 //        return studentService.findBy(studentId);

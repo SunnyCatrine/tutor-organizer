@@ -55,6 +55,11 @@ public class Student extends Client {
         this.defaultLessonParam = defaultLessonParam;
     }
 
+    public Student(Integer clientId, String firstName, String lastName, Contact contact, StudentStatus studentStatus) {
+        super(clientId, firstName, lastName, contact);
+        this.studentStatus = studentStatus;
+    }
+
     public Agent getAgent() {
         return agent;
     }
