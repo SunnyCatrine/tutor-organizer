@@ -2,6 +2,7 @@ package main.java.edu.catherine.tutorg.dao;
 
 import main.java.edu.catherine.tutorg.exception.DaoException;
 import main.java.edu.catherine.tutorg.model.client.Contact;
+import main.java.edu.catherine.tutorg.model.client.Location;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.client.ext.Student;
 
@@ -15,9 +16,10 @@ public final class StudentDao {
     private static final String CREATE_STUDENT_SQL = "INSERT INTO student (first_name, last_name, status, default_lesson_price, default_lesson_duration_minutes) VALUES (?,?,?,?,?)";
     private static final String CREATE_CONTACT_SQL = "INSERT INTO student_contact_info (country, city, phone_no, skype, timezone, student_id) VALUES (?,?,?,?,?,?)";
 
-    private static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
-    private static final String FIND_BY_ID = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id WHERE student.id = ?";
+    private static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype, student_contact_info.country as country, student_contact_info.city as city FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
+    private static final String FIND_BY_ID = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student_contact_info.phone_No as phone, student_contact_info.skype as skype, student_contact_info.country as country, student_contact_info.city as city FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id WHERE student.id = ?";
     private static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE id = ?" ;
+
 
     private StudentDao() {
     }
@@ -74,11 +76,14 @@ public final class StudentDao {
     private Student buildStudent(ResultSet resultSet) throws SQLException {
         Contact contact = new Contact(resultSet.getString("phone"),
                 resultSet.getString("skype"));
+        Location location = new Location(resultSet.getString("country"),
+                resultSet.getString("city"));
         Student resultStudent = new Student(
                 resultSet.getInt("id"),
                 resultSet.getString("first_name"),
                 resultSet.getString("last_name"),
                 contact,
+                location,
                 StudentStatus.valueOf(resultSet.getString("status")));
         return resultStudent;
     }
@@ -108,6 +113,116 @@ public final class StudentDao {
             return null;
         }
     }
+
+    public Student update(Connection connection, Integer id, Student studentRequest) throws SQLException {
+        String updateStudentSql = getUpdateStudentSql(studentRequest);
+        String updateContactSql = getUpdateContactSql(studentRequest);
+        if (! updateStudentSql.isEmpty()) {
+            try (PreparedStatement updateStudentByID = connection.prepareStatement(updateStudentSql)) {
+                updateStudentByID.setInt(1,id);
+                updateStudentByID.executeUpdate();
+            }
+        }
+        if (! updateContactSql.isEmpty()) {
+            try (PreparedStatement updateContactByStudentID = connection.prepareStatement(updateContactSql)) {
+                updateContactByStudentID.setInt(1,id);
+                updateContactByStudentID.executeUpdate();
+            }
+        }
+        return findBy(connection, id);
+    }
+
+    private String getUpdateStudentSql(Student student) {
+        String resultSqlStart = "UPDATE student SET ";
+        String resultSqlEnd = " WHERE id = ?";
+        String resultSql = "";
+        String firstName = "";
+        String lastName = "";
+        String status = "";
+        String defaultLessonPrice = "";
+        String defaultLessonDurationMinutes = "";
+        boolean noNullFieldPresent = false;
+
+        String studentFirstName = student.getFirstName();
+        if (studentFirstName != null) {
+            firstName = "first_name = '" + studentFirstName + "',";
+            noNullFieldPresent = true;
+        }
+        String studentLastName = student.getLastName();
+        if (studentLastName != null) {
+            lastName = "last_name = '" + studentLastName + "',";
+            noNullFieldPresent = true;
+        }
+        StudentStatus studentStatus = student.getStudentStatus();
+        if (studentStatus != null) {
+            status = "status = '" + studentStatus.getStatus() + "',";
+            noNullFieldPresent = true;
+        }
+        Integer studentDefaultLessonPrice = student.getDefaultLessonParam().getPrice();
+        if (studentDefaultLessonPrice != null) {
+            defaultLessonPrice = "default_lesson_price = " + studentDefaultLessonPrice + ",";
+            noNullFieldPresent = true;
+        }
+        Integer studentDefaultLessonDurationMinutes = student.getDefaultLessonParam().getDuration();
+        if (studentDefaultLessonDurationMinutes != null) {
+            defaultLessonDurationMinutes = "default_lesson_duration_minutes = " + studentDefaultLessonDurationMinutes + ",";
+            noNullFieldPresent = true;
+        }
+
+        if (noNullFieldPresent) {
+            resultSql = resultSqlStart + firstName + lastName + status + defaultLessonPrice + defaultLessonDurationMinutes;
+            resultSql = resultSql.substring(0, resultSql.length() - 1);
+            resultSql = resultSql.concat(resultSqlEnd);
+        }
+        return resultSql;
+    }
+
+    private String getUpdateContactSql(Student student) {
+        String resultSqlStart = "UPDATE student_contact_info SET ";
+        String resultSqlEnd = " WHERE student_id = ?";
+        String resultSql = "";
+        String country = "";
+        String city = "";
+        String phoneNo = "";
+        String skype = "";
+        String timeZone = "";
+        boolean noNullFieldPresent = false;
+
+        String studentCountry = student.getLocation().getCountry();
+        if (studentCountry != null) {
+            country = "country = '" + studentCountry + "',";
+            noNullFieldPresent = true;
+        }
+        String studentCity = student.getLocation().getCity();
+        if (studentCity != null) {
+            city = "city = '" + studentCity + "',";
+            noNullFieldPresent = true;
+        }
+        String studentPhone = student.getContact().getPhoneNo();
+        if (studentPhone != null) {
+            phoneNo = "phone_no = '" + studentPhone + "',";
+            noNullFieldPresent = true;
+        }
+        String studentSkype = student.getContact().getSkype();
+        if (studentSkype != null) {
+            skype = "skype = '" + studentSkype + "',";
+            noNullFieldPresent = true;
+        }
+        String studentTimeZone = student.getLocation().getTimezone();
+        if (studentTimeZone != null) {
+            timeZone = "timezone = '" + studentTimeZone +"',";
+            noNullFieldPresent = true;
+        }
+
+        if (noNullFieldPresent) {
+            resultSql = resultSqlStart + country + city + phoneNo + skype + timeZone;
+            resultSql = resultSql.substring(0, resultSql.length() - 1);
+            resultSql = resultSql.concat(resultSqlEnd);
+        }
+        return resultSql;
+    }
+
+
 
 
 //    public List<Student> findAllStudents(Connection connection) {

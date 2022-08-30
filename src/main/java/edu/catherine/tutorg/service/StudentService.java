@@ -44,6 +44,12 @@ public class StudentService {
         }
     }
 
+    public Student update(Integer id, Student studentRequest) throws SQLException {
+        try (Connection connection = ConnectionManager.get()) {
+            return studentDao.update(connection, id, studentRequest);
+        }
+    }
+
 //    public CreateStudentResponseDto createStudent(CreateStudentRequestDto studentDto) throws SQLException {
 //        try (Connection connection = ConnectionManager.get()) {
 //

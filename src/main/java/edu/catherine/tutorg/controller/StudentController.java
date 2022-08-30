@@ -30,11 +30,11 @@ public final class StudentController {
     public Student findBy(Integer studentId) throws SQLException {
         return studentService.findBy(studentId);
     }
-//
-//    public Student update(Student studentRequest) {
-//        return studentService.update(studentRequest);
-//    }
-//
+
+    public Student update(Integer id, Student studentRequest) throws SQLException {
+        return studentService.update(id, studentRequest);
+    }
+
     public Student deleteBy(Integer studentId) throws SQLException {
         return studentService.deleteBy(studentId);
     }

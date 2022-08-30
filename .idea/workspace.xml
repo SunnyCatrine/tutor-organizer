@@ -6,6 +6,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/StudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/StudentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/StudentService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -285,7 +287,7 @@
       <workItem from="1661589725240" duration="4729000" />
       <workItem from="1661841694026" duration="11785000" />
       <workItem from="1661853846972" duration="174000" />
-      <workItem from="1661854055954" duration="1262000" />
+      <workItem from="1661854055954" duration="10153000" />
     </task>
     <servers />
   </component>

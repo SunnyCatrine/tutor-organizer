@@ -22,12 +22,23 @@ public class TutorgLauncher {
         LessonParam defaultLessonParams = new LessonParam(1000, 90);
         Student student = new Student("Noah", "Benet", contact, location, defaultLessonParams);
 
-//        Student addedStudent = studentController.create(student);
-//        System.out.println(addedStudent);
+        System.out.println("ALL STUDENTS");
+        List<Student> students = studentController.findAll();
+        students.forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("ADD NEW STUDENT");
+        student.setFirstName("Tracy");
+        student.setLastName("Strauss");
+        location.setCountry("Germany");
+        location.setCity("Berlin");
+        Student addedStudent = studentController.create(student);
+        System.out.println(addedStudent);
+        System.out.println();
 
         System.out.println("ALL STUDENTS");
 
-        List<Student> students = studentController.findAll();
+        students = studentController.findAll();
         students.forEach(System.out::println);
 
         System.out.println();
@@ -38,8 +49,8 @@ public class TutorgLauncher {
 
         System.out.println();
 
-        System.out.println("Delete student id 8");
-        Student deletedStudent = studentController.deleteBy(8);
+        System.out.println("Delete student id 5");
+        Student deletedStudent = studentController.deleteBy(5);
         System.out.println(deletedStudent);
 
         System.out.println();
@@ -48,6 +59,25 @@ public class TutorgLauncher {
 
         students = studentController.findAll();
         students.forEach(System.out::println);
+        System.out.println();
+
+
+
+        System.out.println("Update student id 11");
+        contact.setPhoneNo("+79780123456");
+        student.setFirstName("Angela");
+        student.setLastName("Petrelli");
+        student.setContact(contact);
+
+        Student updatedStudent = studentController.update(11, student);
+        System.out.println(updatedStudent);
+        System.out.println();
+
+        System.out.println("ALL STUDENTS Again");
+
+        students = studentController.findAll();
+        students.forEach(System.out::println);
+
 
 
 
