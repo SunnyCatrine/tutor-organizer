@@ -9,7 +9,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.java.edu.catherine.tutorg.util.SqlUtil.*;
+import static main.java.edu.catherine.tutorg.util.sql.SqlConstants.*;
+import static main.java.edu.catherine.tutorg.util.sql.SqlUtil.*;
 
 public final class StudentDao {
     private static final StudentDao INSTANCE = new StudentDao();

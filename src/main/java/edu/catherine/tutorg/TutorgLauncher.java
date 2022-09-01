@@ -3,6 +3,7 @@ package main.java.edu.catherine.tutorg;
 import main.java.edu.catherine.tutorg.controller.StudentController;
 import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.Location;
+import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
 
@@ -65,6 +66,7 @@ public class TutorgLauncher {
         student.setFirstName("Angela");
         student.setLastName(null);
         student.setContact(contact);
+        student.setStudentStatus(StudentStatus.ARCHIVED);
 
         Student updatedStudent = studentController.update(6, student);
         System.out.println(updatedStudent);
