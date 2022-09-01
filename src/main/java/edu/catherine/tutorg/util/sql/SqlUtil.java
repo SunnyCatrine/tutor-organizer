@@ -7,7 +7,7 @@ import static jdk.internal.joptsimple.internal.Strings.EMPTY;
 import static main.java.edu.catherine.tutorg.util.sql.SqlConstants.*;
 
 public class SqlUtil {
-    public static String getUpdateStudentSql(Student student) {
+    public static String buildUpdateStudentSql(Student student) {
         String resultSql = buildSqlSetPartIfNeed(student.getFirstName(), FIRST_NAME)
                             + buildSqlSetPartIfNeed(student.getLastName(), LAST_NAME)
                             + buildSqlSetPartIfNeed(student.getStudentStatus().getStatus(), STATUS)
@@ -23,7 +23,7 @@ public class SqlUtil {
         return resultSql;
     }
 
-    public static String getUpdateContactSql(Student student) {
+    public static String buildUpdateContactSql(Student student) {
         String resultSql = buildSqlSetPartIfNeed(student.getLocation().getCountry(), COUNTRY)
                             + buildSqlSetPartIfNeed(student.getLocation().getCity(), CITY)
                             + buildSqlSetPartIfNeed(student.getContact().getPhoneNo(), PHONE_NO)
@@ -49,10 +49,9 @@ public class SqlUtil {
                 : fieldName + SPACE + EQUALS + SPACE + QUOTE + newValue + QUOTE + COMMA;
     }
 
-    private static String buildSqlSetPartIfNeed(Integer fieldValue, String fieldName) {
-        if (fieldValue != null) {
-            return fieldName + SPACE + EQUALS + SPACE + fieldValue + COMMA;
-        }
-        return EMPTY;
+    private static String buildSqlSetPartIfNeed(Integer newValue, String fieldName) {
+        return isNull(newValue)
+                ? EMPTY
+                : fieldName + SPACE + EQUALS + SPACE + newValue + COMMA;
     }
 }

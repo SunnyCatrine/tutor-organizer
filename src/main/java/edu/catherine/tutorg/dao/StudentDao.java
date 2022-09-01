@@ -94,8 +94,8 @@ public final class StudentDao {
     }
 
     public Student update(Connection connection, Integer id, Student studentRequest) throws SQLException {
-        String updateStudentSql = getUpdateStudentSql(studentRequest);
-        String updateContactSql = getUpdateContactSql(studentRequest);
+        String updateStudentSql = buildUpdateStudentSql(studentRequest);
+        String updateContactSql = buildUpdateContactSql(studentRequest);
         // TODO: 30.08.2022 spaces.. fix in all other methods too
 
         // DONE: 30.08.2022 name of condition is bad
