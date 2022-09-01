@@ -6,8 +6,12 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/TutorgLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/controller/StudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/dao/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/CreateStudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/CreateStudentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/FindStudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/mapper/FindStudentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/StudentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/StudentStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/impl/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/ext/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/model/client/impl/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/catherine/tutorg/service/StudentService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,56 +70,6 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="tutor-organizer" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="tutor_organizer: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="home_work: table" type="69fad909:PgImplModel$LocalTable" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="tutor-organizer" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="tutor_organizer: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="lesson: table" type="69fad909:PgImplModel$LocalTable" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="tutor-organizer" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="tutor_organizer: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="lesson_status: table" type="69fad909:PgImplModel$LocalTable" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="tutor-organizer" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="tutor_organizer: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="schedule_unit: table" type="69fad909:PgImplModel$LocalTable" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="tutor-organizer" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="tutor_organizer: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="student: table" type="69fad909:PgImplModel$LocalTable" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -287,7 +241,8 @@
       <workItem from="1661589725240" duration="4729000" />
       <workItem from="1661841694026" duration="11785000" />
       <workItem from="1661853846972" duration="174000" />
-      <workItem from="1661854055954" duration="10153000" />
+      <workItem from="1661854055954" duration="13667000" />
+      <workItem from="1662017146118" duration="11790000" />
     </task>
     <servers />
   </component>

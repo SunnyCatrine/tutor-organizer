@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.client.ext;
+package main.java.edu.catherine.tutorg.model.client.impl;
 
 import main.java.edu.catherine.tutorg.model.client.*;
 import main.java.edu.catherine.tutorg.model.lesson.Lesson;
@@ -122,11 +122,13 @@ public class Student extends Client {
         return Objects.hash(super.hashCode(), getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod());
     }
 
+    // DONE: 30.08.2022 bad impl of toString :)
     @Override
     public String toString() {
 
-        return super.toString() + "Student{" +
-                "defaultLessonParam=" + defaultLessonParam +
+        return "Student{"
+                + super.toString()
+                + "defaultLessonParam=" + defaultLessonParam +
                 '}';
     }
 }

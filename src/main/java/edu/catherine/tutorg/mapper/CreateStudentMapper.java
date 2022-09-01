@@ -6,7 +6,7 @@ import main.java.edu.catherine.tutorg.model.client.Location;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequestDto;
 import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponseDto;
-import main.java.edu.catherine.tutorg.model.client.ext.Student;
+import main.java.edu.catherine.tutorg.model.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
 import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
 

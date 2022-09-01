@@ -3,10 +3,7 @@ package main.java.edu.catherine.tutorg;
 import main.java.edu.catherine.tutorg.controller.StudentController;
 import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.Location;
-import main.java.edu.catherine.tutorg.model.client.ext.Student;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequestDto;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponseDto;
-import main.java.edu.catherine.tutorg.model.dto.FindStudentResponseDto;
+import main.java.edu.catherine.tutorg.model.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
 
 import java.sql.SQLException;
@@ -63,13 +60,13 @@ public class TutorgLauncher {
 
 
 
-        System.out.println("Update student id 11");
+        System.out.println("Update student id 6");
         contact.setPhoneNo("+79780123456");
         student.setFirstName("Angela");
-        student.setLastName("Petrelli");
+        student.setLastName(null);
         student.setContact(contact);
 
-        Student updatedStudent = studentController.update(11, student);
+        Student updatedStudent = studentController.update(6, student);
         System.out.println(updatedStudent);
         System.out.println();
 

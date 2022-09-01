@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.client.ext;
+package main.java.edu.catherine.tutorg.model.client.impl;
 
 import main.java.edu.catherine.tutorg.model.client.Client;
 import main.java.edu.catherine.tutorg.model.client.Contact;

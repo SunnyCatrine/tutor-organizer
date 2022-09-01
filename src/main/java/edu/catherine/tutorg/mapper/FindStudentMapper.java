@@ -1,10 +1,7 @@
 package main.java.edu.catherine.tutorg.mapper;
 
 import main.java.edu.catherine.tutorg.model.dto.FindStudentResponseDto;
-import main.java.edu.catherine.tutorg.model.client.ext.Student;
-import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
-
-import java.util.stream.Collectors;
+import main.java.edu.catherine.tutorg.model.client.impl.Student;
 
 public class FindStudentMapper {
 

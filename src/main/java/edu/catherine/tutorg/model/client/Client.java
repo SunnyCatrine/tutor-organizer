@@ -95,12 +95,10 @@ public abstract class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "clientId=" + clientId +
+        return "clientId=" + clientId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", contact=" + contact +
-                ", location=" + location +
-                '}';
+                ", location=" + location;
     }
 }
