@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.client.ext;
+package main.java.edu.catherine.tutorg.model.client.impl;
 
 import main.java.edu.catherine.tutorg.model.client.Client;
 import main.java.edu.catherine.tutorg.model.client.Contact;
@@ -10,8 +10,8 @@ import java.util.Objects;
 public class Agent extends Client {
     List<Student> studentList;
 
-    public Agent(String firstName, String lastName, Contact contact, Location location) {
-        super(firstName, lastName, contact, location);
+    public Agent(Integer id, String firstName, String lastName, Contact contact, Location location) {
+        super(id, firstName, lastName, contact, location);
     }
 
     public List<Student> getStudentList() {

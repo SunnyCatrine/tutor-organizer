@@ -3,12 +3,34 @@ package main.java.edu.catherine.tutorg.model.client;
 import java.util.Objects;
 
 public abstract class Client {
+    private Integer clientId;
     private String firstName;
     private String lastName;
     private Contact contact;
     private Location location;
 
+    public Client(Integer clientId, String firstName, String lastName) {
+        this.clientId = clientId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Client(Integer clientId, String firstName, String lastName, Contact contact) {
+        this.clientId = clientId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contact = contact;
+    }
+
     public Client(String firstName, String lastName, Contact contact, Location location) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contact = contact;
+        this.location = location;
+    }
+
+    public Client(Integer clientId, String firstName, String lastName, Contact contact, Location location) {
+        this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.contact = contact;
@@ -31,6 +53,10 @@ public abstract class Client {
         return location;
     }
 
+    public Integer getClientId() {
+        return clientId;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -45,6 +71,10 @@ public abstract class Client {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
     @Override
@@ -65,11 +95,10 @@ public abstract class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "firstName='" + firstName + '\'' +
+        return "clientId=" + clientId +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", contact=" + contact +
-                ", location=" + location +
-                '}';
+                ", location=" + location;
     }
 }

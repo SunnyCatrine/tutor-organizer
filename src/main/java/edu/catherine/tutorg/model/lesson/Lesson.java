@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model;
+package main.java.edu.catherine.tutorg.model.lesson;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
