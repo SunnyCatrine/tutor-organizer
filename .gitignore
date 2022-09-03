@@ -23,18 +23,13 @@
 hs_err_pid*
 replay_pid*
 
-/.idea/
-.idea/
-/.idea/*
-.idea/*
-/.idea/**
-.idea/**
-
+# module settings file
 *.iml
 
-/out/
-out/
-/out/*
-out/*
-/out/**
-out/**
+# IntelliJ’s project specific settings files
+**/.idea/
+
+# all classes after compilation
+**/out/
+
+
