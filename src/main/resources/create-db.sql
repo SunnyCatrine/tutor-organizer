@@ -146,3 +146,5 @@ ALTER TABLE student ADD COLUMN default_lesson_price smallint;
 ALTER TABLE student ADD COLUMN default_lesson_duration_minutes smallint;
 
 DROP TABLE lesson_default_param;
+
+ALTER TABLE student ALTER COLUMN status SET DEFAULT 'ACTIVE';

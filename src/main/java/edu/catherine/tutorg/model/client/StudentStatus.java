@@ -11,7 +11,7 @@ public enum StudentStatus {
         this.status = status;
     }
 
-    public String getStatus() {
+    public String getStatusValue() {
         return status;
     }
 

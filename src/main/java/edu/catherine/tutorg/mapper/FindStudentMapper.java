@@ -10,7 +10,7 @@ public class FindStudentMapper {
                 responseStudent.getClientId(),
                 responseStudent.getFirstName(),
                 responseStudent.getLastName(),
-                responseStudent.getStudentStatus().getStatus()
+                responseStudent.getStudentStatus().getStatusValue()
                 );
     }
 }

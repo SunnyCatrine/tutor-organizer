@@ -2,62 +2,57 @@ package main.java.edu.catherine.tutorg.model.dto;
 
 import java.util.Objects;
 
-public class CreateStudentResponseDto {
+public class CreateStudentResponse {
     private Integer studentId;
     private String firstName;
     private String lastName;
+    private String status;
 
-    public CreateStudentResponseDto(Integer studentId, String firstName, String lastName) {
+
+    public CreateStudentResponse(Integer studentId, String firstName, String lastName, String status) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.status = status;
     }
 
     public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public String getStatus() {return status;}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CreateStudentResponseDto)) return false;
-        CreateStudentResponseDto that = (CreateStudentResponseDto) o;
-        return getStudentId().equals(that.getStudentId()) &&
-                getFirstName().equals(that.getFirstName()) &&
-                getLastName().equals(that.getLastName());
+        if (!(o instanceof CreateStudentResponse)) return false;
+        CreateStudentResponse that = (CreateStudentResponse) o;
+        return Objects.equals(getStudentId(), that.getStudentId()) &&
+                Objects.equals(getFirstName(), that.getFirstName()) &&
+                Objects.equals(getLastName(), that.getLastName()) &&
+                Objects.equals(getStatus(), that.getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStudentId(), getFirstName(), getLastName());
+        return Objects.hash(getStudentId(), getFirstName(), getLastName(), getStatus());
     }
 
     @Override
     public String toString() {
-        return "CreateStudentResponseDto{" +
+        return "CreateStudentResponse{" +
                 "studentId=" + studentId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

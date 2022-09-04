@@ -1,7 +1,10 @@
 package main.java.edu.catherine.tutorg.service;
 
 import main.java.edu.catherine.tutorg.dao.StudentDao;
+import main.java.edu.catherine.tutorg.mapper.CreateStudentMapper;
 import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequest;
+import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponse;
 import main.java.edu.catherine.tutorg.util.ConnectionManager;
 
 import java.sql.Connection;
@@ -14,9 +17,10 @@ public class StudentService {
 
     private final StudentDao studentDao = StudentDao.getInstance();
 
-    public Student create(Student studentRequest) throws SQLException {
+    public CreateStudentResponse create(CreateStudentRequest studentRequest) throws SQLException {
+        Student student = CreateStudentMapper.toEntity(studentRequest);
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.create(connection, studentRequest);
+            return CreateStudentMapper.toDto(studentDao.create(connection, student));
         }
     }
 
@@ -38,11 +42,11 @@ public class StudentService {
         }
     }
 
-    public Student update(Integer id, Student studentRequest) throws SQLException {
-        try (Connection connection = ConnectionManager.get()) {
-            return studentDao.update(connection, id, studentRequest);
-        }
-    }
+//    public Student update(Integer id, Student studentRequest) throws SQLException {
+//        try (Connection connection = ConnectionManager.get()) {
+//            return studentDao.update(connection, id, studentRequest);
+//        }
+//    }
 
     public static StudentService getInstance() {
         return INSTANCE;

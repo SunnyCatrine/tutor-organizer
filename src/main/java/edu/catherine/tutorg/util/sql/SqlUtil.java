@@ -10,7 +10,7 @@ public class SqlUtil {
     public static String buildUpdateStudentSql(Student student) {
         String resultSql = buildSqlSetPartIfNeed(student.getFirstName(), FIRST_NAME)
                             + buildSqlSetPartIfNeed(student.getLastName(), LAST_NAME)
-                            + buildSqlSetPartIfNeed(student.getStudentStatus().getStatus(), STATUS)
+                            + buildSqlSetPartIfNeed(student.getStudentStatus().getStatusValue(), STATUS)
                             + buildSqlSetPartIfNeed(student.getDefaultLessonParam().getPrice(), DEFAULT_LESSON_PRICE)
                             + buildSqlSetPartIfNeed(student.getDefaultLessonParam().getDuration(), DEFAULT_LESSON_DURATION_MINUTES);
 
