@@ -78,7 +78,6 @@ public final class StudentDao {
     }
 
     public Student deleteBy(Connection connection, Integer studentId) throws SQLException {
-        // DONE: 30.08.2022 you should notice all spaces in your code even after commas
         Student resultStudent = findBy(connection, studentId);
         try (PreparedStatement deleteStudentById = connection.prepareStatement(DELETE_STUDENT_BY_ID)) {
             deleteStudentById.setInt(1, studentId);
@@ -92,7 +91,6 @@ public final class StudentDao {
 //    public Student update(Connection connection, Integer id, Student studentRequest) throws SQLException {
 //        String updateStudentSql = buildUpdateStudentSql(studentRequest);
 //        String updateContactSql = buildUpdateContactSql(studentRequest);
-//        // TODO: 30.08.2022 spaces.. fix in all other methods too
 //
 //        // DONE: 30.08.2022 name of condition is bad
 //        if (availableFieldForUpdate(updateStudentSql)) {
