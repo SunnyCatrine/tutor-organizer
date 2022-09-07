@@ -26,8 +26,9 @@ public class Student extends Client {
         this.studentStatus = studentStatus;
     }
 
-    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, StudentStatus studentStatus) {
+    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
         super(clientId, firstName, lastName, contact, location);
+        this.defaultLessonParam = defaultLessonParam;
         this.studentStatus = studentStatus;
     }
 

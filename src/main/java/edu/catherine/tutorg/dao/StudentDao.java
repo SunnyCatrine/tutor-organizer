@@ -4,6 +4,7 @@ import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.Location;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -119,21 +120,24 @@ public final class StudentDao {
     }
 
 
-    // DONE: 30.08.2022 methods like these are not dao methods - you should create util classes for them
 
     private Student buildStudent(ResultSet resultSet) throws SQLException {
-        // DONE: 30.08.2022 no constants in code
         Contact contact = new Contact(resultSet.getString(PHONE_NO),
                 resultSet.getString(SKYPE));
-        Location location = new Location(resultSet.getString(COUNTRY),
-                resultSet.getString(CITY));
-        // TODO: 30.08.2022 you should notice all IDEA remarks
+        Location location = new Location(
+                resultSet.getString(COUNTRY),
+                resultSet.getString(CITY),
+                resultSet.getString(TIMEZONE));
+        LessonParam defaultLessonParam = new LessonParam(
+                resultSet.getInt(DEFAULT_LESSON_PRICE),
+                resultSet.getInt(DEFAULT_LESSON_DURATION_MINUTES));
         return new Student(
                 resultSet.getInt(ID),
                 resultSet.getString(FIRST_NAME),
                 resultSet.getString(LAST_NAME),
                 contact,
                 location,
+                defaultLessonParam,
                 StudentStatus.valueOf(resultSet.getString(STATUS)));
     }
 

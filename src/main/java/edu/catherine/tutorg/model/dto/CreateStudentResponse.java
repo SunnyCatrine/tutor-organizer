@@ -3,20 +3,20 @@ package main.java.edu.catherine.tutorg.model.dto;
 import java.util.Objects;
 
 public class CreateStudentResponse {
-    private Integer studentId;
+    private String studentId;
     private String firstName;
     private String lastName;
     private String status;
 
 
-    public CreateStudentResponse(Integer studentId, String firstName, String lastName, String status) {
+    public CreateStudentResponse(String studentId, String firstName, String lastName, String status) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
     }
 
-    public Integer getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 

@@ -2,17 +2,19 @@ package main.java.edu.catherine.tutorg.service;
 
 import main.java.edu.catherine.tutorg.dao.StudentDao;
 import main.java.edu.catherine.tutorg.mapper.CreateStudentMapper;
+import main.java.edu.catherine.tutorg.mapper.FindStudentMapper;
 import main.java.edu.catherine.tutorg.model.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequest;
 import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponse;
+import main.java.edu.catherine.tutorg.model.dto.FindStudentResponse;
 import main.java.edu.catherine.tutorg.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentService {
-    // TODO: 30.08.2022 make clean code in class (proper methods\fields order, indents, no comments etc.)
     private final static StudentService INSTANCE = new StudentService();
 
     private final StudentDao studentDao = StudentDao.getInstance();
@@ -24,9 +26,11 @@ public class StudentService {
         }
     }
 
-    public List<Student> findAll() throws SQLException {
+    public List<FindStudentResponse> findAll() throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.findAll(connection);
+            return studentDao.findAll(connection).stream()
+                    .map(FindStudentMapper::toDto)
+                    .collect(Collectors.toList());
         }
     }
 

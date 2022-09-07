@@ -3,6 +3,7 @@ package main.java.edu.catherine.tutorg.controller;
 import main.java.edu.catherine.tutorg.model.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequest;
 import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponse;
+import main.java.edu.catherine.tutorg.model.dto.FindStudentResponse;
 import main.java.edu.catherine.tutorg.service.StudentService;
 
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ public final class StudentController {
         return studentService.create(studentRequest);
     }
 
-    public List<Student> findAll() throws SQLException {
+    public List<FindStudentResponse> findAll() throws SQLException {
         return studentService.findAll();
     }
 

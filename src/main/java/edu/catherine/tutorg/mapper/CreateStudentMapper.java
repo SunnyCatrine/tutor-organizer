@@ -39,12 +39,12 @@ public class CreateStudentMapper {
                 contact,
                 location,
                 defaultLessonParam,
-                null
+                studentStatus
         );
     }
     public static CreateStudentResponse toDto(Student student) {
         return new CreateStudentResponse(
-                student.getClientId(),
+                student.getClientId().toString(),
                 student.getFirstName(),
                 student.getLastName(),
                 student.getStudentStatus().getStatusValue()
