@@ -39,13 +39,13 @@ public class TutorgLauncher {
         students = studentController.findAll();
         students.forEach(System.out::println);
 
-//        System.out.println();
-//
-//        System.out.println("findStudent id 10");
-//        Student findStudent = studentController.findBy(10);
-//        System.out.println(findStudent);
-//
-//        System.out.println();
+        System.out.println();
+
+        System.out.println("findStudent id 10");
+        FindStudentResponse findStudent = studentController.findBy(10);
+        System.out.println(findStudent);
+
+        System.out.println();
 //
 //        System.out.println("Delete student id 5");
 //        Student deletedStudent = studentController.deleteBy(5);

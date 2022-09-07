@@ -22,7 +22,7 @@ public final class StudentController {
         return studentService.findAll();
     }
 
-    public Student findBy(Integer studentId) throws SQLException {
+    public FindStudentResponse findBy(Integer studentId) throws SQLException {
         return studentService.findBy(studentId);
     }
 

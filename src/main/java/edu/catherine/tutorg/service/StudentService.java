@@ -34,9 +34,9 @@ public class StudentService {
         }
     }
 
-    public Student findBy(Integer studentId) throws SQLException {
+    public FindStudentResponse findBy(Integer studentId) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.findBy(connection, studentId);
+            return FindStudentMapper.toDto(studentDao.findBy(connection, studentId));
         }
     }
 

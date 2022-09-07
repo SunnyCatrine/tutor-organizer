@@ -62,7 +62,6 @@ public final class StudentDao {
 
 
 
-    // DONE: 30.08.2022 private methods should be in the end of the class
     public Student findBy(Connection connection, Integer studentId) throws SQLException {
         Student resultStudent = null;
         try (PreparedStatement findStudentById = connection.prepareStatement(FIND_BY_ID)) {
