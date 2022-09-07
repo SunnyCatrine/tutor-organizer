@@ -2,7 +2,7 @@ package main.java.edu.catherine.tutorg.model.dto;
 
 import java.util.Objects;
 
-public class CreateStudentRequest {
+public class StudentRequest {
     private String firstName;
     private String lastName;
     private String phoneNo;
@@ -14,16 +14,16 @@ public class CreateStudentRequest {
     private String defaultDurationInMinutes;
     private String studentStatus;
 
-    public CreateStudentRequest(String firstName,
-                                String lastName,
-                                String phoneNo,
-                                String skype,
-                                String country,
-                                String city,
-                                String timezone,
-                                String defaultPrice,
-                                String defaultDurationInMinutes,
-                                String studentStatus) {
+    public StudentRequest(String firstName,
+                          String lastName,
+                          String phoneNo,
+                          String skype,
+                          String country,
+                          String city,
+                          String timezone,
+                          String defaultPrice,
+                          String defaultDurationInMinutes,
+                          String studentStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNo = phoneNo;
@@ -79,8 +79,8 @@ public class CreateStudentRequest {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CreateStudentRequest)) return false;
-        CreateStudentRequest that = (CreateStudentRequest) o;
+        if (!(o instanceof StudentRequest)) return false;
+        StudentRequest that = (StudentRequest) o;
         return Objects.equals(getFirstName(), that.getFirstName()) &&
                 Objects.equals(getLastName(), that.getLastName()) &&
                 Objects.equals(getPhoneNo(), that.getPhoneNo()) &&

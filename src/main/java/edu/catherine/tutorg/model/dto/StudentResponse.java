@@ -2,7 +2,7 @@ package main.java.edu.catherine.tutorg.model.dto;
 
 import java.util.Objects;
 
-public class FindStudentResponse {
+public class StudentResponse {
     private String id;
     private String firstName;
     private String lastName;
@@ -15,17 +15,17 @@ public class FindStudentResponse {
     private String defaultPrice;
     private String defaultDuration;
 
-    public FindStudentResponse(String id,
-                               String firstName,
-                               String lastName,
-                               String status,
-                               String phoneNo,
-                               String skype,
-                               String country,
-                               String city,
-                               String timezone,
-                               String defaultPrice,
-                               String defaultDuration) {
+    public StudentResponse(String id,
+                           String firstName,
+                           String lastName,
+                           String status,
+                           String phoneNo,
+                           String skype,
+                           String country,
+                           String city,
+                           String timezone,
+                           String defaultPrice,
+                           String defaultDuration) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,8 +86,8 @@ public class FindStudentResponse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FindStudentResponse)) return false;
-        FindStudentResponse that = (FindStudentResponse) o;
+        if (!(o instanceof StudentResponse)) return false;
+        StudentResponse that = (StudentResponse) o;
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getFirstName(), that.getFirstName()) &&
                 Objects.equals(getLastName(), that.getLastName()) &&

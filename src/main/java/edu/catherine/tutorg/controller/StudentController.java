@@ -1,9 +1,7 @@
 package main.java.edu.catherine.tutorg.controller;
 
-import main.java.edu.catherine.tutorg.model.client.impl.Student;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequest;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponse;
-import main.java.edu.catherine.tutorg.model.dto.FindStudentResponse;
+import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
+import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 import main.java.edu.catherine.tutorg.service.StudentService;
 
 import java.sql.SQLException;
@@ -14,15 +12,15 @@ public final class StudentController {
 
     private final StudentService studentService = StudentService.getInstance();
 
-    public CreateStudentResponse create(CreateStudentRequest studentRequest) throws SQLException {
+    public StudentResponse create(StudentRequest studentRequest) throws SQLException {
         return studentService.create(studentRequest);
     }
 
-    public List<FindStudentResponse> findAll() throws SQLException {
+    public List<StudentResponse> findAll() throws SQLException {
         return studentService.findAll();
     }
 
-    public FindStudentResponse findBy(Integer studentId) throws SQLException {
+    public StudentResponse findBy(Integer studentId) throws SQLException {
         return studentService.findBy(studentId);
     }
 
@@ -30,7 +28,7 @@ public final class StudentController {
 //        return studentService.update(id, studentRequest);
 //    }
 
-    public Student deleteBy(Integer studentId) throws SQLException {
+    public StudentResponse deleteBy(Integer studentId) throws SQLException {
         return studentService.deleteBy(studentId);
     }
 

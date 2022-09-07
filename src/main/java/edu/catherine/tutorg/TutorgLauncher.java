@@ -1,9 +1,8 @@
 package main.java.edu.catherine.tutorg;
 
 import main.java.edu.catherine.tutorg.controller.StudentController;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequest;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponse;
-import main.java.edu.catherine.tutorg.model.dto.FindStudentResponse;
+import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
+import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,12 +13,12 @@ public class TutorgLauncher {
         StudentController studentController = StudentController.getINSTANCE();
 
         System.out.println("ALL STUDENTS");
-        List<FindStudentResponse> students = studentController.findAll();
+        List<StudentResponse> students = studentController.findAll();
         students.forEach(System.out::println);
         System.out.println();
 
         System.out.println("ADD NEW STUDENT");
-        CreateStudentRequest createStudentRequest = new CreateStudentRequest(
+        StudentRequest studentRequest = new StudentRequest(
                 "Sayler",
                 "Sayler",
                 "0000000",
@@ -30,7 +29,7 @@ public class TutorgLauncher {
                 "2000",
                 "120",
                 null);
-        CreateStudentResponse addedStudent = studentController.create(createStudentRequest);
+        StudentResponse addedStudent = studentController.create(studentRequest);
         System.out.println(addedStudent);
         System.out.println();
 
@@ -42,7 +41,7 @@ public class TutorgLauncher {
         System.out.println();
 
         System.out.println("findStudent id 10");
-        FindStudentResponse findStudent = studentController.findBy(10);
+        StudentResponse findStudent = studentController.findBy(10);
         System.out.println(findStudent);
 
         System.out.println();

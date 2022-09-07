@@ -3,14 +3,14 @@ package main.java.edu.catherine.tutorg.mapper;
 import main.java.edu.catherine.tutorg.model.client.Contact;
 import main.java.edu.catherine.tutorg.model.client.Location;
 import main.java.edu.catherine.tutorg.model.client.StudentStatus;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentRequest;
-import main.java.edu.catherine.tutorg.model.dto.CreateStudentResponse;
+import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
 import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
 
-public class CreateStudentMapper {
+public class StudentMapper {
 
-    public static Student toEntity(CreateStudentRequest studentRequest) {
+    public static Student toEntity(StudentRequest studentRequest) {
         Contact contact = new Contact(
                 studentRequest.getPhoneNo(),
                 studentRequest.getSkype()
@@ -42,12 +42,19 @@ public class CreateStudentMapper {
                 studentStatus
         );
     }
-    public static CreateStudentResponse toDto(Student student) {
-        return new CreateStudentResponse(
+    public static StudentResponse toDto(Student student) {
+        return new StudentResponse(
                 student.getClientId().toString(),
                 student.getFirstName(),
                 student.getLastName(),
-                student.getStudentStatus().getStatusValue()
+                student.getStudentStatus().getStatusValue(),
+                student.getContact().getPhoneNo(),
+                student.getContact().getSkype(),
+                student.getLocation().getCountry(),
+                student.getLocation().getCity(),
+                student.getLocation().getTimezone(),
+                student.getDefaultLessonParam().getPrice().toString(),
+                student.getDefaultLessonParam().getDuration().toString()
         );
     }
 }
