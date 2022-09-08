@@ -1,9 +1,9 @@
-package main.java.edu.catherine.tutorg.model.client.impl;
+package main.java.edu.catherine.tutorg.model.entity.client.impl;
 
-import main.java.edu.catherine.tutorg.model.client.*;
-import main.java.edu.catherine.tutorg.model.lesson.Lesson;
-import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
-import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
+import main.java.edu.catherine.tutorg.model.entity.client.*;
+import main.java.edu.catherine.tutorg.model.entity.lesson.Lesson;
+import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
+import main.java.edu.catherine.tutorg.model.entity.lesson.SubjectBlock;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -108,13 +108,13 @@ public class Student extends Client {
         return Objects.hash(super.hashCode(), getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod());
     }
 
-    // DONE: 30.08.2022 bad impl of toString :)
     @Override
     public String toString() {
 
         return "Student{"
                 + super.toString()
-                + "defaultLessonParam=" + defaultLessonParam +
-                '}';
+                + "defaultLessonParam=" + defaultLessonParam
+                + "status=" + studentStatus
+                + '}';
     }
 }

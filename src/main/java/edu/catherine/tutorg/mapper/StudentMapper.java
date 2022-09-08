@@ -1,12 +1,12 @@
 package main.java.edu.catherine.tutorg.mapper;
 
-import main.java.edu.catherine.tutorg.model.client.Contact;
-import main.java.edu.catherine.tutorg.model.client.Location;
-import main.java.edu.catherine.tutorg.model.client.StudentStatus;
+import main.java.edu.catherine.tutorg.model.entity.client.Contact;
+import main.java.edu.catherine.tutorg.model.entity.client.Location;
+import main.java.edu.catherine.tutorg.model.entity.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
-import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
-import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
+import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
 
 public class StudentMapper {
 
@@ -23,8 +23,12 @@ public class StudentMapper {
         );
 
         LessonParam defaultLessonParam = new LessonParam(
-                Integer.parseInt(studentRequest.getDefaultPrice()),
-                Integer.parseInt(studentRequest.getDefaultDurationInMinutes())
+                studentRequest.getDefaultPrice() == null
+                        ? null
+                        : Integer.parseInt(studentRequest.getDefaultPrice()),
+                studentRequest.getDefaultDurationInMinutes() == null
+                        ? null
+                        : Integer.parseInt(studentRequest.getDefaultDurationInMinutes())
         );
 
         String studentStatusValue = studentRequest.getStudentStatus();

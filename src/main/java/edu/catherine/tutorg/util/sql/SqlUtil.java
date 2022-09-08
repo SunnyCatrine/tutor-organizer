@@ -1,6 +1,6 @@
 package main.java.edu.catherine.tutorg.util.sql;
 
-import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
 
 import static java.util.Objects.isNull;
 import static jdk.internal.joptsimple.internal.Strings.EMPTY;

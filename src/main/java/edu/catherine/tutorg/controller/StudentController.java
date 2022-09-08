@@ -24,9 +24,9 @@ public final class StudentController {
         return studentService.findBy(studentId);
     }
 
-//    public Student update(Integer id, Student studentRequest) throws SQLException {
-//        return studentService.update(id, studentRequest);
-//    }
+    public StudentResponse update(Integer id, StudentRequest studentRequest) throws SQLException {
+        return studentService.update(id, studentRequest);
+    }
 
     public StudentResponse deleteBy(Integer studentId) throws SQLException {
         return studentService.deleteBy(studentId);

@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.client;
+package main.java.edu.catherine.tutorg.model.entity.client;
 
 import java.util.Objects;
 

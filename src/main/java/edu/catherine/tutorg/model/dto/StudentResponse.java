@@ -108,8 +108,8 @@ public class StudentResponse {
 
     @Override
     public String toString() {
-        return "FindStudentResponse{" +
-                "id=" + id +
+        return "StudentResponse{" +
+                "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", status='" + status + '\'' +

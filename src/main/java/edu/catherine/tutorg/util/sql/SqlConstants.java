@@ -24,7 +24,7 @@ public class SqlConstants {
 
     public static final String CREATE_STUDENT_SQL = "INSERT INTO student (first_name, last_name, status, default_lesson_price, default_lesson_duration_minutes) VALUES (?,?,?,?,?)";
     public static final String CREATE_CONTACT_SQL = "INSERT INTO student_contact_info (country, city, phone_no, skype, timezone, student_id) VALUES (?,?,?,?,?,?)";
-    public static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student. default_lesson_price as default_lesson_price, student.default_lesson_duration_minutes as default_lesson_duration_minutes, student_contact_info.phone_no as phone_no, student_contact_info.skype as skype, student_contact_info.country as country, student_contact_info.city as city, student_contact_info.timezone as timezone FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
+    public static final String FIND_ALL_SQL = "SELECT student.id as id, student.first_name as first_name, student.last_name as last_name, student.status as status, student.default_lesson_price as default_lesson_price, student.default_lesson_duration_minutes as default_lesson_duration_minutes, student_contact_info.phone_no as phone_no, student_contact_info.skype as skype, student_contact_info.country as country, student_contact_info.city as city, student_contact_info.timezone as timezone FROM student JOIN student_contact_info ON student.id = student_contact_info.student_id";
     public static final String FIND_BY_ID = FIND_ALL_SQL + " WHERE student.id = ?";
     public static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE id = ?" ;
 }

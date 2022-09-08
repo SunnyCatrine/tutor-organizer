@@ -19,35 +19,35 @@ public class TutorgLauncher {
 
         System.out.println("ADD NEW STUDENT");
         StudentRequest studentRequest = new StudentRequest(
-                "Sayler",
-                "Sayler",
-                "0000000",
-                "Sayler",
-                "Australia",
-                "Sidney",
-                "+6",
-                "2000",
-                "120",
-                null);
+                "Tracy",
+                "Straus",
+                "333333",
+                "TS",
+                "Germany",
+                "Berlin",
+                "-2",
+                "15000",
+                "100",
+                "ACTIVE");
         StudentResponse addedStudent = studentController.create(studentRequest);
         System.out.println(addedStudent);
         System.out.println();
 
-        System.out.println("ALL STUDENTS");
+        System.out.println("ALL STUDENTS again");
 
         students = studentController.findAll();
         students.forEach(System.out::println);
 
         System.out.println();
 
-        System.out.println("findStudent id 10");
-        StudentResponse findStudent = studentController.findBy(10);
+        System.out.println("findStudent id 4");
+        StudentResponse findStudent = studentController.findBy(4);
         System.out.println(findStudent);
 
         System.out.println();
 
-        System.out.println("Delete student id 25");
-        StudentResponse deletedStudent = studentController.deleteBy(25);
+        System.out.println("Delete student id 6");
+        StudentResponse deletedStudent = studentController.deleteBy(6);
         System.out.println(deletedStudent);
 
         System.out.println();
@@ -58,16 +58,23 @@ public class TutorgLauncher {
         students.forEach(System.out::println);
         System.out.println();
 
+
+
+//        System.out.println("Update student id 5");
+//        StudentRequest updateStudentRequest = new StudentRequest(
+//                "Rene",
+//                null,
+//                null,
+//                "Renenene",
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                "ARCHIVED"
+//        );
 //
-//
-//        System.out.println("Update student id 6");
-//        contact.setPhoneNo("+79780123456");
-//        student.setFirstName("Angela");
-//        student.setLastName(null);
-//        student.setContact(contact);
-//        student.setStudentStatus(StudentStatus.ARCHIVED);
-//
-//        Student updatedStudent = studentController.update(6, student);
+//        StudentResponse updatedStudent = studentController.update(31, updateStudentRequest);
 //        System.out.println(updatedStudent);
 //        System.out.println();
 //

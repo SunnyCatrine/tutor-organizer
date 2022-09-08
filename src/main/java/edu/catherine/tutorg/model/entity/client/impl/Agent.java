@@ -1,8 +1,8 @@
-package main.java.edu.catherine.tutorg.model.client.impl;
+package main.java.edu.catherine.tutorg.model.entity.client.impl;
 
-import main.java.edu.catherine.tutorg.model.client.Client;
-import main.java.edu.catherine.tutorg.model.client.Contact;
-import main.java.edu.catherine.tutorg.model.client.Location;
+import main.java.edu.catherine.tutorg.model.entity.client.Client;
+import main.java.edu.catherine.tutorg.model.entity.client.Contact;
+import main.java.edu.catherine.tutorg.model.entity.client.Location;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,16 +1,17 @@
 package main.java.edu.catherine.tutorg.dao;
 
-import main.java.edu.catherine.tutorg.model.client.Contact;
-import main.java.edu.catherine.tutorg.model.client.Location;
-import main.java.edu.catherine.tutorg.model.client.StudentStatus;
-import main.java.edu.catherine.tutorg.model.client.impl.Student;
-import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
+import main.java.edu.catherine.tutorg.model.entity.client.Contact;
+import main.java.edu.catherine.tutorg.model.entity.client.Location;
+import main.java.edu.catherine.tutorg.model.entity.client.StudentStatus;
+import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static main.java.edu.catherine.tutorg.util.sql.SqlConstants.*;
+import static main.java.edu.catherine.tutorg.util.sql.SqlUtil.*;
 
 public final class StudentDao {
     private static final StudentDao INSTANCE = new StudentDao();
@@ -24,7 +25,9 @@ public final class StudentDao {
 
             studentCreate.setString(1, student.getFirstName());
             studentCreate.setString(2, student.getLastName());
-            studentCreate.setString(3, StudentStatus.ACTIVE.getStatusValue());
+            studentCreate.setString(3, student.getStudentStatus() == null
+                    ? null
+                    : student.getStudentStatus().getStatusValue());
             studentCreate.setInt(4, student.getDefaultLessonParam().getPrice());
             studentCreate.setInt(5, student.getDefaultLessonParam().getDuration());
 
@@ -88,26 +91,24 @@ public final class StudentDao {
         }
     }
 
-//    public Student update(Connection connection, Integer id, Student studentRequest) throws SQLException {
-//        String updateStudentSql = buildUpdateStudentSql(studentRequest);
-//        String updateContactSql = buildUpdateContactSql(studentRequest);
-//
-//        // DONE: 30.08.2022 name of condition is bad
-//        if (availableFieldForUpdate(updateStudentSql)) {
-//            // DONE: 30.08.2022 not camel case
-//            try (PreparedStatement updateStudentById = connection.prepareStatement(updateStudentSql)) {
-//                updateStudentById.setInt(1, id);
-//                updateStudentById.executeUpdate();
-//            }
-//        }
-//        if (! updateContactSql.isEmpty()) {
-//            try (PreparedStatement updateContactByStudentID = connection.prepareStatement(updateContactSql)) {
-//                updateContactByStudentID.setInt(1, id);
-//                updateContactByStudentID.executeUpdate();
-//            }
-//        }
-//        return findBy(connection, id);
-//    }
+    public Student update(Connection connection, Integer id, Student student) throws SQLException {
+        String updateStudentSql = buildUpdateStudentSql(student);
+        String updateContactSql = buildUpdateContactSql(student);
+
+        if (availableFieldForUpdate(updateStudentSql)) {
+            try (PreparedStatement updateStudentById = connection.prepareStatement(updateStudentSql)) {
+                updateStudentById.setInt(1, id);
+                updateStudentById.executeUpdate();
+            }
+        }
+        if (! updateContactSql.isEmpty()) {
+            try (PreparedStatement updateContactByStudentID = connection.prepareStatement(updateContactSql)) {
+                updateContactByStudentID.setInt(1, id);
+                updateContactByStudentID.executeUpdate();
+            }
+        }
+        return findBy(connection, id);
+    }
 
     public static StudentDao getInstance() {
         return INSTANCE;

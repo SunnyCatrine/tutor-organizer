@@ -1,7 +1,6 @@
-package main.java.edu.catherine.tutorg.model.client;
+package main.java.edu.catherine.tutorg.model.entity.client;
 
 public enum StudentStatus {
-    // DONE: 30.08.2022 you should choose one style of const
     ACTIVE("ACTIVE"),
     ARCHIVED("ARCHIVED");
 
@@ -21,4 +20,6 @@ public enum StudentStatus {
                 "status='" + status + '\'' +
                 '}';
     }
+
+
 }
