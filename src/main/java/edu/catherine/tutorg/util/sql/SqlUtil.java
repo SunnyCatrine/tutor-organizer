@@ -34,7 +34,7 @@ public class SqlUtil {
             resultSql = resultSql.substring(0, resultSql.length() - 1);
             resultSql = UPDATE_CONTACT_SQL_START
                         + resultSql
-                        + SQL_WHERE_ID;
+                        + SQL_WHERE_STUDENT_ID;
         }
         return resultSql;
     }

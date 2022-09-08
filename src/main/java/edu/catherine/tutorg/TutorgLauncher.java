@@ -46,8 +46,8 @@ public class TutorgLauncher {
 
         System.out.println();
 
-        System.out.println("Delete student id 6");
-        StudentResponse deletedStudent = studentController.deleteBy(6);
+        System.out.println("Delete student id 11");
+        StudentResponse deletedStudent = studentController.deleteBy(11);
         System.out.println(deletedStudent);
 
         System.out.println();
@@ -60,28 +60,28 @@ public class TutorgLauncher {
 
 
 
-//        System.out.println("Update student id 5");
-//        StudentRequest updateStudentRequest = new StudentRequest(
-//                "Rene",
-//                null,
-//                null,
-//                "Renenene",
-//                null,
-//                null,
-//                null,
-//                null,
-//                null,
-//                "ARCHIVED"
-//        );
-//
-//        StudentResponse updatedStudent = studentController.update(31, updateStudentRequest);
-//        System.out.println(updatedStudent);
-//        System.out.println();
-//
-//        System.out.println("ALL STUDENTS Again");
-//
-//        students = studentController.findAll();
-//        students.forEach(System.out::println);
+        System.out.println("Update student id 15");
+        StudentRequest updateStudentRequest = new StudentRequest(
+                "Rene",
+                null,
+                null,
+                "Renenene",
+                null,
+                null,
+                null,
+                null,
+                null,
+                "ARCHIVED"
+        );
+
+        StudentResponse updatedStudent = studentController.update(15, updateStudentRequest);
+        System.out.println(updatedStudent);
+        System.out.println();
+
+        System.out.println("ALL STUDENTS Again");
+
+        students = studentController.findAll();
+        students.forEach(System.out::println);
 
 
 

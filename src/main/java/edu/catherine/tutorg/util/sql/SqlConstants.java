@@ -21,6 +21,8 @@ public class SqlConstants {
     public static final String UPDATE_STUDENT_SQL_START = "UPDATE student SET ";
     public static final String UPDATE_CONTACT_SQL_START = "UPDATE student_contact_info SET ";
     public static final String SQL_WHERE_ID = " WHERE id = ?";
+    public static final String SQL_WHERE_STUDENT_ID = " WHERE student_id = ?";
+
 
     public static final String CREATE_STUDENT_SQL = "INSERT INTO student (first_name, last_name, status, default_lesson_price, default_lesson_duration_minutes) VALUES (?,?,?,?,?)";
     public static final String CREATE_CONTACT_SQL = "INSERT INTO student_contact_info (country, city, phone_no, skype, timezone, student_id) VALUES (?,?,?,?,?,?)";

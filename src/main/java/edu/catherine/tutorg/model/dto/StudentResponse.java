@@ -113,6 +113,7 @@ public class StudentResponse {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", status='" + status + '\'' +
+                "\n" +
                 ", phoneNo='" + phoneNo + '\'' +
                 ", skype='" + skype + '\'' +
                 ", country='" + country + '\'' +
@@ -120,6 +121,7 @@ public class StudentResponse {
                 ", timezone='" + timezone + '\'' +
                 ", defaultPrice='" + defaultPrice + '\'' +
                 ", defaultDuration='" + defaultDuration + '\'' +
-                '}';
+                '}' +
+                "\n";
     }
 }
