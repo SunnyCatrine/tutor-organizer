@@ -8,9 +8,38 @@ import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
 import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
 
-public class StudentMapper {
+public final class StudentMapper {
 
-    public static Student toEntity(StudentRequest studentRequest) {
+    public static Student toCreateEntity(StudentRequest studentRequest) {
+        Contact contact = new Contact(
+                studentRequest.getPhoneNo(),
+                studentRequest.getSkype()
+        );
+
+        Location location = new Location(
+                studentRequest.getCountry(),
+                studentRequest.getCity(),
+                studentRequest.getTimezone()
+        );
+
+        LessonParam defaultLessonParam = new LessonParam(
+                Integer.parseInt(studentRequest.getDefaultPrice()),
+                Integer.parseInt(studentRequest.getDefaultDurationInMinutes())
+        );
+
+        StudentStatus studentStatus = StudentStatus.valueOf(studentRequest.getStudentStatus());
+
+        return new Student(
+                studentRequest.getFirstName(),
+                studentRequest.getLastName(),
+                contact,
+                location,
+                defaultLessonParam,
+                studentStatus
+        );
+    }
+
+    public static Student toUpdateEntity(StudentRequest studentRequest) {
         Contact contact = new Contact(
                 studentRequest.getPhoneNo(),
                 studentRequest.getSkype()
@@ -46,19 +75,20 @@ public class StudentMapper {
                 studentStatus
         );
     }
-    public static StudentResponse toDto(Student student) {
-        return new StudentResponse(
-                student.getClientId().toString(),
-                student.getFirstName(),
-                student.getLastName(),
-                student.getStudentStatus().getStatusValue(),
-                student.getContact().getPhoneNo(),
-                student.getContact().getSkype(),
-                student.getLocation().getCountry(),
-                student.getLocation().getCity(),
-                student.getLocation().getTimezone(),
-                student.getDefaultLessonParam().getPrice().toString(),
-                student.getDefaultLessonParam().getDuration().toString()
-        );
+
+    public static StudentResponse toResponse(Student student) {
+        return StudentResponse.builder()
+                .id(student.getClientId().toString())
+                .firstName(student.getFirstName())
+                .lastName(student.getLastName())
+                .status(student.getStudentStatus().getStatusValue())
+                .phoneNo(student.getContact().getPhoneNo())
+                .skype(student.getContact().getSkype())
+                .country(student.getLocation().getCountry())
+                .city(student.getLocation().getCity())
+                .timezone(student.getLocation().getTimezone())
+                .defaultPrice(student.getDefaultLessonParam().getPrice().toString())
+                .defaultDuration(student.getDefaultLessonParam().getDuration().toString())
+                .build();
     }
 }

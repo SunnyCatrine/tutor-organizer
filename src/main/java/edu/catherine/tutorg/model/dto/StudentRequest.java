@@ -2,7 +2,7 @@ package main.java.edu.catherine.tutorg.model.dto;
 
 import java.util.Objects;
 
-public class StudentRequest {
+public final class StudentRequest {
     private String firstName;
     private String lastName;
     private String phoneNo;
@@ -13,6 +13,10 @@ public class StudentRequest {
     private String defaultPrice;
     private String defaultDurationInMinutes;
     private String studentStatus;
+
+    public StudentRequest() {
+    }
+
 
     public StudentRequest(String firstName,
                           String lastName,
@@ -35,6 +39,89 @@ public class StudentRequest {
         this.defaultDurationInMinutes = defaultDurationInMinutes;
         this.studentStatus = studentStatus;
     }
+
+    public static StudentRequestBuilder builder() {
+        return new StudentRequestBuilder();
+    }
+
+    public final static class StudentRequestBuilder {
+        private String firstName;
+        private String lastName;
+        private String phoneNo;
+        private String skype;
+        private String country;
+        private String city;
+        private String timezone;
+        private String defaultPrice;
+        private String defaultDurationInMinutes;
+        private String studentStatus;
+
+        public final StudentRequestBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public final StudentRequestBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public final StudentRequestBuilder phoneNo(String phoneNo) {
+            this.phoneNo = phoneNo;
+            return this;
+        }
+
+        public final StudentRequestBuilder skype(String skype) {
+            this.skype = skype;
+            return this;
+        }
+
+        public final StudentRequestBuilder country(String country) {
+            this.country = country;
+            return this;
+        }
+
+        public final StudentRequestBuilder city(String city) {
+            this.city = city;
+            return this;
+        }
+
+        public final StudentRequestBuilder timezone(String timezone) {
+            this.timezone = timezone;
+            return this;
+        }
+
+        public final StudentRequestBuilder defaultPrice(String price) {
+            this.defaultPrice = price;
+            return this;
+        }
+
+        public final StudentRequestBuilder defaultDuration(String duration) {
+            this.defaultDurationInMinutes = duration;
+            return this;
+        }
+
+        public final StudentRequestBuilder status(String status) {
+            this.studentStatus = status;
+            return this;
+        }
+
+        public final StudentRequest build() {
+            return new StudentRequest(
+                    firstName,
+                    lastName,
+                    phoneNo,
+                    skype,
+                    country,
+                    city,
+                    timezone,
+                    defaultPrice,
+                    defaultDurationInMinutes,
+                    studentStatus
+            );
+        }
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -100,7 +187,7 @@ public class StudentRequest {
 
     @Override
     public String toString() {
-        return "CreateStudentRequest{" +
+        return "StudentRequest{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +

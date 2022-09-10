@@ -18,36 +18,36 @@ public class StudentService {
     private final StudentDao studentDao = StudentDao.getInstance();
 
     public StudentResponse create(StudentRequest studentRequest) throws SQLException {
-        Student student = StudentMapper.toEntity(studentRequest);
+        Student student = StudentMapper.toCreateEntity(studentRequest);
         try (Connection connection = ConnectionManager.get()) {
-            return StudentMapper.toDto(studentDao.create(connection, student));
+            return StudentMapper.toResponse(studentDao.create(connection, student));
         }
     }
 
     public List<StudentResponse> findAll() throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
             return studentDao.findAll(connection).stream()
-                    .map(StudentMapper::toDto)
+                    .map(StudentMapper::toResponse)
                     .collect(Collectors.toList());
         }
     }
 
     public StudentResponse findBy(Integer studentId) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return StudentMapper.toDto(studentDao.findBy(connection, studentId));
+            return StudentMapper.toResponse(studentDao.findBy(connection, studentId));
         }
     }
 
     public StudentResponse deleteBy(Integer studentId) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return StudentMapper.toDto(studentDao.deleteBy(connection, studentId));
+            return StudentMapper.toResponse(studentDao.deleteBy(connection, studentId));
         }
     }
 
     public StudentResponse update(Integer id, StudentRequest studentRequest) throws SQLException {
-        Student student = StudentMapper.toEntity(studentRequest);
+        Student student = StudentMapper.toUpdateEntity(studentRequest);
         try (Connection connection = ConnectionManager.get()) {
-            return StudentMapper.toDto((studentDao.update(connection, id, student)));
+            return StudentMapper.toResponse((studentDao.update(connection, id, student)));
         }
     }
 

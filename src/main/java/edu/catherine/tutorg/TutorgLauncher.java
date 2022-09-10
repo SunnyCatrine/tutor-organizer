@@ -18,6 +18,19 @@ public class TutorgLauncher {
         System.out.println();
 
         System.out.println("ADD NEW STUDENT");
+        StudentRequest studentRequestBuilt = StudentRequest.builder()
+                .firstName("Hero")
+                .lastName("Nakamuro")
+                .phoneNo("14434145")
+                .skype("superHero")
+                .country("Japan")
+                .city("Keko")
+                .defaultPrice("111")
+                .defaultDuration("2222")
+                .timezone("+9")
+                .status("ACTIVE")
+                .build();
+
         StudentRequest studentRequest = new StudentRequest(
                 "Tracy",
                 "Straus",
@@ -29,7 +42,7 @@ public class TutorgLauncher {
                 "15000",
                 "100",
                 "ACTIVE");
-        StudentResponse addedStudent = studentController.create(studentRequest);
+        StudentResponse addedStudent = studentController.create(studentRequestBuilt);
         System.out.println(addedStudent);
         System.out.println();
 
@@ -46,8 +59,8 @@ public class TutorgLauncher {
 
         System.out.println();
 
-        System.out.println("Delete student id 11");
-        StudentResponse deletedStudent = studentController.deleteBy(11);
+        System.out.println("Delete student id 13");
+        StudentResponse deletedStudent = studentController.deleteBy(13);
         System.out.println(deletedStudent);
 
         System.out.println();
@@ -60,7 +73,7 @@ public class TutorgLauncher {
 
 
 
-        System.out.println("Update student id 15");
+        System.out.println("Update student id 16");
         StudentRequest updateStudentRequest = new StudentRequest(
                 "Rene",
                 null,
@@ -74,7 +87,7 @@ public class TutorgLauncher {
                 "ARCHIVED"
         );
 
-        StudentResponse updatedStudent = studentController.update(15, updateStudentRequest);
+        StudentResponse updatedStudent = studentController.update(16, updateStudentRequest);
         System.out.println(updatedStudent);
         System.out.println();
 
