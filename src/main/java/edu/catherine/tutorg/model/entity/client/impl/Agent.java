@@ -14,6 +14,10 @@ public class Agent extends Client {
         super(id, firstName, lastName, contact, location);
     }
 
+    public Agent(String firstName, String lastName, Contact contact, Location location) {
+        super(firstName, lastName, contact, location);
+    }
+
     public List<Student> getStudentList() {
         return studentList;
     }
