@@ -9,19 +9,6 @@ public abstract class Client {
     private Contact contact;
     private Location location;
 
-    public Client(Integer clientId, String firstName, String lastName) {
-        this.clientId = clientId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public Client(Integer clientId, String firstName, String lastName, Contact contact) {
-        this.clientId = clientId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.contact = contact;
-    }
-
     public Client(String firstName, String lastName, Contact contact, Location location) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,22 +42,6 @@ public abstract class Client {
 
     public Integer getClientId() {
         return clientId;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public void setClientId(Integer clientId) {

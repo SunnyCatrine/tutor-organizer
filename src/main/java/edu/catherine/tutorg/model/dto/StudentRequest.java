@@ -14,10 +14,6 @@ public final class StudentRequest {
     private String defaultDurationInMinutes;
     private String studentStatus;
 
-    public StudentRequest() {
-    }
-
-
     public StudentRequest(String firstName,
                           String lastName,
                           String phoneNo,

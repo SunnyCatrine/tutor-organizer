@@ -16,7 +16,6 @@ import static main.java.edu.catherine.tutorg.util.sql.SqlUtil.*;
 public final class StudentDao {
     private static final StudentDao INSTANCE = new StudentDao();
 
-
     public Student create(Connection connection, Student student) throws SQLException {
         Student resultStudent = buildStudent(student);
 
@@ -25,9 +24,7 @@ public final class StudentDao {
 
             studentCreate.setString(1, student.getFirstName());
             studentCreate.setString(2, student.getLastName());
-            studentCreate.setString(3, student.getStudentStatus() == null
-                    ? null
-                    : student.getStudentStatus().getStatusValue());
+            studentCreate.setString(3, student.getStudentStatus().getStatusValue());
             studentCreate.setInt(4, student.getDefaultLessonParam().getPrice());
             studentCreate.setInt(5, student.getDefaultLessonParam().getDuration());
 
@@ -95,13 +92,13 @@ public final class StudentDao {
         String updateStudentSql = buildUpdateStudentSql(student);
         String updateContactSql = buildUpdateContactSql(student);
 
-        if (availableFieldForUpdate(updateStudentSql)) {
+        if (needUpdate(updateStudentSql)) {
             try (PreparedStatement updateStudentById = connection.prepareStatement(updateStudentSql)) {
                 updateStudentById.setInt(1, id);
                 updateStudentById.executeUpdate();
             }
         }
-        if (! updateContactSql.isEmpty()) {
+        if (needUpdate(updateContactSql)) {
             try (PreparedStatement updateContactByStudentID = connection.prepareStatement(updateContactSql)) {
                 updateContactByStudentID.setInt(1, id);
                 updateContactByStudentID.executeUpdate();
@@ -110,14 +107,9 @@ public final class StudentDao {
         return findBy(connection, id);
     }
 
-    public static StudentDao getInstance() {
-        return INSTANCE;
+    private boolean needUpdate(String sql) {
+        return ! sql.isEmpty();
     }
-
-    private StudentDao() {
-    }
-
-
 
     private Student buildStudent(ResultSet resultSet) throws SQLException {
         Contact contact = new Contact(resultSet.getString(PHONE_NO),
@@ -139,7 +131,7 @@ public final class StudentDao {
                 StudentStatus.valueOf(resultSet.getString(STATUS)));
     }
 
-    private Student buildStudent (Student student) {
+    private Student buildStudent(Student student) {
         return new Student(student.getFirstName(),
                 student.getLastName(),
                 student.getContact(),
@@ -148,51 +140,10 @@ public final class StudentDao {
                 student.getStudentStatus());
     }
 
+    public static StudentDao getInstance() {
+        return INSTANCE;
+    }
 
-
-
-//    public List<Student> findAllStudents(Connection connection) {
-//        try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SQL)) {
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//
-//            List<Student> resultList = new ArrayList<>();
-//            while (resultSet.next()) {
-//                Student student = buildStudent(resultSet);
-//                resultList.add(student);
-////                System.out.println(student);
-//            }
-//            return resultList;
-//        } catch (SQLException e) {
-//            throw new DaoException(e);
-//        }
-//    }
-//
-//    private Student buildStudent(ResultSet resultSet) throws SQLException {
-//        return new Student(
-//                resultSet.getInt("id"),
-//                resultSet.getString("first_name"),
-//                resultSet.getString("last_name"),
-//                StudentStatus.valueOf(resultSet.getString("status")));
-//    }
-//
-//    public Student createStudent(Student studentRequest, Connection connection) throws SQLException {
-//        Student studentResponse = studentRequest;
-//        try(PreparedStatement preparedStatement = connection.prepareStatement(CREATE_STUDENT_SQL, Statement.RETURN_GENERATED_KEYS)) {
-//
-//            preparedStatement.setString(1, studentRequest.getFirstName());
-//            preparedStatement.setString(2,studentRequest.getLastName());
-//            preparedStatement.setString(3,studentRequest.getStudentStatus().getStatus());
-//            preparedStatement.executeUpdate();
-//
-//            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-//            if (resultSet.next()) {
-//                studentResponse.setClientId(resultSet.getInt("id"));
-//            }
-//            return  studentResponse;
-//        } catch (Exception e) {
-//            throw e;
-//        }
-
-//    }
-
+    private StudentDao() {
+    }
 }

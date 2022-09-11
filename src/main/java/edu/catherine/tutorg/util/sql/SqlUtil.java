@@ -14,7 +14,7 @@ public class SqlUtil {
                             + buildSqlSetPartIfNeed(student.getDefaultLessonParam().getPrice(), DEFAULT_LESSON_PRICE)
                             + buildSqlSetPartIfNeed(student.getDefaultLessonParam().getDuration(), DEFAULT_LESSON_DURATION_MINUTES);
 
-        if (availableFieldForUpdate(resultSql)) {
+        if (areFieldsForUpdate(resultSql)) {
             resultSql = resultSql.substring(0, resultSql.length() - 1);
             resultSql = UPDATE_STUDENT_SQL_START
                         + resultSql
@@ -30,7 +30,7 @@ public class SqlUtil {
                             + buildSqlSetPartIfNeed(student.getContact().getSkype(), SKYPE)
                             + buildSqlSetPartIfNeed(student.getLocation().getTimezone(), TIMEZONE);
 
-        if (availableFieldForUpdate(resultSql)) {
+        if (areFieldsForUpdate(resultSql)) {
             resultSql = resultSql.substring(0, resultSql.length() - 1);
             resultSql = UPDATE_CONTACT_SQL_START
                         + resultSql
@@ -39,7 +39,7 @@ public class SqlUtil {
         return resultSql;
     }
 
-    public static boolean availableFieldForUpdate(String string) {
+    public static boolean areFieldsForUpdate(String string) {
         return !string.isEmpty();
     }
 

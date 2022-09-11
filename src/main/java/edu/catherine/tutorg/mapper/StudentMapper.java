@@ -27,15 +27,13 @@ public final class StudentMapper {
                 Integer.parseInt(studentRequest.getDefaultDurationInMinutes())
         );
 
-        StudentStatus studentStatus = StudentStatus.valueOf(studentRequest.getStudentStatus());
-
         return new Student(
                 studentRequest.getFirstName(),
                 studentRequest.getLastName(),
                 contact,
                 location,
                 defaultLessonParam,
-                studentStatus
+                StudentStatus.valueOf(studentRequest.getStudentStatus())
         );
     }
 

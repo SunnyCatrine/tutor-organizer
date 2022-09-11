@@ -14,17 +14,17 @@ public final class StudentResponse {
     private final String defaultPrice;
     private final String defaultDuration;
 
-    public StudentResponse(String id,
-                           String firstName,
-                           String lastName,
-                           String status,
-                           String phoneNo,
-                           String skype,
-                           String country,
-                           String city,
-                           String timezone,
-                           String defaultPrice,
-                           String defaultDuration) {
+    private StudentResponse(String id,
+                            String firstName,
+                            String lastName,
+                            String status,
+                            String phoneNo,
+                            String skype,
+                            String country,
+                            String city,
+                            String timezone,
+                            String defaultPrice,
+                            String defaultDuration) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -123,7 +123,6 @@ public final class StudentResponse {
                     defaultDuration
             );
         }
-
     }
 
     public String getId() {

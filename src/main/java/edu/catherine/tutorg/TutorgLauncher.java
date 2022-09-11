@@ -96,41 +96,5 @@ public class TutorgLauncher {
         students = studentController.findAll();
         students.forEach(System.out::println);
 
-
-
-
-
-//        CreateStudentRequestDto studentDto = new CreateStudentRequestDto(
-//                "Vasiliy",
-//                "Terkin",
-//                "+79091234567",
-//                "VasyaTerkin",
-//                "Russia",
-//                "Moscow",
-//                "GMT +3",
-//                "MATH5",
-//                null,
-//                null,
-//                "1000",
-//                "60",
-//                "MONDAY",
-//                null,
-//                null,
-//                null,
-//                "12:00",
-//                null,
-//                null,
-//                null,
-//                "2022-09-23",
-//                "2023-05-31");
-//
-//
-//        CreateStudentResponseDto createStudentResponseDto = studentController.createStudent(studentDto);
-//        System.out.println(createStudentResponseDto);
-//
-//        List<FindStudentResponseDto> findStudents = studentController.findAllStudents();
-//        for (FindStudentResponseDto findStudent: findStudents) {
-//            System.out.println(findStudent);
-//        }
     }
 }
