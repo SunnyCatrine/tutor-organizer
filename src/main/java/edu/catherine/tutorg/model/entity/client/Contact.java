@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.client;
+package main.java.edu.catherine.tutorg.model.entity.client;
 
 import java.util.Objects;
 
@@ -15,17 +15,10 @@ public class Contact {
         return phoneNo;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
     public String getSkype() {
         return skype;
     }
 
-    public void setSkype(String skype) {
-        this.skype = skype;
-    }
 
     @Override
     public boolean equals(Object o) {

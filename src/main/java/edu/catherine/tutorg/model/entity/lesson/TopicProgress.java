@@ -1,4 +1,4 @@
-package main.java.edu.catherine.tutorg.model.lesson;
+package main.java.edu.catherine.tutorg.model.entity.lesson;
 
 public enum TopicProgress {
     DONE,

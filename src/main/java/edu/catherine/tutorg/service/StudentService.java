@@ -1,46 +1,53 @@
 package main.java.edu.catherine.tutorg.service;
 
 import main.java.edu.catherine.tutorg.dao.StudentDao;
-import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.mapper.StudentMapper;
+import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
+import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 import main.java.edu.catherine.tutorg.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentService {
-    // TODO: 30.08.2022 make clean code in class (proper methods\fields order, indents, no comments etc.)
     private final static StudentService INSTANCE = new StudentService();
 
     private final StudentDao studentDao = StudentDao.getInstance();
 
-    public Student create(Student studentRequest) throws SQLException {
+    public StudentResponse create(StudentRequest studentRequest) throws SQLException {
+        Student student = StudentMapper.toCreateEntity(studentRequest);
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.create(connection, studentRequest);
+            return StudentMapper.toResponse(studentDao.create(connection, student));
         }
     }
 
-    public List<Student> findAll() throws SQLException {
+    public List<StudentResponse> findAll() throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.findAll(connection);
+            return studentDao.findAll(connection).stream()
+                    .map(StudentMapper::toResponse)
+                    .collect(Collectors.toList());
         }
     }
 
-    public Student findBy(Integer studentId) throws SQLException {
+    public StudentResponse findBy(Integer studentId) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.findBy(connection, studentId);
+            return StudentMapper.toResponse(studentDao.findBy(connection, studentId));
         }
     }
 
-    public Student deleteBy(Integer studentId) throws SQLException {
+    public StudentResponse deleteBy(Integer studentId) throws SQLException {
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.deleteBy(connection, studentId);
+            return StudentMapper.toResponse(studentDao.deleteBy(connection, studentId));
         }
     }
 
-    public Student update(Integer id, Student studentRequest) throws SQLException {
+    public StudentResponse update(Integer id, StudentRequest studentRequest) throws SQLException {
+        Student student = StudentMapper.toUpdateEntity(studentRequest);
         try (Connection connection = ConnectionManager.get()) {
-            return studentDao.update(connection, id, studentRequest);
+            return StudentMapper.toResponse((studentDao.update(connection, id, student)));
         }
     }
 

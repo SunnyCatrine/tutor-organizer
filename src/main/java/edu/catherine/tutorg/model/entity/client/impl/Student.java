@@ -1,9 +1,9 @@
-package main.java.edu.catherine.tutorg.model.client.impl;
+package main.java.edu.catherine.tutorg.model.entity.client.impl;
 
-import main.java.edu.catherine.tutorg.model.client.*;
-import main.java.edu.catherine.tutorg.model.lesson.Lesson;
-import main.java.edu.catherine.tutorg.model.lesson.LessonParam;
-import main.java.edu.catherine.tutorg.model.lesson.SubjectBlock;
+import main.java.edu.catherine.tutorg.model.entity.client.*;
+import main.java.edu.catherine.tutorg.model.entity.lesson.Lesson;
+import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
+import main.java.edu.catherine.tutorg.model.entity.lesson.SubjectBlock;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -20,29 +20,15 @@ public class Student extends Client {
     private LessonsPeriod lessonsPeriod;
     private Agent agent;
 
-    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, StudentStatus studentStatus) {
+    public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
+        super(firstName, lastName, contact, location);
+        this.defaultLessonParam = defaultLessonParam;
+        this.studentStatus = studentStatus;
+    }
+
+    public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
         super(clientId, firstName, lastName, contact, location);
-        this.studentStatus = studentStatus;
-    }
-
-    public Student(String firstName, String lastName, Contact contact, Location location, List<SubjectBlock> subjects, LessonParam defaultLessonParam, Map<DayOfWeek, LocalTime> schedule, List<Lesson> lessonList, StudentStatus studentStatus, LessonsPeriod lessonsPeriod) {
-        super(firstName, lastName, contact, location);
-        this.subjects = subjects;
         this.defaultLessonParam = defaultLessonParam;
-        this.schedule = schedule;
-        this.lessonList = lessonList;
-        this.studentStatus = studentStatus;
-        this.lessonsPeriod = lessonsPeriod;
-        this.agent = agent;
-    }
-
-    public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam) {
-        super(firstName, lastName, contact, location);
-        this.defaultLessonParam = defaultLessonParam;
-    }
-
-    public Student(Integer clientId, String firstName, String lastName, Contact contact, StudentStatus studentStatus) {
-        super(clientId, firstName, lastName, contact);
         this.studentStatus = studentStatus;
     }
 
@@ -122,13 +108,13 @@ public class Student extends Client {
         return Objects.hash(super.hashCode(), getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod());
     }
 
-    // DONE: 30.08.2022 bad impl of toString :)
     @Override
     public String toString() {
 
         return "Student{"
                 + super.toString()
-                + "defaultLessonParam=" + defaultLessonParam +
-                '}';
+                + "defaultLessonParam=" + defaultLessonParam
+                + "status=" + studentStatus
+                + '}';
     }
 }

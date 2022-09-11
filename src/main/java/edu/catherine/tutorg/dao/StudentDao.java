@@ -1,9 +1,10 @@
 package main.java.edu.catherine.tutorg.dao;
 
-import main.java.edu.catherine.tutorg.model.client.Contact;
-import main.java.edu.catherine.tutorg.model.client.Location;
-import main.java.edu.catherine.tutorg.model.client.StudentStatus;
-import main.java.edu.catherine.tutorg.model.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.entity.client.Contact;
+import main.java.edu.catherine.tutorg.model.entity.client.Location;
+import main.java.edu.catherine.tutorg.model.entity.client.StudentStatus;
+import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
+import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,39 +16,35 @@ import static main.java.edu.catherine.tutorg.util.sql.SqlUtil.*;
 public final class StudentDao {
     private static final StudentDao INSTANCE = new StudentDao();
 
-
-    // DONE: 30.08.2022 all const should be in util constants class
-    public Student create(Connection connection, Student studentRequest) throws SQLException {
-        Integer studentId = null;
-        // DONE: 30.08.2022 response and request are not same entities - they shouldn't be equal
-        Student studentResponse = buildStudent(studentRequest);
+    public Student create(Connection connection, Student student) throws SQLException {
+        Student resultStudent = buildStudent(student);
 
         try (PreparedStatement studentCreate = connection.prepareStatement(CREATE_STUDENT_SQL, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement contactCreate = connection.prepareStatement(CREATE_CONTACT_SQL)) {
 
-            studentCreate.setString(1, studentRequest.getFirstName());
-            studentCreate.setString(2, studentRequest.getLastName());
-            studentCreate.setString(3, StudentStatus.ACTIVE.getStatus());
-            studentCreate.setInt(4, studentRequest.getDefaultLessonParam().getPrice());
-            studentCreate.setInt(5, studentRequest.getDefaultLessonParam().getDuration());
+            studentCreate.setString(1, student.getFirstName());
+            studentCreate.setString(2, student.getLastName());
+            studentCreate.setString(3, student.getStudentStatus().getStatusValue());
+            studentCreate.setInt(4, student.getDefaultLessonParam().getPrice());
+            studentCreate.setInt(5, student.getDefaultLessonParam().getDuration());
 
             studentCreate.executeUpdate();
             ResultSet resultSet = studentCreate.getGeneratedKeys();
             if (resultSet.next()) {
-                studentId = resultSet.getInt(ID);
-                studentResponse.setClientId(studentId);
+                resultStudent.setClientId(resultSet.getInt(ID));
+                resultStudent.setStudentStatus(StudentStatus.valueOf(resultSet.getString(STATUS)));
             }
 
-            contactCreate.setString(1, studentRequest.getLocation().getCountry());
-            contactCreate.setString(2, studentRequest.getLocation().getCity());
-            contactCreate.setString(3, studentRequest.getContact().getPhoneNo());
-            contactCreate.setString(4, studentRequest.getContact().getSkype());
-            contactCreate.setString(5, studentRequest.getLocation().getTimezone());
-            contactCreate.setInt(6, studentId);
+            contactCreate.setString(1, student.getLocation().getCountry());
+            contactCreate.setString(2, student.getLocation().getCity());
+            contactCreate.setString(3, student.getContact().getPhoneNo());
+            contactCreate.setString(4, student.getContact().getSkype());
+            contactCreate.setString(5, student.getLocation().getTimezone());
+            contactCreate.setInt(6, resultStudent.getClientId());
 
             contactCreate.executeUpdate();
 
-            return studentResponse;
+            return resultStudent;
         }
     }
 
@@ -65,7 +62,6 @@ public final class StudentDao {
 
 
 
-    // DONE: 30.08.2022 private methods should be in the end of the class
     public Student findBy(Connection connection, Integer studentId) throws SQLException {
         Student resultStudent = null;
         try (PreparedStatement findStudentById = connection.prepareStatement(FIND_BY_ID)) {
@@ -82,7 +78,6 @@ public final class StudentDao {
     }
 
     public Student deleteBy(Connection connection, Integer studentId) throws SQLException {
-        // DONE: 30.08.2022 you should notice all spaces in your code even after commas
         Student resultStudent = findBy(connection, studentId);
         try (PreparedStatement deleteStudentById = connection.prepareStatement(DELETE_STUDENT_BY_ID)) {
             deleteStudentById.setInt(1, studentId);
@@ -93,20 +88,17 @@ public final class StudentDao {
         }
     }
 
-    public Student update(Connection connection, Integer id, Student studentRequest) throws SQLException {
-        String updateStudentSql = buildUpdateStudentSql(studentRequest);
-        String updateContactSql = buildUpdateContactSql(studentRequest);
-        // TODO: 30.08.2022 spaces.. fix in all other methods too
+    public Student update(Connection connection, Integer id, Student student) throws SQLException {
+        String updateStudentSql = buildUpdateStudentSql(student);
+        String updateContactSql = buildUpdateContactSql(student);
 
-        // DONE: 30.08.2022 name of condition is bad
-        if (availableFieldForUpdate(updateStudentSql)) {
-            // DONE: 30.08.2022 not camel case
+        if (needUpdate(updateStudentSql)) {
             try (PreparedStatement updateStudentById = connection.prepareStatement(updateStudentSql)) {
                 updateStudentById.setInt(1, id);
                 updateStudentById.executeUpdate();
             }
         }
-        if (! updateContactSql.isEmpty()) {
+        if (needUpdate(updateContactSql)) {
             try (PreparedStatement updateContactByStudentID = connection.prepareStatement(updateContactSql)) {
                 updateContactByStudentID.setInt(1, id);
                 updateContactByStudentID.executeUpdate();
@@ -115,85 +107,43 @@ public final class StudentDao {
         return findBy(connection, id);
     }
 
-    public static StudentDao getInstance() {
-        return INSTANCE;
+    private boolean needUpdate(String sql) {
+        return ! sql.isEmpty();
     }
-
-    private StudentDao() {
-    }
-
-
-    // DONE: 30.08.2022 methods like these are not dao methods - you should create util classes for them
 
     private Student buildStudent(ResultSet resultSet) throws SQLException {
-        // DONE: 30.08.2022 no constants in code
         Contact contact = new Contact(resultSet.getString(PHONE_NO),
                 resultSet.getString(SKYPE));
-        Location location = new Location(resultSet.getString(COUNTRY),
-                resultSet.getString(CITY));
-        // TODO: 30.08.2022 you should notice all IDEA remarks
+        Location location = new Location(
+                resultSet.getString(COUNTRY),
+                resultSet.getString(CITY),
+                resultSet.getString(TIMEZONE));
+        LessonParam defaultLessonParam = new LessonParam(
+                resultSet.getInt(DEFAULT_LESSON_PRICE),
+                resultSet.getInt(DEFAULT_LESSON_DURATION_MINUTES));
         return new Student(
                 resultSet.getInt(ID),
                 resultSet.getString(FIRST_NAME),
                 resultSet.getString(LAST_NAME),
                 contact,
                 location,
+                defaultLessonParam,
                 StudentStatus.valueOf(resultSet.getString(STATUS)));
     }
 
-    private Student buildStudent (Student student) {
+    private Student buildStudent(Student student) {
         return new Student(student.getFirstName(),
                 student.getLastName(),
                 student.getContact(),
                 student.getLocation(),
-                student.getDefaultLessonParam());
+                student.getDefaultLessonParam(),
+                student.getStudentStatus());
     }
 
+    public static StudentDao getInstance() {
+        return INSTANCE;
+    }
 
-
-
-//    public List<Student> findAllStudents(Connection connection) {
-//        try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SQL)) {
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//
-//            List<Student> resultList = new ArrayList<>();
-//            while (resultSet.next()) {
-//                Student student = buildStudent(resultSet);
-//                resultList.add(student);
-////                System.out.println(student);
-//            }
-//            return resultList;
-//        } catch (SQLException e) {
-//            throw new DaoException(e);
-//        }
-//    }
-//
-//    private Student buildStudent(ResultSet resultSet) throws SQLException {
-//        return new Student(
-//                resultSet.getInt("id"),
-//                resultSet.getString("first_name"),
-//                resultSet.getString("last_name"),
-//                StudentStatus.valueOf(resultSet.getString("status")));
-//    }
-//
-//    public Student createStudent(Student studentRequest, Connection connection) throws SQLException {
-//        Student studentResponse = studentRequest;
-//        try(PreparedStatement preparedStatement = connection.prepareStatement(CREATE_STUDENT_SQL, Statement.RETURN_GENERATED_KEYS)) {
-//
-//            preparedStatement.setString(1, studentRequest.getFirstName());
-//            preparedStatement.setString(2,studentRequest.getLastName());
-//            preparedStatement.setString(3,studentRequest.getStudentStatus().getStatus());
-//            preparedStatement.executeUpdate();
-//
-//            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-//            if (resultSet.next()) {
-//                studentResponse.setClientId(resultSet.getInt("id"));
-//            }
-//            return  studentResponse;
-//        } catch (Exception e) {
-//            throw e;
-//        }
-
-//    }
-
+    private StudentDao() {
+    }
 }
