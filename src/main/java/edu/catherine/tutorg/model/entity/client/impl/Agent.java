@@ -8,18 +8,29 @@ import java.util.List;
 import java.util.Objects;
 
 public class Agent extends Client {
+    String phoneNo;
     List<Student> studentList;
 
-    public Agent(Integer id, String firstName, String lastName, Contact contact, Location location) {
-        super(id, firstName, lastName, contact, location);
+    public Agent(Integer id, String firstName, String lastName, String phoneNo, Location location) {
+        super(id, firstName, lastName, location);
+        this.phoneNo = phoneNo;
     }
 
-    public Agent(String firstName, String lastName, Contact contact, Location location) {
-        super(firstName, lastName, contact, location);
+    public Agent(String firstName, String lastName, String phoneNo, Location location) {
+        super(firstName, lastName, location);
+        this.phoneNo = phoneNo;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
     public List<Student> getStudentList() {
         return studentList;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     public void setStudentList(List<Student> studentList) {
@@ -32,18 +43,21 @@ public class Agent extends Client {
         if (!(o instanceof Agent)) return false;
         if (!super.equals(o)) return false;
         Agent agent = (Agent) o;
-        return getStudentList().equals(agent.getStudentList());
+        return Objects.equals(getPhoneNo(), agent.getPhoneNo()) &&
+                Objects.equals(getStudentList(), agent.getStudentList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getStudentList());
+        return Objects.hash(super.hashCode(), getPhoneNo(), getStudentList());
     }
 
     @Override
     public String toString() {
-        return "Agent{" +
-                "studentList=" + studentList +
-                '}';
+        return "Agent{"
+                + super.toString() 
+                + "phoneNo='" + phoneNo
+                + "studentList=" + studentList
+                + '}';
     }
 }

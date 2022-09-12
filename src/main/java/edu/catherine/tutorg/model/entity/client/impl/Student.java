@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Student extends Client {
+    private Contact contact;
     private List<SubjectBlock> subjects;
     private LessonParam defaultLessonParam;
     private Map<DayOfWeek, LocalTime> schedule;
@@ -21,15 +22,21 @@ public class Student extends Client {
     private Agent agent;
 
     public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
-        super(firstName, lastName, contact, location);
+        super(firstName, lastName, location);
+        this.contact = contact;
         this.defaultLessonParam = defaultLessonParam;
         this.studentStatus = studentStatus;
     }
 
     public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
-        super(clientId, firstName, lastName, contact, location);
+        super(clientId, firstName, lastName, location);
+        this.contact = contact;
         this.defaultLessonParam = defaultLessonParam;
         this.studentStatus = studentStatus;
+    }
+
+    public Contact getContact() {
+        return contact;
     }
 
     public Agent getAgent() {
@@ -51,10 +58,6 @@ public class Student extends Client {
 
     public LessonParam getDefaultLessonParam() {
         return defaultLessonParam;
-    }
-
-    public void setDefaultLessonParam(LessonParam defaultLessonParam) {
-        this.defaultLessonParam = defaultLessonParam;
     }
 
     public Map<DayOfWeek, LocalTime> getSchedule() {
@@ -95,17 +98,19 @@ public class Student extends Client {
         if (!(o instanceof Student)) return false;
         if (!super.equals(o)) return false;
         Student student = (Student) o;
-        return Objects.equals(getSubjects(), student.getSubjects()) &&
-                getDefaultLessonParam().equals(student.getDefaultLessonParam()) &&
+        return Objects.equals(contact, student.contact) &&
+                Objects.equals(getSubjects(), student.getSubjects()) &&
+                Objects.equals(getDefaultLessonParam(), student.getDefaultLessonParam()) &&
                 Objects.equals(getSchedule(), student.getSchedule()) &&
                 Objects.equals(getLessonList(), student.getLessonList()) &&
                 getStudentStatus() == student.getStudentStatus() &&
-                getLessonsPeriod().equals(student.getLessonsPeriod());
+                Objects.equals(getLessonsPeriod(), student.getLessonsPeriod()) &&
+                Objects.equals(getAgent(), student.getAgent());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod());
+        return Objects.hash(super.hashCode(), contact, getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod(), getAgent());
     }
 
     @Override
@@ -113,6 +118,7 @@ public class Student extends Client {
 
         return "Student{"
                 + super.toString()
+                + "contact=" + contact
                 + "defaultLessonParam=" + defaultLessonParam
                 + "status=" + studentStatus
                 + '}';

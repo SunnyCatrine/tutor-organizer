@@ -17,7 +17,14 @@ public final class AgentController {
     public AgentResponse create(String studentId, AgentRequest agentRequest) throws SQLException {
         return agentService.create(studentId, agentRequest);
     }
-    
+
+    public AgentResponse findByStudentId(String studentId) throws SQLException {
+        return agentService.findByStudentId(studentId);
+    }
+
+    public AgentResponse deleteByStudentId(String studentId) throws SQLException {
+        return agentService.deleteByStudentId(studentId);
+    }
 
 
     public static AgentController getInstance() {

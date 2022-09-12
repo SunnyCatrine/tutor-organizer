@@ -20,7 +20,7 @@ public final class StudentDao {
         Student resultStudent = buildStudent(student);
 
         try (PreparedStatement studentCreate = connection.prepareStatement(CREATE_STUDENT_SQL, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement contactCreate = connection.prepareStatement(CREATE_CONTACT_SQL)) {
+             PreparedStatement contactCreate = connection.prepareStatement(CREATE_STUDENT_CONTACT_SQL)) {
 
             studentCreate.setString(1, student.getFirstName());
             studentCreate.setString(2, student.getLastName());
@@ -50,7 +50,7 @@ public final class StudentDao {
 
     public List<Student> findAll(Connection connection) throws SQLException {
         List<Student> resultList = new ArrayList<>();
-        try (PreparedStatement findAllStudents = connection.prepareStatement(FIND_ALL_SQL)) {
+        try (PreparedStatement findAllStudents = connection.prepareStatement(FIND_ALL_STUDENTS_SQL)) {
             findAllStudents.executeQuery();
             ResultSet resultSet = findAllStudents.getResultSet();
             while (resultSet.next()) {
@@ -64,7 +64,7 @@ public final class StudentDao {
 
     public Student findBy(Connection connection, Integer studentId) throws SQLException {
         Student resultStudent = null;
-        try (PreparedStatement findStudentById = connection.prepareStatement(FIND_BY_ID)) {
+        try (PreparedStatement findStudentById = connection.prepareStatement(FIND_STUDENT_BY_ID)) {
 
             findStudentById.setInt(1,studentId);
 

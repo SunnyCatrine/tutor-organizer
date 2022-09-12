@@ -9,6 +9,8 @@ import java.util.List;
 
 public class TutorgLauncher {
 
+    // TODO: 11.09.2022 сделать коммит, проверить методы агента, добавить update
+
     public static void main(String[] args) throws SQLException {
         StudentController studentController = StudentController.getINSTANCE();
 

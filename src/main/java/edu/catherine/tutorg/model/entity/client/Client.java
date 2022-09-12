@@ -6,21 +6,18 @@ public abstract class Client {
     private Integer clientId;
     private String firstName;
     private String lastName;
-    private Contact contact;
     private Location location;
 
-    public Client(String firstName, String lastName, Contact contact, Location location) {
+    public Client(String firstName, String lastName, Location location) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.contact = contact;
         this.location = location;
     }
 
-    public Client(Integer clientId, String firstName, String lastName, Contact contact, Location location) {
+    public Client(Integer clientId, String firstName, String lastName, Location location) {
         this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.contact = contact;
         this.location = location;
     }
 
@@ -30,10 +27,6 @@ public abstract class Client {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public Contact getContact() {
-        return contact;
     }
 
     public Location getLocation() {
@@ -55,13 +48,12 @@ public abstract class Client {
         Client client = (Client) o;
         return getFirstName().equals(client.getFirstName()) &&
                 Objects.equals(getLastName(), client.getLastName()) &&
-                Objects.equals(getContact(), client.getContact()) &&
                 Objects.equals(getLocation(), client.getLocation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName(), getContact(), getLocation());
+        return Objects.hash(getFirstName(), getLastName(), getLocation());
     }
 
     @Override
@@ -69,7 +61,6 @@ public abstract class Client {
         return "clientId=" + clientId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", contact=" + contact +
                 ", location=" + location;
     }
 }

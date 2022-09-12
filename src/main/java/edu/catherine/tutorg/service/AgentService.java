@@ -5,11 +5,11 @@ import main.java.edu.catherine.tutorg.mapper.AgentMapper;
 import main.java.edu.catherine.tutorg.model.dto.AgentRequest;
 import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
 import main.java.edu.catherine.tutorg.model.entity.client.impl.Agent;
-import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
 import main.java.edu.catherine.tutorg.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
 
 public class AgentService {
     private static final AgentService INSTANCE = new AgentService(AgentDao.getInstance());
@@ -28,6 +28,20 @@ public class AgentService {
         Agent agent = AgentMapper.toCreateEntity(agentRequest);
         try (Connection connection = ConnectionManager.get()) {
             return AgentMapper.toResponse(agentDao.create(connection, studentId, agent));
+        }
+    }
+
+    public AgentResponse findByStudentId(String studentId) throws SQLException {
+        Integer id = Integer.parseInt(studentId);
+        try (Connection connection = ConnectionManager.get()) {
+            return AgentMapper.toResponse(agentDao.findByStudentId(connection, id));
+        }
+    }
+
+    public AgentResponse deleteByStudentId(String studentId) throws SQLException {
+        Integer id = Integer.parseInt(studentId);
+        try (Connection connection = ConnectionManager.get()) {
+            return AgentMapper.toResponse(agentDao.deleteByStudentId(connection, id));
         }
     }
 }
