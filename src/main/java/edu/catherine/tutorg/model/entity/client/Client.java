@@ -8,6 +8,12 @@ public abstract class Client {
     private String lastName;
     private Location location;
 
+    public Client(Integer clientId, String firstName, String lastName) {
+        this.clientId = clientId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Client(String firstName, String lastName, Location location) {
         this.firstName = firstName;
         this.lastName = lastName;

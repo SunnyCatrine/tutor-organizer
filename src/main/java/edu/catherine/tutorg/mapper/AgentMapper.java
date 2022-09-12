@@ -13,11 +13,6 @@ import java.util.stream.Collectors;
 public class AgentMapper {
 
     public static Agent toCreateEntity(AgentRequest agentRequest) {
-        Contact contact = new Contact(
-                agentRequest.getPhoneNo(),
-                agentRequest.getSkype()
-        );
-
         Location location = new Location(
                 agentRequest.getCountry(),
                 agentRequest.getCity(),
@@ -27,7 +22,7 @@ public class AgentMapper {
         return new Agent(
                 agentRequest.getFirstName(),
                 agentRequest.getLastName(),
-                contact,
+                agentRequest.getPhoneNo(),
                 location);
     }
     
@@ -42,8 +37,7 @@ public class AgentMapper {
                 .country(agent.getLocation().getCountry())
                 .city(agent.getLocation().getCity())
                 .timezone(agent.getLocation().getTimezone())
-                .phoneNo(agent.getContact().getPhoneNo())
-                .skype(agent.getContact().getSkype())
+                .phoneNo(agent.getPhoneNo())
                 .studentIdList(studentIdList)
                 .build();
     }

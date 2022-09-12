@@ -35,6 +35,11 @@ public class Student extends Client {
         this.studentStatus = studentStatus;
     }
 
+    public Student(Integer clientId, String firstName, String lastName, StudentStatus studentStatus) {
+        super(clientId, firstName, lastName);
+        this.studentStatus = studentStatus;
+    }
+
     public Contact getContact() {
         return contact;
     }

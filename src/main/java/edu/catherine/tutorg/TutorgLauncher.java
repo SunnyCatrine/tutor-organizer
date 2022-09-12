@@ -1,6 +1,9 @@
 package main.java.edu.catherine.tutorg;
 
+import main.java.edu.catherine.tutorg.controller.AgentController;
 import main.java.edu.catherine.tutorg.controller.StudentController;
+import main.java.edu.catherine.tutorg.model.dto.AgentRequest;
+import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
 import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
 import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 
@@ -8,12 +11,41 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TutorgLauncher {
-
-    // TODO: 11.09.2022 сделать коммит, проверить методы агента, добавить update
-
+    
     public static void main(String[] args) throws SQLException {
         StudentController studentController = StudentController.getINSTANCE();
+        AgentController agentController = AgentController.getInstance();
 
+
+        checkAgentController(agentController);
+    }
+
+    private static void checkAgentController(AgentController agentController) throws SQLException {
+        System.out.println("ADD NEW AGENT to student_id 14");
+        AgentRequest agentRequest = AgentRequest.builder()
+                .firstName("Luk")
+                .lastName("Skywolker")
+                .phoneNo("111")
+                .country("NOname")
+                .city("unknown")
+                .timezone("absent")
+                .build();
+
+        AgentResponse addedAgent = agentController.create("14", agentRequest);
+        System.out.println(addedAgent);
+        System.out.println();
+
+        System.out.println("FIND AGENT by student id 4");
+        AgentResponse foundAgent = agentController.findByStudentId("4");
+        System.out.println(foundAgent);
+
+        System.out.println("DELETE AGENT by student id 4");
+        AgentResponse deletedAgent = agentController.deleteByStudentId("4");
+        System.out.println(deletedAgent);
+
+    }
+
+    private void checkStudentController(StudentController studentController) throws SQLException {
         System.out.println("ALL STUDENTS");
         List<StudentResponse> students = studentController.findAll();
         students.forEach(System.out::println);

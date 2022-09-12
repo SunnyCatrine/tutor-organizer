@@ -2,6 +2,7 @@ package main.java.edu.catherine.tutorg.model.dto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class AgentResponse {
     private final String id;
@@ -11,7 +12,6 @@ public final class AgentResponse {
     private final String city;
     private final String timezone;
     private final String phoneNo;
-    private final String skype;
     private final List<String> studentIdList;
 
     public AgentResponse(
@@ -22,7 +22,6 @@ public final class AgentResponse {
             String city,
             String timezone,
             String phoneNo,
-            String skype,
             List<String> studentIdList) {
         this.id = id;
         this.firstName = firstName;
@@ -31,7 +30,6 @@ public final class AgentResponse {
         this.city = city;
         this.timezone = timezone;
         this.phoneNo = phoneNo;
-        this.skype = skype;
         this.studentIdList = studentIdList;
     }
 
@@ -45,7 +43,6 @@ public final class AgentResponse {
         private String city;
         private String timezone;
         private String phoneNo;
-        private String skype;
         private List<String> studentIdList;
 
         public AgentResponseBuilder id(String id) {
@@ -83,11 +80,6 @@ public final class AgentResponse {
             return this;
         }
 
-        public AgentResponseBuilder skype(String skype) {
-            this.skype = skype;
-            return this;
-        }
-
         public AgentResponseBuilder studentIdList(List<String> studentIdList) {
             this.studentIdList = studentIdList;
             return this;
@@ -102,7 +94,6 @@ public final class AgentResponse {
                     city,
                     timezone,
                     phoneNo,
-                    skype,
                     studentIdList
             );
         }
@@ -136,10 +127,6 @@ public final class AgentResponse {
         return phoneNo;
     }
 
-    public String getSkype() {
-        return skype;
-    }
-
     public List<String> getStudentIdList() {
         return studentIdList;
     }
@@ -156,17 +143,19 @@ public final class AgentResponse {
                 Objects.equals(getCity(), that.getCity()) &&
                 Objects.equals(getTimezone(), that.getTimezone()) &&
                 Objects.equals(getPhoneNo(), that.getPhoneNo()) &&
-                Objects.equals(getSkype(), that.getSkype()) &&
                 Objects.equals(getStudentIdList(), that.getStudentIdList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getCountry(), getCity(), getTimezone(), getPhoneNo(), getSkype(), getStudentIdList());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getCountry(), getCity(), getTimezone(), getPhoneNo(), getStudentIdList());
     }
 
     @Override
     public String toString() {
+        String studentsId = studentIdList.stream()
+                .map(String::toString)
+                .collect(Collectors.joining("\n"));
         return "AgentResponse{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
@@ -175,8 +164,7 @@ public final class AgentResponse {
                 ", city='" + city + '\'' +
                 ", timezone='" + timezone + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
-                ", skype='" + skype + '\'' +
-                ", studentIdList=" + studentIdList +
+                ", studentIdList=" + studentsId + '\'' +
                 '}';
     }
 }
