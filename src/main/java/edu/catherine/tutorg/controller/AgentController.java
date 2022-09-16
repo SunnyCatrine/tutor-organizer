@@ -5,6 +5,7 @@ import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
 import main.java.edu.catherine.tutorg.service.AgentService;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public final class AgentController {
     private static final AgentController INSTANCE = new AgentController(AgentService.getInstance());
@@ -14,18 +15,17 @@ public final class AgentController {
         this.agentService = agentService;
     }
 
-    public AgentResponse create(String studentId, AgentRequest agentRequest) throws SQLException {
-        return agentService.create(studentId, agentRequest);
+    public AgentResponse create(AgentRequest agentRequest) throws SQLException {
+        return agentService.create(agentRequest);
     }
 
-    public AgentResponse findByStudentId(String studentId) throws SQLException {
+    public List<AgentResponse> findByStudentId(String studentId) throws SQLException {
         return agentService.findByStudentId(studentId);
     }
 
-    public AgentResponse deleteByStudentId(String studentId) throws SQLException {
-        return agentService.deleteByStudentId(studentId);
+    public AgentResponse deleteById(String id) throws SQLException {
+        return agentService.deleteById(id);
     }
-
 
     public static AgentController getInstance() {
         return INSTANCE;

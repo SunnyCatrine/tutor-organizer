@@ -38,7 +38,9 @@ public class SqlConstants {
 
     public static final String CREATE_AGENT_SQL = "INSERT INTO agent (first_name, last_name, country, city, phone_no, timezone) VALUES (?,?,?,?,?,?)";
     public static final String ADD_NOTE_TO_STUDENTS_AGENTS_TABLE_SQL = "INSERT INTO students_agents (student_id, agent_id) VALUES (?,?)";
-    public static final String FIND_AGENT_ID_SQL = "SELECT students_agents.agent_id as agent_id FROM students_agents" + SQL_WHERE_STUDENT_ID;
     public static final String FIND_AGENT_SQL = "SELECT agent.id as id, agent.first_name as first_name, agent.last_name as last_name, agent.country as country, agent.city as city, agent.timezone as timezone, agent.phone_no as phone_no, student.id as student_id, student.first_name as student_first_name, student.last_name as student_last_name, student.status as student_status FROM agent JOIN students_agents sa on agent.id = sa.agent_id JOIN student on sa.student_id = student.id" + SQL_WHERE_AGENT_ID;
     public static final String DELETE_AGENT_SQL = "DELETE FROM agent" + SQL_WHERE_ID;
+
+    public static final String FIND_AGENT_ID_LIST_BY_STUDENT_ID = "SELECT agent_id FROM students_agents" + SQL_WHERE_STUDENT_ID;
+    public static final String FIND_STUDENT_ID_LIST_BY_AGENT_ID = "SELECT student_id FROM students_agents WHERE agent_id = ?";
 }

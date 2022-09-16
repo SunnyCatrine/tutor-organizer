@@ -1,7 +1,6 @@
 package main.java.edu.catherine.tutorg.dao;
 
 import main.java.edu.catherine.tutorg.model.entity.client.Location;
-import main.java.edu.catherine.tutorg.model.entity.client.StudentStatus;
 import main.java.edu.catherine.tutorg.model.entity.client.impl.Agent;
 import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
 
@@ -12,14 +11,16 @@ import java.util.List;
 import static main.java.edu.catherine.tutorg.util.sql.SqlConstants.*;
 
 public class AgentDao {
-    private static final AgentDao INSTANCE = new AgentDao();
+    private static final AgentDao INSTANCE = new AgentDao(StudentsAgentsDao.getInstance(), StudentDao.getInstance());
+    private StudentsAgentsDao studentsAgentsDao;
+    private StudentDao studentDao;
 
-
-    public static AgentDao getInstance() {
-        return INSTANCE;
+    private AgentDao(StudentsAgentsDao studentsAgentsDao, StudentDao studentDao) {
+        this.studentsAgentsDao = studentsAgentsDao;
+        this.studentDao = studentDao;
     }
 
-    public Agent create(Connection connection, String studentId, Agent agent) throws SQLException {
+    public Agent create(Connection connection, Integer studentId, Agent agent) throws SQLException {
         Integer agentId = null;
         try (PreparedStatement agentCreate = connection.prepareStatement(CREATE_AGENT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -34,44 +35,32 @@ public class AgentDao {
             ResultSet resultSet = agentCreate.getGeneratedKeys();
             if (resultSet.next()) {
                 agentId = resultSet.getInt(ID);
-                addNoteToStudentsAgentsTable(connection, studentId, agentId);
+                studentsAgentsDao.create(connection, studentId, agentId);
             }
             return  findBy(connection, agentId);
         }
     }
 
-    public Agent findByStudentId(Connection connection, Integer id) throws SQLException {
-        Integer agentId = findAgentId(connection, id);
-        return findBy(connection, agentId);
+    public List<Agent> findByStudentId(Connection connection, Integer studentId) throws SQLException {
+        List<Agent> resultList = new ArrayList<>();
+        List<Integer> agentIdList = getAgentIdListByStudentId(connection, studentId);
+        for (Integer agentId: agentIdList) {
+            Agent agent = findBy(connection, agentId);
+            resultList.add(agent);
+        }
+        return resultList;
     }
 
-    public Agent deleteByStudentId(Connection connection, Integer id) throws SQLException {
-        Integer agentId = findAgentId(connection, id);
-        Agent resultAgent = findBy(connection, agentId);
+    public Agent deleteById(Connection connection, Integer id) throws SQLException {
+        Agent resultAgent = findBy(connection, id);
         try (PreparedStatement deleteAgent =connection.prepareStatement(DELETE_AGENT_SQL)) {
 
-            deleteAgent.setInt(1,agentId);
+            deleteAgent.setInt(1, id);
 
             if (deleteAgent.executeUpdate() > 0) {
                 return resultAgent;
             }
             return null;
-        }
-    }
-
-    private Integer findAgentId(Connection connection, Integer studentId) throws SQLException {
-        Integer agentId = null;
-        try (PreparedStatement findAgentId = connection.prepareStatement(FIND_AGENT_ID_SQL)) {
-
-            findAgentId.setInt(1, studentId);
-
-            findAgentId.executeQuery();
-
-            ResultSet resultSet = findAgentId.getResultSet();
-            if (resultSet.next()) {
-                agentId = resultSet.getInt(AGENT_ID);
-            }
-            return agentId;
         }
     }
 
@@ -87,35 +76,30 @@ public class AgentDao {
             if (resultSet.next()) {
                 resultAgent = buildAgent(resultSet);
             }
-            while (resultSet.next()) {
-                addStudent(resultAgent, resultSet);
-            }
+            resultAgent.setStudentList(getStudentListByAgentId(connection, agentId));
+
             return resultAgent;
         }
     }
 
-    private void addStudent(Agent resultAgent, ResultSet resultSet) throws SQLException {
-        Student student = new Student(
-                resultSet.getInt(STUDENT_ID),
-                resultSet.getString(STUDENT_FIRST_NAME),
-                resultSet.getString(STUDENT_LAST_NAME),
-                StudentStatus.valueOf(resultSet.getString(STUDENT_STATUS)));
+    private List<Integer> getAgentIdListByStudentId(Connection connection, Integer studentId) throws SQLException {
+        return studentsAgentsDao.findAgentIdListByStudentId(connection, studentId);
+    }
 
-        List<Student> students = resultAgent.getStudentList();
-        students.add(student);
-        resultAgent.setStudentList(students);
+    private List<Student> getStudentListByAgentId(Connection connection, Integer agentId) throws SQLException {
+        List<Integer> studentIdList = studentsAgentsDao.findStudentIdListByAgentId(connection, agentId);
+        return getStudentListByStudentIdList(connection, studentIdList);
+    }
+
+    private List<Student> getStudentListByStudentIdList(Connection connection, List<Integer> studentIdList) throws SQLException {
+        List<Student> studentList = new ArrayList<>();
+        for (Integer studentId : studentIdList) {
+            studentList.add(studentDao.findBy(connection, studentId));
+        }
+        return studentList;
     }
 
     private Agent buildAgent(ResultSet resultSet) throws SQLException {
-        Student student = new Student(
-                resultSet.getInt(STUDENT_ID),
-                resultSet.getString(STUDENT_FIRST_NAME),
-                resultSet.getString(STUDENT_LAST_NAME),
-                StudentStatus.valueOf(resultSet.getString(STUDENT_STATUS)));
-
-        List<Student> students = new ArrayList<>();
-        students.add(student);
-
         Location location = new Location(
                 resultSet.getString(COUNTRY),
                 resultSet.getString(CITY),
@@ -125,18 +109,12 @@ public class AgentDao {
                 resultSet.getInt(ID),
                 resultSet.getString(FIRST_NAME),
                 resultSet.getString(LAST_NAME),
-                location,
                 resultSet.getString(PHONE_NO),
-                students);
+                location);
     }
 
-    private void addNoteToStudentsAgentsTable(Connection connection, String studentId, Integer agentId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NOTE_TO_STUDENTS_AGENTS_TABLE_SQL)) {
 
-            preparedStatement.setInt(1, Integer.parseInt(studentId));
-            preparedStatement.setInt(2, agentId);
-
-            preparedStatement.executeUpdate();
-        }
+    public static AgentDao getInstance() {
+        return INSTANCE;
     }
 }

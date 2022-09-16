@@ -2,6 +2,7 @@ package main.java.edu.catherine.tutorg;
 
 import main.java.edu.catherine.tutorg.controller.AgentController;
 import main.java.edu.catherine.tutorg.controller.StudentController;
+import main.java.edu.catherine.tutorg.controller.StudentsAgentsController;
 import main.java.edu.catherine.tutorg.model.dto.AgentRequest;
 import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
 import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
@@ -11,38 +12,44 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TutorgLauncher {
-    
+
     public static void main(String[] args) throws SQLException {
         StudentController studentController = StudentController.getINSTANCE();
         AgentController agentController = AgentController.getInstance();
+        StudentsAgentsController studentsAgentsController = StudentsAgentsController.getINSTANCE();
 
-
+        checkStudentAgentController(studentsAgentsController);
         checkAgentController(agentController);
     }
 
+    private static void checkStudentAgentController(StudentsAgentsController studentsAgentsController) throws SQLException {
+        System.out.println("ASSIGN AGENT 3 TO STUDENT 1");
+        System.out.println(studentsAgentsController.assignAgentToStudent("1", "3"));
+    }
+
     private static void checkAgentController(AgentController agentController) throws SQLException {
-        System.out.println("ADD NEW AGENT to student_id 14");
+        System.out.println("ADD NEW AGENT to student_id 1");
         AgentRequest agentRequest = AgentRequest.builder()
-                .firstName("Luk")
+                .firstName("Eny")
                 .lastName("Skywolker")
-                .phoneNo("111")
+                .phoneNo("111111111")
                 .country("NOname")
                 .city("unknown")
                 .timezone("absent")
+                .studentId("1")
                 .build();
 
-        AgentResponse addedAgent = agentController.create("14", agentRequest);
+        AgentResponse addedAgent = agentController.create(agentRequest);
         System.out.println(addedAgent);
         System.out.println();
 
-        System.out.println("FIND AGENT by student id 4");
-        AgentResponse foundAgent = agentController.findByStudentId("4");
-        System.out.println(foundAgent);
+        System.out.println("FIND AGENTs by student id 1");
+        List<AgentResponse> foundAgents = agentController.findByStudentId("1");
+        System.out.println(foundAgents);
 
-        System.out.println("DELETE AGENT by student id 4");
-        AgentResponse deletedAgent = agentController.deleteByStudentId("4");
-        System.out.println(deletedAgent);
-
+//        System.out.println("DELETE AGENT by id 5");
+//        AgentResponse deletedAgent = agentController.deleteById("5");
+//        System.out.println(deletedAgent);
     }
 
     private void checkStudentController(StudentController studentController) throws SQLException {
@@ -129,6 +136,5 @@ public class TutorgLauncher {
 
         students = studentController.findAll();
         students.forEach(System.out::println);
-
     }
 }

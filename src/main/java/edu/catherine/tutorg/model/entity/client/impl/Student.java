@@ -19,7 +19,7 @@ public class Student extends Client {
     private List<Lesson> lessonList;
     private StudentStatus studentStatus;
     private LessonsPeriod lessonsPeriod;
-    private Agent agent;
+    private List<Agent> agentList;
 
     public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
         super(firstName, lastName, location);
@@ -44,12 +44,12 @@ public class Student extends Client {
         return contact;
     }
 
-    public Agent getAgent() {
-        return agent;
+    public List<Agent> getAgentList() {
+        return agentList;
     }
 
-    public void setAgent(Agent agent) {
-        this.agent = agent;
+    public void setAgentList(List<Agent> agentList) {
+        this.agentList = agentList;
     }
 
     public List<SubjectBlock> getSubjects() {
@@ -110,12 +110,12 @@ public class Student extends Client {
                 Objects.equals(getLessonList(), student.getLessonList()) &&
                 getStudentStatus() == student.getStudentStatus() &&
                 Objects.equals(getLessonsPeriod(), student.getLessonsPeriod()) &&
-                Objects.equals(getAgent(), student.getAgent());
+                Objects.equals(getAgentList(), student.getAgentList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), contact, getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod(), getAgent());
+        return Objects.hash(super.hashCode(), contact, getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod(), getAgentList());
     }
 
     @Override

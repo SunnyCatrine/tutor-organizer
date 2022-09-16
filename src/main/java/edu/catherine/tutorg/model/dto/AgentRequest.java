@@ -9,20 +9,23 @@ public final class AgentRequest {
     private final String city;
     private final String timezone;
     private final String phoneNo;
+    private final String studentId;
 
-    public AgentRequest(
+    private AgentRequest(
             String firstName,
             String lastName,
             String country,
             String city,
             String timezone,
-            String phoneNo) {
+            String phoneNo,
+            String studentId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
         this.city = city;
         this.timezone = timezone;
         this.phoneNo = phoneNo;
+        this.studentId = studentId;
     }
 
     public static AgentRequestBuilder builder() {return new AgentRequestBuilder();}
@@ -34,6 +37,7 @@ public final class AgentRequest {
         private String city;
         private String timezone;
         private String phoneNo;
+        private String studentId;
 
         public AgentRequestBuilder firstName(String firstName) {
             this.firstName = firstName;
@@ -65,6 +69,10 @@ public final class AgentRequest {
             return this;
         }
 
+        public AgentRequestBuilder studentId(String studentId) {
+            this.studentId = studentId;
+            return this;
+        }
         public AgentRequest build() {
             return new AgentRequest(
                     firstName,
@@ -72,8 +80,8 @@ public final class AgentRequest {
                     country,
                     city,
                     timezone,
-                    phoneNo
-            );
+                    phoneNo,
+                    studentId);
         }
     }
 
@@ -101,6 +109,10 @@ public final class AgentRequest {
         return phoneNo;
     }
 
+    public String getStudentId() {
+        return studentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,12 +123,13 @@ public final class AgentRequest {
                 Objects.equals(getCountry(), that.getCountry()) &&
                 Objects.equals(getCity(), that.getCity()) &&
                 Objects.equals(getTimezone(), that.getTimezone()) &&
-                Objects.equals(getPhoneNo(), that.getPhoneNo());
+                Objects.equals(getPhoneNo(), that.getPhoneNo()) &&
+                Objects.equals(getStudentId(), that.getStudentId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName(), getCountry(), getCity(), getTimezone(), getPhoneNo());
+        return Objects.hash(getFirstName(), getLastName(), getCountry(), getCity(), getTimezone(), getPhoneNo(), getStudentId());
     }
 
     @Override
@@ -128,6 +141,7 @@ public final class AgentRequest {
                 ", city='" + city + '\'' +
                 ", timezone='" + timezone + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
+                ", studentId='" + studentId + '\'' +
                 '}';
     }
 }
