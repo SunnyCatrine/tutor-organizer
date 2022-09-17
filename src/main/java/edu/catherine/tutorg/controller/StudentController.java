@@ -32,6 +32,10 @@ public final class StudentController {
         return studentService.deleteBy(studentId);
     }
 
+    public Boolean assignAgent(String studentId, String agentId) throws SQLException {
+        return studentService.assignAgent(studentId, agentId);
+    }
+
     public static StudentController getINSTANCE() {
         return INSTANCE;
     }

@@ -14,7 +14,8 @@ import static main.java.edu.catherine.tutorg.util.sql.SqlConstants.*;
 import static main.java.edu.catherine.tutorg.util.sql.SqlUtil.*;
 
 public final class StudentDao {
-    private static final StudentDao INSTANCE = new StudentDao();
+    private static final StudentDao INSTANCE = new StudentDao(StudentsAgentsDao.getInstance());
+    private final StudentsAgentsDao studentsAgentsDao;
 
     public Student create(Connection connection, Student student) throws SQLException {
         Student resultStudent = buildStudent(student);
@@ -144,6 +145,11 @@ public final class StudentDao {
         return INSTANCE;
     }
 
-    private StudentDao() {
+    private StudentDao(StudentsAgentsDao studentsAgentsDao) {
+        this.studentsAgentsDao = studentsAgentsDao;
+    }
+
+    public Boolean assignAgent(Connection connection, Integer intStudentId, Integer intAgentId) throws SQLException {
+        return studentsAgentsDao.create(connection, intStudentId, intAgentId);
     }
 }
