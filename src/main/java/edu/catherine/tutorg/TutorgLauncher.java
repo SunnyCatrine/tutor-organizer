@@ -1,21 +1,79 @@
 package main.java.edu.catherine.tutorg;
 
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import main.java.edu.catherine.tutorg.controller.AgentController;
 import main.java.edu.catherine.tutorg.controller.StudentController;
 import main.java.edu.catherine.tutorg.model.dto.AgentRequest;
 import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
+import main.java.edu.catherine.tutorg.model.entity.client.Contact;
+import main.java.edu.catherine.tutorg.model.entity.client.LessonsPeriod;
+import main.java.edu.catherine.tutorg.model.entity.client.Location;
+import main.java.edu.catherine.tutorg.model.entity.client.StudentStatus;
+import main.java.edu.catherine.tutorg.model.entity.client.impl.Agent;
+import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
+import main.java.edu.catherine.tutorg.model.xml.StudentXml;
+import org.glassfish.jaxb.runtime.v2.runtime.JAXBContextImpl;
 
+import java.nio.file.Path;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TutorgLauncher {
 
-    public static void main(String[] args) throws SQLException {
-        StudentController studentController = StudentController.getINSTANCE();
-        AgentController agentController = AgentController.getInstance();
+    public static void main(String[] args) throws JAXBException {
+        JAXBContextImpl jaxbContext = new JAXBContextImpl.JAXBContextBuilder()
+                .setClasses(new Class[] {
+                        StudentXml.class,
+                        Location.class,
+                        Contact.class,
+                        LessonParam.class,
+                        LessonsPeriod.class,
+                        StudentStatus.class,
+                        LocalDate.class
+//                        Agent.class
+                })
+                .build();
+
+
+//        3
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+//        5
+
+//        StudentXml studentFromFile = (StudentXml) unmarshaller.unmarshal(
+//                Path.of("full.xml").toFile());
+//
+//        System.out.println(studentFromFile);
+
+
+        Agent agent1 = new Agent(1,"Fiona","Shrekova","+0987654");
+        Agent agent2 = new Agent(2,"Ishak","Ishakov","+0123123");
+        List<Agent> agents = new ArrayList<>();
+        agents.add(agent1);
+        agents.add(agent2);
+
+        marshaller.marshal(new StudentXml(
+                44,
+                "Shrek",
+                "Shrekov",
+                StudentStatus.valueOf("ACTIVE"),
+                new Location("3/9 kingdom", "bog", "+15"),
+                new Contact("+00000", "ShrekCheburek"),
+                new LessonParam(2000, 30),
+                new LessonsPeriod(LocalDate.of(2022,10,16), LocalDate.of(2023,5,30))
+                ), Path.of("student.xml").toFile());
+
+
+//        StudentController studentController = StudentController.getINSTANCE();
+//        AgentController agentController = AgentController.getInstance();
 
 //        checkAgentController(agentController);
-        checkStudentController(studentController);
+//        checkStudentController(studentController);
 
     }
 

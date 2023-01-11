@@ -1,8 +1,15 @@
 package main.java.edu.catherine.tutorg.model.entity.lesson;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.util.Objects;
 
 public class LessonParam {
+    @XmlAttribute
+    private static final String CURRENCY = "RUB";
+    @XmlAttribute
+    private static final String UNIT = "min";
     private Integer price;
     private Integer duration;
 
@@ -14,7 +21,7 @@ public class LessonParam {
     public Integer getPrice() {
         return price;
     }
-
+    @XmlElement
     public void setPrice(Integer price) {
         this.price = price;
     }
@@ -22,7 +29,7 @@ public class LessonParam {
     public Integer getDuration() {
         return duration;
     }
-
+    @XmlElement
     public void setDuration(Integer duration) {
         this.duration = duration;
     }

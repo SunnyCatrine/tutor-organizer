@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="student">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+                <xs:element name="firstname" type="xs:string"/>
+                <xs:element name="lastname" type="xs:string"/>
+                <xs:element name="status" type="xs:string"/>
+                <xs:element name="location">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="country" type="xs:string"/>
+                            <xs:element name="city" type="xs:string"/>
+                            <xs:element name="timezone" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="contact">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="phoneNo" type="xs:string"/>
+                            <xs:element name="skype" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="lessonparam">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="price">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:integer">
+                                            <xs:attribute name="currency" type="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="duration">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:integer">
+                                            <xs:attribute name="unit" type="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="lessonperiod">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="firstlessondate" type="xs:date"/>
+                            <xs:element name="lastlessondate" type="xs:date"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <!--                        <xs:attribute name="size" type="xs:integer"/>-->
+                <xs:element name="agents">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="agent" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:integer"/>
+                                        <xs:element name="firstname" type="xs:string"/>
+                                        <xs:element name="lastname" type="xs:string"/>
+                                        <xs:element name="phoneNo" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="size" type="xs:integer"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

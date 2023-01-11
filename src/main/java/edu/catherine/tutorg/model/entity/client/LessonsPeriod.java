@@ -1,5 +1,7 @@
 package main.java.edu.catherine.tutorg.model.entity.client;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,7 +17,7 @@ public class LessonsPeriod {
     public LocalDate getFirstLessonDate() {
         return firstLessonDate;
     }
-
+    @XmlElement
     public void setFirstLessonDate(LocalDate firstLessonDate) {
         this.firstLessonDate = firstLessonDate;
     }
@@ -23,7 +25,7 @@ public class LessonsPeriod {
     public LocalDate getLastLessonDate() {
         return lastLessonDate;
     }
-
+    @XmlElement()
     public void setLastLessonDate(LocalDate lastLessonDate) {
         this.lastLessonDate = lastLessonDate;
     }

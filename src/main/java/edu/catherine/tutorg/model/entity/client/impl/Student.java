@@ -21,6 +21,7 @@ public class Student extends Client {
     private LessonsPeriod lessonsPeriod;
     private List<Agent> agentList;
 
+
     public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
         super(firstName, lastName, location);
         this.contact = contact;

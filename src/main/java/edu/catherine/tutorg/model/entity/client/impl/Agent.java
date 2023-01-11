@@ -21,11 +21,12 @@ public class Agent extends Client {
         this.phoneNo = phoneNo;
     }
 
-    public Agent(Integer clientId, String firstName, String lastName, Location location, String phoneNo, List<Student> studentList) {
-        super(clientId, firstName, lastName, location);
+    public Agent(Integer clientId, String firstName, String lastName, String phoneNo) {
+        super(clientId, firstName, lastName);
         this.phoneNo = phoneNo;
-        this.studentList = studentList;
     }
+
+
 
     public String getPhoneNo() {
         return phoneNo;

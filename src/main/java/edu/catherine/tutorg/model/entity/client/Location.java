@@ -1,5 +1,7 @@
 package main.java.edu.catherine.tutorg.model.entity.client;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.util.Objects;
 
 public class Location {
@@ -23,6 +25,19 @@ public class Location {
 
     public String getTimezone() {
         return timezone;
+    }
+
+    @XmlElement
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    @XmlElement
+    public void setCity(String city) {
+        this.city = city;
+    }
+    @XmlElement
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 
     @Override

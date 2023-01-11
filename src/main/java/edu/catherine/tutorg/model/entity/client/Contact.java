@@ -1,5 +1,7 @@
 package main.java.edu.catherine.tutorg.model.entity.client;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.util.Objects;
 
 public class Contact {
@@ -19,6 +21,14 @@ public class Contact {
         return skype;
     }
 
+    @XmlElement
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+    @XmlElement
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
 
     @Override
     public boolean equals(Object o) {

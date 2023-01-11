@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<student xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="full_schema.xsd">
+	<id>1</id>
+	<firstname>Joechka</firstname>
+	<lastname>Pirojoechka</lastname>
+	<status>ACTIVE</status>
+	<location><country>Crimea</country><city>Simferopol</city><timezone>+3</timezone></location>
+	<contact>
+		<phoneNo>+79780000000</phoneNo>
+		<skype>Joy</skype>
+	</contact>
+	<lessonparam>
+		<price currency = "RUB">1000</price>
+		<duration unit = "minute">60</duration>
+	</lessonparam>
+	<lessonperiod>
+		<firstlessondate>2013-12-12</firstlessondate>
+		<lastlessondate>1111-11-11</lastlessondate>
+	</lessonperiod>
+	<agents size="12">
+		<agent>
+			<id>1</id>
+			<firstname>Joechka</firstname>
+			<lastname>Pirojoechka</lastname>
+			<phoneNo></phoneNo>
+		</agent>
+		<agent>
+			<id>1</id>
+			<firstname>Joechka</firstname>
+			<lastname>Pirojoechka</lastname>
+			<phoneNo></phoneNo>
+		</agent>
+	</agents>
+</student>
