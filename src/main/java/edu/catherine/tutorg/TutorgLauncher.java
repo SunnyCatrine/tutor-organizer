@@ -4,6 +4,8 @@ import main.java.edu.catherine.tutorg.controller.AgentController;
 import main.java.edu.catherine.tutorg.controller.StudentController;
 import main.java.edu.catherine.tutorg.model.dto.AgentRequest;
 import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
+import main.java.edu.catherine.tutorg.model.dto.StudentRequest;
+import main.java.edu.catherine.tutorg.model.dto.StudentResponse;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,33 +23,33 @@ public class TutorgLauncher {
 
 
     private static void checkAgentController(AgentController agentController) throws SQLException {
-        System.out.println("ADD NEW AGENT to student_id 1");
-        AgentRequest agentRequest = AgentRequest.builder()
-                .firstName("Eny")
-                .lastName("Skywolker")
-                .phoneNo("111111111")
-                .country("NOname")
-                .city("unknown")
-                .timezone("absent")
-                .studentId("1")
-                .build();
+//        System.out.println("ADD NEW AGENT to student_id 3");
+//        AgentRequest agentRequest = AgentRequest.builder()
+//                .firstName("Mister")
+//                .lastName("Bin")
+//                .phoneNo("0000000")
+//                .country("USA")
+//                .city("LA")
+//                .timezone("789")
+//                .studentId("3")
+//                .build();
+//
+//        AgentResponse addedAgent = agentController.create(agentRequest);
+//        System.out.println(addedAgent);
+//        System.out.println();
 
-        AgentResponse addedAgent = agentController.create(agentRequest);
-        System.out.println(addedAgent);
-        System.out.println();
-
-        System.out.println("FIND AGENTs by student id 1");
-        List<AgentResponse> foundAgents = agentController.findByStudentId("1");
+        System.out.println("FIND AGENTs by student id 3");
+        List<AgentResponse> foundAgents = agentController.findByStudentId("3");
         System.out.println(foundAgents);
 
-//        System.out.println("DELETE AGENT by id 5");
-//        AgentResponse deletedAgent = agentController.deleteById("5");
+//        System.out.println("DELETE AGENT by id 3");
+//        AgentResponse deletedAgent = agentController.deleteById("3");
 //        System.out.println(deletedAgent);
     }
 
     private static void checkStudentController(StudentController studentController) throws SQLException {
-        System.out.println("ASSIGN agent 10 to student 16");
-        System.out.println(studentController.assignAgent("16", "10"));
+        System.out.println("ASSIGN agent 1 to student 4");
+        System.out.println(studentController.assignAgent("4", "1"));
 
 
 //        System.out.println("ALL STUDENTS");
@@ -90,15 +92,15 @@ public class TutorgLauncher {
 //        students.forEach(System.out::println);
 //
 //        System.out.println();
-//
-//        System.out.println("findStudent id 4");
-//        StudentResponse findStudent = studentController.findBy(4);
+////
+//        System.out.println("findStudent id 2");
+//        StudentResponse findStudent = studentController.findBy(2);
 //        System.out.println(findStudent);
 //
 //        System.out.println();
 //
-//        System.out.println("Delete student id 13");
-//        StudentResponse deletedStudent = studentController.deleteBy(13);
+//        System.out.println("Delete student id 2");
+//        StudentResponse deletedStudent = studentController.deleteBy(2);
 //        System.out.println(deletedStudent);
 //
 //        System.out.println();
@@ -111,7 +113,7 @@ public class TutorgLauncher {
 //
 //
 //
-//        System.out.println("Update student id 16");
+//        System.out.println("Update student id 3");
 //        StudentRequest updateStudentRequest = new StudentRequest(
 //                "Rene",
 //                null,
@@ -125,7 +127,7 @@ public class TutorgLauncher {
 //                "ARCHIVED"
 //        );
 //
-//        StudentResponse updatedStudent = studentController.update(16, updateStudentRequest);
+//        StudentResponse updatedStudent = studentController.update(3, updateStudentRequest);
 //        System.out.println(updatedStudent);
 //        System.out.println();
 //
