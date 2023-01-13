@@ -12,32 +12,44 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Student extends Client {
+    private Contact contact;
     private List<SubjectBlock> subjects;
     private LessonParam defaultLessonParam;
     private Map<DayOfWeek, LocalTime> schedule;
     private List<Lesson> lessonList;
     private StudentStatus studentStatus;
     private LessonsPeriod lessonsPeriod;
-    private Agent agent;
+    private List<Agent> agentList;
 
     public Student(String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
-        super(firstName, lastName, contact, location);
+        super(firstName, lastName, location);
+        this.contact = contact;
         this.defaultLessonParam = defaultLessonParam;
         this.studentStatus = studentStatus;
     }
 
     public Student(Integer clientId, String firstName, String lastName, Contact contact, Location location, LessonParam defaultLessonParam, StudentStatus studentStatus) {
-        super(clientId, firstName, lastName, contact, location);
+        super(clientId, firstName, lastName, location);
+        this.contact = contact;
         this.defaultLessonParam = defaultLessonParam;
         this.studentStatus = studentStatus;
     }
 
-    public Agent getAgent() {
-        return agent;
+    public Student(Integer clientId, String firstName, String lastName, StudentStatus studentStatus) {
+        super(clientId, firstName, lastName);
+        this.studentStatus = studentStatus;
     }
 
-    public void setAgent(Agent agent) {
-        this.agent = agent;
+    public Contact getContact() {
+        return contact;
+    }
+
+    public List<Agent> getAgentList() {
+        return agentList;
+    }
+
+    public void setAgentList(List<Agent> agentList) {
+        this.agentList = agentList;
     }
 
     public List<SubjectBlock> getSubjects() {
@@ -51,10 +63,6 @@ public class Student extends Client {
 
     public LessonParam getDefaultLessonParam() {
         return defaultLessonParam;
-    }
-
-    public void setDefaultLessonParam(LessonParam defaultLessonParam) {
-        this.defaultLessonParam = defaultLessonParam;
     }
 
     public Map<DayOfWeek, LocalTime> getSchedule() {
@@ -95,17 +103,19 @@ public class Student extends Client {
         if (!(o instanceof Student)) return false;
         if (!super.equals(o)) return false;
         Student student = (Student) o;
-        return Objects.equals(getSubjects(), student.getSubjects()) &&
-                getDefaultLessonParam().equals(student.getDefaultLessonParam()) &&
+        return Objects.equals(contact, student.contact) &&
+                Objects.equals(getSubjects(), student.getSubjects()) &&
+                Objects.equals(getDefaultLessonParam(), student.getDefaultLessonParam()) &&
                 Objects.equals(getSchedule(), student.getSchedule()) &&
                 Objects.equals(getLessonList(), student.getLessonList()) &&
                 getStudentStatus() == student.getStudentStatus() &&
-                getLessonsPeriod().equals(student.getLessonsPeriod());
+                Objects.equals(getLessonsPeriod(), student.getLessonsPeriod()) &&
+                Objects.equals(getAgentList(), student.getAgentList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod());
+        return Objects.hash(super.hashCode(), contact, getSubjects(), getDefaultLessonParam(), getSchedule(), getLessonList(), getStudentStatus(), getLessonsPeriod(), getAgentList());
     }
 
     @Override
@@ -113,6 +123,7 @@ public class Student extends Client {
 
         return "Student{"
                 + super.toString()
+                + "contact=" + contact
                 + "defaultLessonParam=" + defaultLessonParam
                 + "status=" + studentStatus
                 + '}';

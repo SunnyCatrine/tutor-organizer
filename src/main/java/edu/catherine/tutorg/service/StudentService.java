@@ -58,4 +58,11 @@ public class StudentService {
     private StudentService() {
     }
 
+    public Boolean assignAgent(String studentId, String agentId) throws SQLException {
+        Integer intStudentId = Integer.parseInt(studentId);
+        Integer intAgentId = Integer.parseInt(agentId);
+        try (Connection connection = ConnectionManager.get()) {
+            return studentDao.assignAgent(connection, intStudentId, intAgentId);
+        }
+    }
 }
