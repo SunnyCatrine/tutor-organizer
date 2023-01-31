@@ -1,7 +1,14 @@
 package main.java.edu.catherine.tutorg.model.entity.client;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.Objects;
 
+@Data
+@AllArgsConstructor
 public abstract class Client {
     private Integer clientId;
     private String firstName;
@@ -15,13 +22,6 @@ public abstract class Client {
     }
 
     public Client(String firstName, String lastName, Location location) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.location = location;
-    }
-
-    public Client(Integer clientId, String firstName, String lastName, Location location) {
-        this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;
