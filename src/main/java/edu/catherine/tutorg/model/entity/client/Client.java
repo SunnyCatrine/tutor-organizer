@@ -2,10 +2,6 @@ package main.java.edu.catherine.tutorg.model.entity.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
-import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -25,48 +21,5 @@ public abstract class Client {
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Integer getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Client)) return false;
-        Client client = (Client) o;
-        return getFirstName().equals(client.getFirstName()) &&
-                Objects.equals(getLastName(), client.getLastName()) &&
-                Objects.equals(getLocation(), client.getLocation());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName(), getLocation());
-    }
-
-    @Override
-    public String toString() {
-        return "clientId=" + clientId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", location=" + location;
     }
 }
