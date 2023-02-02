@@ -1,5 +1,6 @@
 package main.java.edu.catherine.tutorg.dao;
 
+import lombok.SneakyThrows;
 import main.java.edu.catherine.tutorg.model.entity.client.Location;
 import main.java.edu.catherine.tutorg.model.entity.client.impl.Agent;
 import main.java.edu.catherine.tutorg.model.entity.client.impl.Student;
@@ -20,7 +21,8 @@ public class AgentDao {
         this.studentDao = studentDao;
     }
 
-    public Agent create(Connection connection, Integer studentId, Agent agent) throws SQLException {
+    @SneakyThrows
+    public Agent create(Connection connection, Integer studentId, Agent agent) {
         Integer agentId = null;
         try (PreparedStatement agentCreate = connection.prepareStatement(CREATE_AGENT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -41,7 +43,8 @@ public class AgentDao {
         }
     }
 
-    public List<Agent> findByStudentId(Connection connection, Integer studentId) throws SQLException {
+    @SneakyThrows
+    public List<Agent> findByStudentId(Connection connection, Integer studentId) {
         List<Agent> resultList = new ArrayList<>();
         List<Integer> agentIdList = getAgentIdListByStudentId(connection, studentId);
         for (Integer agentId: agentIdList) {
@@ -51,7 +54,8 @@ public class AgentDao {
         return resultList;
     }
 
-    public Agent deleteById(Connection connection, Integer id) throws SQLException {
+    @SneakyThrows
+    public Agent deleteById(Connection connection, Integer id) {
         Agent resultAgent = findBy(connection, id);
         try (PreparedStatement deleteAgent =connection.prepareStatement(DELETE_AGENT_SQL)) {
 
@@ -64,7 +68,8 @@ public class AgentDao {
         }
     }
 
-    private Agent findBy(Connection connection, Integer agentId) throws SQLException {
+    @SneakyThrows
+    private Agent findBy(Connection connection, Integer agentId) {
         Agent resultAgent = null;
         try (PreparedStatement findAgent = connection.prepareStatement(FIND_AGENT_SQL)) {
 
@@ -82,16 +87,19 @@ public class AgentDao {
         }
     }
 
-    private List<Integer> getAgentIdListByStudentId(Connection connection, Integer studentId) throws SQLException {
+    @SneakyThrows
+    private List<Integer> getAgentIdListByStudentId(Connection connection, Integer studentId) {
         return studentsAgentsDao.findAgentIdListByStudentId(connection, studentId);
     }
 
-    private List<Student> getStudentListByAgentId(Connection connection, Integer agentId) throws SQLException {
+    @SneakyThrows
+    private List<Student> getStudentListByAgentId(Connection connection, Integer agentId) {
         List<Integer> studentIdList = studentsAgentsDao.findStudentIdListByAgentId(connection, agentId);
         return getStudentListByStudentIdList(connection, studentIdList);
     }
 
-    private List<Student> getStudentListByStudentIdList(Connection connection, List<Integer> studentIdList) throws SQLException {
+    @SneakyThrows
+    private List<Student> getStudentListByStudentIdList(Connection connection, List<Integer> studentIdList) {
         List<Student> studentList = new ArrayList<>();
         for (Integer studentId : studentIdList) {
             studentList.add(studentDao.findBy(connection, studentId));
@@ -99,7 +107,8 @@ public class AgentDao {
         return studentList;
     }
 
-    private Agent buildAgent(ResultSet resultSet) throws SQLException {
+    @SneakyThrows
+    private Agent buildAgent(ResultSet resultSet) {
         Location location = new Location(
                 resultSet.getString(COUNTRY),
                 resultSet.getString(CITY),

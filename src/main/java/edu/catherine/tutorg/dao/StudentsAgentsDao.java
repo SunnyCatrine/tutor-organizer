@@ -1,9 +1,10 @@
 package main.java.edu.catherine.tutorg.dao;
 
+import lombok.SneakyThrows;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,8 @@ public final class StudentsAgentsDao {
     private StudentsAgentsDao() {
     }
 
-    public Boolean create(Connection connection, Integer studentId, Integer agentId) throws SQLException {
+    @SneakyThrows
+    public Boolean create(Connection connection, Integer studentId, Integer agentId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NOTE_TO_STUDENTS_AGENTS_TABLE_SQL)) {
 
             preparedStatement.setInt(1, studentId);
@@ -26,7 +28,8 @@ public final class StudentsAgentsDao {
         }
     }
 
-    public List<Integer> findAgentIdListByStudentId(Connection connection, Integer requestStudentId) throws SQLException {
+    @SneakyThrows
+    public List<Integer> findAgentIdListByStudentId(Connection connection, Integer requestStudentId) {
         List<Integer> resultList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_AGENT_ID_LIST_BY_STUDENT_ID)) {
 
@@ -41,7 +44,9 @@ public final class StudentsAgentsDao {
         }
     }
 
-    public List<Integer> findStudentIdListByAgentId(Connection connection, Integer agentId) throws SQLException {
+
+    @SneakyThrows
+    public List<Integer> findStudentIdListByAgentId(Connection connection, Integer agentId) {
         List<Integer> resultList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_STUDENT_ID_LIST_BY_AGENT_ID)) {
 
