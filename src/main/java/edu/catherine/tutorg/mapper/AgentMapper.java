@@ -2,22 +2,20 @@ package main.java.edu.catherine.tutorg.mapper;
 
 import main.java.edu.catherine.tutorg.model.dto.AgentRequest;
 import main.java.edu.catherine.tutorg.model.dto.AgentResponse;
-import main.java.edu.catherine.tutorg.model.entity.client.Contact;
 import main.java.edu.catherine.tutorg.model.entity.client.Location;
 import main.java.edu.catherine.tutorg.model.entity.client.impl.Agent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AgentMapper {
 
     public static Agent toEntityForCreate(AgentRequest agentRequest) {
-        Location location = new Location(
-                agentRequest.getCountry(),
-                agentRequest.getCity(),
-                agentRequest.getTimezone()
-        );
+        Location location = Location.builder()
+                .country(agentRequest.getCountry())
+                .city(agentRequest.getCity())
+                .timezone(agentRequest.getTimezone())
+                .build();
 
         return new Agent(
                 agentRequest.getFirstName(),
