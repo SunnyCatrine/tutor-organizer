@@ -48,75 +48,75 @@ public class TutorgLauncher {
     }
 
     private static void checkStudentController(StudentController studentController) throws SQLException {
-        System.out.println("ASSIGN agent 1 to student 5");
-        System.out.println(studentController.assignAgent("5", "1"));
+//        System.out.println("ASSIGN agent 1 to student 5");
+//        System.out.println(studentController.assignAgent("5", "1"));
 
 
-//        System.out.println("ALL STUDENTS");
-//        List<StudentResponse> students = studentController.findAll();
-//        students.forEach(System.out::println);
-//        System.out.println();
+        System.out.println("ALL STUDENTS");
+        List<StudentResponse> students = studentController.findAll();
+        students.forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("ADD NEW STUDENT");
+        StudentRequest studentRequestBuilt = StudentRequest.builder()
+                .firstName("Grinch")
+                .lastName("Green")
+                .phoneNo("14434145")
+                .skype("superHero")
+                .country("Japan")
+                .city("Keko")
+                .defaultPrice("111")
+                .defaultDurationInMinutes("2222")
+                .timezone("+9")
+                .studentStatus("ACTIVE")
+                .build();
+
+
+        StudentResponse addedStudent = studentController.create(studentRequestBuilt);
+        System.out.println(addedStudent);
+        System.out.println();
+
+        System.out.println("ALL STUDENTS again");
+
+        students = studentController.findAll();
+        students.forEach(System.out::println);
+
+        System.out.println();
 //
-//        System.out.println("ADD NEW STUDENT");
-//        StudentRequest studentRequestBuilt = StudentRequest.builder()
-//                .firstName("NoHero")
-//                .lastName("Nakamuro")
-//                .phoneNo("14434145")
-//                .skype("superHero")
-//                .country("Japan")
-//                .city("Keko")
-//                .defaultPrice("111")
-//                .defaultDurationInMinutes("2222")
-//                .timezone("+9")
-//                .studentStatus("ACTIVE")
-//                .build();
-//
-//
-//        StudentResponse addedStudent = studentController.create(studentRequestBuilt);
-//        System.out.println(addedStudent);
-//        System.out.println();
-//
-//        System.out.println("ALL STUDENTS again");
-//
-//        students = studentController.findAll();
-//        students.forEach(System.out::println);
-//
-//        System.out.println();
-////
-//        System.out.println("findStudent id 3");
-//        StudentResponse findStudent = studentController.findBy(3);
-//        System.out.println(findStudent);
-//
-//        System.out.println();
-//
-//        System.out.println("Delete student id 4");
-//        StudentResponse deletedStudent = studentController.deleteBy(4);
-//        System.out.println(deletedStudent);
-//
-//        System.out.println();
-//
-//        System.out.println("ALL STUDENTS Again");
-//
-//        students = studentController.findAll();
-//        students.forEach(System.out::println);
-//        System.out.println();
-//
-//
-//
-//        System.out.println("Update student id 3");
-//        StudentRequest updateStudentRequest = StudentRequest.builder()
-//                .firstName("Joy")
-//                .skype("Pirojoy")
-//                .studentStatus("ARCHIVED")
-//                .build();
-//
-//        StudentResponse updatedStudent = studentController.update(3, updateStudentRequest);
-//        System.out.println(updatedStudent);
-//        System.out.println();
-//
-//        System.out.println("ALL STUDENTS Again");
-//
-//        students = studentController.findAll();
-//        students.forEach(System.out::println);
+        System.out.println("findStudent id 3");
+        StudentResponse findStudent = studentController.findBy(3);
+        System.out.println(findStudent);
+
+        System.out.println();
+
+        System.out.println("Delete student id 5");
+        StudentResponse deletedStudent = studentController.deleteBy(5);
+        System.out.println(deletedStudent);
+
+        System.out.println();
+
+        System.out.println("ALL STUDENTS Again");
+
+        students = studentController.findAll();
+        students.forEach(System.out::println);
+        System.out.println();
+
+
+
+        System.out.println("Update student id 3");
+        StudentRequest updateStudentRequest = StudentRequest.builder()
+                .firstName("Kavin")
+                .skype("McCalister")
+                .studentStatus("ARCHIVED")
+                .build();
+
+        StudentResponse updatedStudent = studentController.update(3, updateStudentRequest);
+        System.out.println(updatedStudent);
+        System.out.println();
+
+        System.out.println("ALL STUDENTS Again");
+
+        students = studentController.findAll();
+        students.forEach(System.out::println);
     }
 }
