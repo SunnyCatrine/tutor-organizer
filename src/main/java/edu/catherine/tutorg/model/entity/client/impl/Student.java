@@ -13,6 +13,8 @@ import java.util.Map;
 
 @Builder
 @Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Student extends Client {
     private Contact contact;
     private List<SubjectBlock> subjects;

@@ -8,6 +8,8 @@ import java.util.List;
 
 @Builder
 @Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Agent extends Client {
     private String phoneNo;
     private List<Student> studentList;
