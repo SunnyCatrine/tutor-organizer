@@ -11,21 +11,21 @@ import main.java.edu.catherine.tutorg.model.entity.lesson.LessonParam;
 public final class StudentMapper {
 
     public static Student toCreateEntity(StudentRequest studentRequest) {
-        Contact contact = new Contact(
-                studentRequest.getPhoneNo(),
-                studentRequest.getSkype()
-        );
+        Contact contact = Contact.builder()
+                .phoneNo(studentRequest.getPhoneNo())
+                .skype(studentRequest.getSkype())
+                .build();
 
-        Location location = new Location(
-                studentRequest.getCountry(),
-                studentRequest.getCity(),
-                studentRequest.getTimezone()
-        );
+        Location location = Location.builder()
+                .country(studentRequest.getCountry())
+                .city(studentRequest.getCity())
+                .timezone(studentRequest.getTimezone())
+                .build();
 
-        LessonParam defaultLessonParam = new LessonParam(
-                Integer.parseInt(studentRequest.getDefaultPrice()),
-                Integer.parseInt(studentRequest.getDefaultDurationInMinutes())
-        );
+        LessonParam defaultLessonParam = LessonParam.builder()
+                .price(Integer.parseInt(studentRequest.getDefaultPrice()))
+                .duration(Integer.parseInt(studentRequest.getDefaultDurationInMinutes()))
+                .build();
 
         return new Student(
                 studentRequest.getFirstName(),
@@ -38,16 +38,16 @@ public final class StudentMapper {
     }
 
     public static Student toUpdateEntity(StudentRequest studentRequest) {
-        Contact contact = new Contact(
-                studentRequest.getPhoneNo(),
-                studentRequest.getSkype()
-        );
+        Contact contact = Contact.builder()
+                .phoneNo(studentRequest.getPhoneNo())
+                .skype(studentRequest.getSkype())
+                .build();
 
-        Location location = new Location(
-                studentRequest.getCountry(),
-                studentRequest.getCity(),
-                studentRequest.getTimezone()
-        );
+        Location location = Location.builder()
+                .country(studentRequest.getCountry())
+                .city(studentRequest.getCity())
+                .timezone(studentRequest.getTimezone())
+                .build();
 
         LessonParam defaultLessonParam = new LessonParam(
                 studentRequest.getDefaultPrice() == null

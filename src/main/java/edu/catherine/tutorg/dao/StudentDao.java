@@ -1,5 +1,6 @@
 package main.java.edu.catherine.tutorg.dao;
 
+import lombok.SneakyThrows;
 import main.java.edu.catherine.tutorg.model.entity.client.Contact;
 import main.java.edu.catherine.tutorg.model.entity.client.Location;
 import main.java.edu.catherine.tutorg.model.entity.client.StudentStatus;
@@ -17,6 +18,7 @@ public final class StudentDao {
     private static final StudentDao INSTANCE = new StudentDao(StudentsAgentsDao.getInstance());
     private final StudentsAgentsDao studentsAgentsDao;
 
+    @SneakyThrows
     public Student create(Connection connection, Student student) throws SQLException {
         Student resultStudent = buildStudent(student);
 
@@ -49,7 +51,8 @@ public final class StudentDao {
         }
     }
 
-    public List<Student> findAll(Connection connection) throws SQLException {
+    @SneakyThrows
+    public List<Student> findAll(Connection connection) {
         List<Student> resultList = new ArrayList<>();
         try (PreparedStatement findAllStudents = connection.prepareStatement(FIND_ALL_STUDENTS_SQL)) {
             findAllStudents.executeQuery();
@@ -62,8 +65,8 @@ public final class StudentDao {
     }
 
 
-
-    public Student findBy(Connection connection, Integer studentId) throws SQLException {
+    @SneakyThrows
+    public Student findBy(Connection connection, Integer studentId) {
         Student resultStudent = null;
         try (PreparedStatement findStudentById = connection.prepareStatement(FIND_STUDENT_BY_ID)) {
 
@@ -78,7 +81,8 @@ public final class StudentDao {
         }
     }
 
-    public Student deleteBy(Connection connection, Integer studentId) throws SQLException {
+    @SneakyThrows
+    public Student deleteBy(Connection connection, Integer studentId) {
         Student resultStudent = findBy(connection, studentId);
         try (PreparedStatement deleteStudentById = connection.prepareStatement(DELETE_STUDENT_BY_ID)) {
             deleteStudentById.setInt(1, studentId);
@@ -89,7 +93,8 @@ public final class StudentDao {
         }
     }
 
-    public Student update(Connection connection, Integer id, Student student) throws SQLException {
+    @SneakyThrows
+    public Student update(Connection connection, Integer id, Student student) {
         String updateStudentSql = buildUpdateStudentSql(student);
         String updateContactSql = buildUpdateContactSql(student);
 
@@ -112,7 +117,8 @@ public final class StudentDao {
         return ! sql.isEmpty();
     }
 
-    private Student buildStudent(ResultSet resultSet) throws SQLException {
+    @SneakyThrows
+    private Student buildStudent(ResultSet resultSet) {
         Contact contact = new Contact(resultSet.getString(PHONE_NO),
                 resultSet.getString(SKYPE));
         Location location = new Location(
@@ -149,7 +155,8 @@ public final class StudentDao {
         this.studentsAgentsDao = studentsAgentsDao;
     }
 
-    public Boolean assignAgent(Connection connection, Integer intStudentId, Integer intAgentId) throws SQLException {
+    @SneakyThrows
+    public Boolean assignAgent(Connection connection, Integer intStudentId, Integer intAgentId) {
         return studentsAgentsDao.create(connection, intStudentId, intAgentId);
     }
 }

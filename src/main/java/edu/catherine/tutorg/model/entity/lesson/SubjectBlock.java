@@ -1,5 +1,8 @@
 package main.java.edu.catherine.tutorg.model.entity.lesson;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public enum SubjectBlock {
     MATH5("MATH5"),
     MATH6("MATH6"),
@@ -18,10 +21,6 @@ public enum SubjectBlock {
     ANALYTIC_GEOMETRY("ANALYTIC_GEOMETRY");
     
     private String subjectName;
-
-    SubjectBlock(String subjectName) {
-        this.subjectName = subjectName;
-    }
 
     public String getSubjectName() {
         return subjectName;
