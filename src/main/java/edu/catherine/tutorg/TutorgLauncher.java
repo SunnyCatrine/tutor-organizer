@@ -16,34 +16,34 @@ public class TutorgLauncher {
         StudentController studentController = StudentController.getINSTANCE();
         AgentController agentController = AgentController.getInstance();
 
-//        checkAgentController(agentController);
-        checkStudentController(studentController);
+        checkAgentController(agentController);
+//        checkStudentController(studentController);
 
     }
 
 
     private static void checkAgentController(AgentController agentController) throws SQLException {
-        System.out.println("ADD NEW AGENT to student_id 3");
-        AgentRequest agentRequest = AgentRequest.builder()
-                .firstName("Mur")
-                .lastName("Anamur")
-                .phoneNo("0000000")
-                .country("USA")
-                .city("LA")
-                .timezone("789")
-                .studentId("3")
-                .build();
+//        System.out.println("ADD NEW AGENT to student_id 6");
+//        AgentRequest agentRequest = AgentRequest.builder()
+//                .firstName("TE")
+//                .lastName("keli")
+//                .phoneNo("0000000")
+//                .country("USA")
+//                .city("LA")
+//                .timezone("789")
+//                .studentId("6")
+//                .build();
+//
+//        AgentResponse addedAgent = agentController.create(agentRequest);
+//        System.out.println(addedAgent);
+//        System.out.println();
+//
+//        System.out.println("FIND AGENTs by student id 6");
+//        List<AgentResponse> foundAgents = agentController.findByStudentId("6");
+//        System.out.println(foundAgents);
 
-        AgentResponse addedAgent = agentController.create(agentRequest);
-        System.out.println(addedAgent);
-        System.out.println();
-
-        System.out.println("FIND AGENTs by student id 3");
-        List<AgentResponse> foundAgents = agentController.findByStudentId("3");
-        System.out.println(foundAgents);
-
-        System.out.println("DELETE AGENT by id 4");
-        AgentResponse deletedAgent = agentController.deleteById("4");
+        System.out.println("DELETE AGENT by id 6");
+        AgentResponse deletedAgent = agentController.deleteById("6");
         System.out.println(deletedAgent);
     }
 
@@ -59,8 +59,8 @@ public class TutorgLauncher {
 
         System.out.println("ADD NEW STUDENT");
         StudentRequest studentRequestBuilt = StudentRequest.builder()
-                .firstName("Grinch")
-                .lastName("Green")
+                .firstName("Maksim")
+                .lastName("deWinter")
                 .phoneNo("14434145")
                 .skype("superHero")
                 .country("Japan")
@@ -89,8 +89,8 @@ public class TutorgLauncher {
 
         System.out.println();
 
-        System.out.println("Delete student id 5");
-        StudentResponse deletedStudent = studentController.deleteBy(5);
+        System.out.println("Delete student id 3");
+        StudentResponse deletedStudent = studentController.deleteBy(3);
         System.out.println(deletedStudent);
 
         System.out.println();
@@ -103,14 +103,14 @@ public class TutorgLauncher {
 
 
 
-        System.out.println("Update student id 3");
+        System.out.println("Update student id 6");
         StudentRequest updateStudentRequest = StudentRequest.builder()
-                .firstName("Kavin")
+                .firstName("Rebeka")
                 .skype("McCalister")
                 .studentStatus("ARCHIVED")
                 .build();
 
-        StudentResponse updatedStudent = studentController.update(3, updateStudentRequest);
+        StudentResponse updatedStudent = studentController.update(6, updateStudentRequest);
         System.out.println(updatedStudent);
         System.out.println();
 

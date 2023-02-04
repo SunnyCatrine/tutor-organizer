@@ -24,7 +24,7 @@ public final class PropertiesUtil {
                     .class
                     .getClassLoader()
                     .getResourceAsStream("application.properties")) {
-                PROPERTIES.load(inputStream);
+                        PROPERTIES.load(inputStream);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
